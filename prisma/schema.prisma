@@ -15,3 +15,34 @@ model users {
     name     String  @db.VarChar(55)
     role     String? @db.VarChar(55)
 }
+
+model categories {
+    id          Int     @id @default(autoincrement())
+    name        String
+    products    products[]
+}
+
+model tags {
+    id          Int     @id @default(autoincrement())
+    name        String
+}
+
+model products {
+    id              Int         @id @default(autoincrement())
+    name            String
+    cover           String
+    images          String      @db.Text
+    date            DateTime    
+    description     String      @db.Text
+    resume          String
+    featured        Boolean
+    price           Float
+    stock           Int
+    categories      categories  @relation(fields: [category], references: [id])
+    category        Int
+    tags            String
+    weight          Float
+    width           Float
+    height          Float
+    lenght          Float
+}
