@@ -16,10 +16,18 @@ model users {
     role     String? @db.VarChar(55)
 }
 
-model categories {
+model colections {
     id          Int     @id @default(autoincrement())
     name        String
+    categories  categories[]
+}
+
+model categories {
+    id          Int         @id @default(autoincrement())
+    name        String
     products    products[]
+    colections  colections  @relation(fields: [colection], references: [id])
+    colection   Int         @default(1)
 }
 
 model tags {
