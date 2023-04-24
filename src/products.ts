@@ -9,4 +9,13 @@ router.get('/', async (request:Request, response:Response) => {
     response.json(products)
 })
 
+router.post('/', async (request:Request, response:Response) => {    
+    const data = request.body
+    console.log(data)
+
+    const products = await prisma.products.findMany({ where: { name: { search: data.search } }, include: { categories: { include: { colections: true } } } })    
+    console.log(products)
+    response.json(products)
+})
+
 export default router
