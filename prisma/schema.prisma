@@ -30,7 +30,7 @@ model tags {
 model products {
     id              Int         @id @default(autoincrement())
     name            String
-    cover           String
+    cover           String      @db.Text
     images          String      @db.Text
     date            DateTime    
     description     String      @db.Text
