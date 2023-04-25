@@ -54,4 +54,5 @@ model products {
     width           Float
     height          Float
     lenght          Float
+    sold            Int         @default(0)
 }
