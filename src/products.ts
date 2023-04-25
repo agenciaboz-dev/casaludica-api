@@ -19,10 +19,21 @@ router.post('/', async (request:Request, response:Response) => {
 
 router.post('/category', async (request:Request, response:Response) => {    
     const data = request.body
+    console.log(data)
 
-    const products = await prisma.products.findMany({ where: { category: data.category }, include: { categories: { include: { colections: true } } } })    
+    const products = await prisma.products.findMany({ where: { category: data.id }, include: { categories: { include: { colections: true } } } })    
+    console.log(products)
     response.json(products)
 
+})
+
+router.post('/collection', async (request:Request, response:Response) => {    
+    const data = request.body
+    console.log(data)
+
+    const products = await prisma.products.findMany({ where: { category: { in: data.categories } }, include: { categories: { include: { colections: true } } } })
+    console.log(products)
+    response.json(products)
 })
 
 export default router
