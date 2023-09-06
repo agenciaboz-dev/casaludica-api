@@ -2,6 +2,7 @@ declare interface Product {
     IdProduto: number
     DataAlteracao: string
     Ativo: boolean
+    IdGrupo: number
     Codigo: string
     CodigoBarra: null
     Descricao: string
