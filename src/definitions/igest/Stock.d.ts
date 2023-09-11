@@ -3,7 +3,7 @@ declare interface Stock {
     EstoqueTotal: number
     EstoqueVariacao: {
         IdEstoqueVariacao: number
-        IdAtributo1: number | null
+        IdAtributo1: number //| null
         IdAtributo2: number | null
         IdAtributo3: number | null
         IdAtributo4: number | null

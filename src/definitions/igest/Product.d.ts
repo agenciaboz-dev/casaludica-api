@@ -1,13 +1,13 @@
 declare interface Product {
     IdProduto: number
-    DataAlteracao: string
+    DataAlteracao: string | null
     Ativo: boolean
     IdGrupo: number
-    Codigo: string
-    CodigoBarra: null
-    Descricao: string
-    DescricaoEducativa: null
-    Tags: null
+    Codigo: string | null
+    CodigoBarra: string | null// null
+    Descricao: string | null
+    DescricaoEducativa: string | null// null
+    Tags: string | null// null
     IdFaixaEtaria: number
     IdMarca: number
     Largura: number
@@ -15,10 +15,10 @@ declare interface Product {
     Comprimento: number
     PesoBruto: number
     PesoLiquido: number
-    LinkVideo: null
+    LinkVideo: string | null// null
     DisponibilidadeEmpresa: {
         IdEmpresa: number
-        IdVariacao: number
+        IdVariacao: number | null
     }[]
 }
 

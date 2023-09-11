@@ -1,17 +1,18 @@
 declare interface Franchise {
     IdEmpresa: number
     Ativo: boolean
-    RazaoSocial: string
-    NomeFantasia: string
-    Cnpj: string
+    RazaoSocial: string | null
+    NomeFantasia: string | null
+    Cnpj: string | null
     Endereco: {
-        Logradouro: string
-        Numero: string
-        Bairro: string
-        Cep: string
-        Cidade: string
-        Estado: string
-        CodigoIbge: string
+        Logradouro: string | null
+        Numero: string | null
+        Complemento: string | null //add
+        Bairro: string | null
+        Cep: string | null
+        Cidade: string | null
+        Estado: string | null
+        CodigoIbge: string | null
     }
 }
 

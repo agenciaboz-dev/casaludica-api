@@ -1,7 +1,7 @@
 declare interface Brand {
     IdMarca: number
     Ativo: boolean
-    Descricao: string
+    Descricao: string | null
 }
 
 declare interface BrandParams {

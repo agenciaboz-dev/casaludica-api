@@ -1,7 +1,7 @@
 declare interface Age {
     IdFaixaEtaria: number
     Ativo: boolean
-    Descricao: string
+    Descricao: string | null
 }
 
 declare interface AgeParams {
