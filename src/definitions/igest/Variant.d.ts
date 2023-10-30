@@ -1,18 +1,14 @@
 declare interface Variant {
-    IdVariacao: number
-    Descricao: string | null
-    ListaDetalhamento: {
-        IdDetalhamento: number
-        Ordem: number
-        Descricao: string | null
-        ListaAtributo: {
-            IdAtributo: number
-            Ordem: number
-            Descricao: string | null
-        }[]
-    }[]
-}
-
-declare interface VariantParams {
-    variacao?: number // IdVariacao
+    IdEstoqueVariacao: number
+    IdAtributo1: number
+    Atributo1Descricao: string
+    IdAtributo2?: number
+    Atributo2Descricao?: string
+    IdAtributo3?: number
+    Atributo3Descricao?: string
+    IdAtributo4?: number
+    Atributo4Descricao?: string
+    IdAtributo5?: number
+    Atributo5Descricao?: string
+    Estoque: number
 }

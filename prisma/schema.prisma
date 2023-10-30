@@ -41,7 +41,7 @@ model products {
     name            String
     cover           String      @db.Text
     images          String      @db.Text
-    date            DateTime    
+    date            DateTime?    
     description     String      @db.Text
     resume          String
     featured        Boolean
