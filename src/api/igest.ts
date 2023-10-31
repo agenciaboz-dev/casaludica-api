@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const token = "9aB4pC!qRt3xYz"
-const version = 3
+const version = 4
 
 const api = axios.create({
     // baseURL: "http://localhost:4100/api",
@@ -21,10 +21,10 @@ const get = async (endpoint: string, params: any) => {
 }
 
 const franchises = async (params: FranchiseParams) => (await get(`/ObterEmpresa`, params)) as Franchise[]
-// const categories = async (params: CategoryParams) => (await get("/ObterGrupo", params)) as Category[]
+const categories = async (params: CategoryParams) => (await get("/ObterGrupo", params)) as Category[]
 const products = async (params: ProductParams) => (await get("/ObterProduto", params)) as Product[]
 const images = async (params: ImageParams) => (await get("/ObterImagem", params)) as Image
 
-const getFunction = { franchises, products, images }
+const getFunction = { franchises, products, images, categories }
 
 export default { get: getFunction }
