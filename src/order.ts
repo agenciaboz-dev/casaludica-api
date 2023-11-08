@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import { OrderProduct, PrismaClient } from "@prisma/client"
+import unmask from "./tools/unmask"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -15,8 +16,8 @@ router.post("/new", async (request: Request, response: Response) => {
                 email: data.email,
                 lastname: data.lastname,
                 name: data.name,
-                phone: data.phone,
-                postcode: data.postcode,
+                phone: unmask(data.phone),
+                postcode: unmask(data.postcode),
                 storeId: data.storeId,
                 company: data.company,
                 notes: data.notes,
