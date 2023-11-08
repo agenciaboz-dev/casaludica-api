@@ -20,6 +20,8 @@ router.post("/new", async (request: Request, response: Response) => {
                 storeId: data.storeId,
                 company: data.company,
                 notes: data.notes,
+                total: data.total,
+
                 products: {
                     createMany: {
                         data: data.products.map((item: OrderProduct) => ({
