@@ -21,6 +21,9 @@ declare interface Product {
     PrazoEntrega: number
     PrecoVenda: number
     EstoqueTotal: number
+    TotalVenda: number
+    TotalVenda7Dias: number
+    TotalVenda30Dias: number
 
     EstoqueVariacao: Variant
 }

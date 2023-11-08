@@ -31,7 +31,7 @@ export const buildProduct = async (product: Product, getImage?: { mainOnly: bool
         name: product.Descricao || "",
         price: product.PrecoVenda,
         resume: product.Descricao || "",
-        sold: 0,
+        sold: product.TotalVenda,
         stock: product.EstoqueTotal,
         tags: product.Tags || "",
         weight: product.PesoBruto,
