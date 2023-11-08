@@ -80,6 +80,7 @@ model OrderProduct {
     name            String
     price           Float
     quantity        Int
+    referenceId     Int         @default(1)
 
     orderId         Int         
     order           Order       @relation(fields: [orderId], references: [id])
