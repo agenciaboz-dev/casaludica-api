@@ -52,6 +52,11 @@ router.post("/", async (request: Request, response: Response) => {
             products = products.filter((product) => normalize(product.name).includes(normalize(data.search)))
         }
 
+        if (data.category) {
+            console.log({ category: data.category })
+            products = products.filter((product) => product.category == data.category)
+        }
+
         console.log({ productsLength: products.length })
 
         response.json(products)

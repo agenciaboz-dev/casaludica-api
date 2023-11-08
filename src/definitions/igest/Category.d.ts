@@ -1,4 +1,4 @@
-declare interface Category {
+declare interface IgestCategory {
     IdGrupo: number
     Ativo: boolean
     Descricao: string
