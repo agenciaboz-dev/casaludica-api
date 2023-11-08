@@ -70,4 +70,16 @@ model Order {
     email           String
     notes           String?
     datetime        String
+
+    products        OrderProduct[]
+}
+
+model OrderProduct {
+    id              Int         @id @default(autoincrement())
+    name            String
+    price           Float
+    quantity        Int
+
+    orderId         Int         
+    order           Order       @relation(fields: [orderId], references: [id])
 }
