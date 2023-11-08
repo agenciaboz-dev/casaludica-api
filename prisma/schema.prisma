@@ -56,3 +56,18 @@ model products {
     lenght          Float
     sold            Int         @default(0)
 }
+
+model Order {
+    id              Int         @id @default(autoincrement())
+    storeId         Int
+    name            String
+    lastname        String
+    company         String?
+    postcode        String
+    address         String
+    city            String
+    phone           String
+    email           String
+    notes           String?
+    datetime        String
+}
