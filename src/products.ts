@@ -22,7 +22,7 @@ export const buildProduct = async (product: Product, getImage?: { mainOnly: bool
         category: product.IdGrupo || 0,
         cover: images.split(",")[0] || "",
         date: product.DataAlteracao ? new Date(product.DataAlteracao) : null,
-        description: product.Descricao || "",
+        description: product.DescricaoEducativa || "",
         featured: false,
         height: product.Altura,
         lenght: product.Comprimento,
