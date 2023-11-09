@@ -76,7 +76,7 @@ router.post("/new", async (request: Request, response: Response) => {
                 products: data.products.map((item) => ({ ...item, referenceId: item.id })),
             })
 
-            response.json(bozpayOrder)
+            response.json({ bozpayOrder: bozpayOrder.order, order })
         } catch (error) {
             console.log("bozpay error")
             console.log(error)
