@@ -10,7 +10,6 @@ declare interface ClientProduct {
     price: number
     stock?: number
     category?: number
-    categories?: Category
     tags?: string
     weight?: number
     width?: number
