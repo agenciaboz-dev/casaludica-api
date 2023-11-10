@@ -17,11 +17,11 @@ const getProductImage = async (id: number, mainOnly?: boolean) => {
 export const buildProduct = async (product: Product, getImage?: { mainOnly: boolean }) => {
     const images = getImage ? await getProductImage(product.IdProduto, getImage.mainOnly) : ""
 
-    const builtProduct: products = {
+    const builtProduct: ClientProduct = {
         id: product.IdProduto,
         category: product.IdGrupo || 0,
         cover: images.split(",")[0] || "",
-        date: product.DataAlteracao ? new Date(product.DataAlteracao) : null,
+        date: product.DataAlteracao ? new Date(product.DataAlteracao) : undefined,
         description: product.DescricaoEducativa || "",
         featured: false,
         height: product.Altura,
@@ -35,6 +35,7 @@ export const buildProduct = async (product: Product, getImage?: { mainOnly: bool
         stock: product.EstoqueTotal,
         tags: product.Tags || "",
         weight: product.PesoBruto,
+        ageRating: product.FaixaEtariaDescricao,
     }
     return builtProduct
 }
