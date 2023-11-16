@@ -8,55 +8,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model users {
-    id       Int     @id @default(autoincrement())
-    username String  @db.VarChar(55) @unique
-    email    String  @db.VarChar(55) @unique
-    password String  @db.VarChar(512)
-    name     String  @db.VarChar(55)
-    role     String? @db.VarChar(55)
-}
-
-model colections {
-    id          Int     @id @default(autoincrement())
-    name        String
-    categories  categories[]
-}
-
-model categories {
-    id          Int         @id @default(autoincrement())
-    name        String
-    products    products[]
-    colections  colections  @relation(fields: [colection], references: [id])
-    colection   Int         @default(1)
-}
-
-model tags {
-    id          Int     @id @default(autoincrement())
-    name        String
-}
-
-model products {
-    id              Int         @id @default(autoincrement())
-    name            String
-    cover           String      @db.Text
-    images          String      @db.Text
-    date            DateTime?    
-    description     String      @db.Text
-    resume          String
-    featured        Boolean
-    price           Float
-    stock           Int
-    categories      categories  @relation(fields: [category], references: [id])
-    category        Int
-    tags            String
-    weight          Float
-    width           Float
-    height          Float
-    lenght          Float
-    sold            Int         @default(0)
-}
-
 model Order {
     id              Int         @id @default(autoincrement())
     storeId         Int

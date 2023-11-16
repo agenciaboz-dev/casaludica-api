@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express'
-import { PrismaClient, categories } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 import api from "./api/igest"
 
 const router = express.Router()
