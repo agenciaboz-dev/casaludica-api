@@ -23,7 +23,7 @@ try {
         {
             key: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/privkey.pem", "utf8"),
             cert: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/cert.pem", "utf8"),
-            ca: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/chain.pem", "utf8"),
+            ca: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/fullchain.pem", "utf8"),
         },
         app
     )
