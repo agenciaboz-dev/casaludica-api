@@ -27,6 +27,8 @@ try {
         },
         app
     )
+
+    console.log("hey")
     
     server.listen(port, () => {
         console.log(`[server]: Server is running at https ${port}`)
