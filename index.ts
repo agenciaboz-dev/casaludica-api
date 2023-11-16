@@ -31,7 +31,8 @@ try {
     server.listen(port, () => {
         console.log(`[server]: Server is running at https ${port}`)
     })
-} catch {
+} catch(e) {
+    console.log(e)
     app.listen(port, () => {
         console.log(`[server]: Server is running at http ${port}`)
     })
