@@ -6,7 +6,7 @@ const router = express.Router()
 export const buildCategory: (category: IgestCategory) => Category = (category) => ({
     id: category.IdGrupo,
     name: category.Descricao,
-    colectionId: category.IdGrupoTitulo,
+    collectionId: category.IdGrupoTitulo,
 })
 
 router.get("/", async (request: Request, response: Response) => {
