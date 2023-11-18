@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express'
-import { PrismaClient, products } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 import igest from "./api/igest"
 import normalize from "./tools/normalize"
 const router = express.Router()
@@ -93,32 +93,5 @@ router.post("/images", async (request: Request, response: Response) => {
     }
 })
 
-router.post("/category", async (request: Request, response: Response) => {
-    const data = request.body
-
-    const products = await prisma.products.findMany({
-        where: { category: data.id },
-        include: { categories: { include: { colections: true } } },
-        orderBy: { featured: "desc" },
-    })
-    response.json(products)
-})
-
-router.post("/collection", async (request: Request, response: Response) => {
-    const data = request.body
-
-    const products = await prisma.products.findMany({
-        where: { category: { in: data.categories } },
-        include: { categories: { include: { colections: true } } },
-        orderBy: { featured: "desc" },
-    })
-    response.json(products)
-})
-
-router.get('/popular', async (request:Request, response:Response) => {    
-
-    const products = await prisma.products.findMany({ orderBy: [{ sold: 'desc' }, { featured: 'desc' }], take: 5, include: { categories: { include: { colections: true } } } })
-    response.json(products)
-})
 
 export default router

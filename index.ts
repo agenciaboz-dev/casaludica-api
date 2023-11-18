@@ -19,16 +19,22 @@ app.use(cookieParser())
 app.use('/api', router)
 
 try {
-    const server = https.createServer({
-        key: fs.readFileSync('/etc/letsencrypt/live/app.agenciaboz.com.br/privkey.pem', 'utf8'),
-        cert: fs.readFileSync('/etc/letsencrypt/live/app.agenciaboz.com.br/cert.pem', 'utf8'),
-        ca: fs.readFileSync('/etc/letsencrypt/live/app.agenciaboz.com.br/chain.pem', 'utf8'),
-    }, app);
+    const server = https.createServer(
+        {
+            key: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/privkey.pem", "utf8"),
+            cert: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/cert.pem", "utf8"),
+            ca: fs.readFileSync("/etc/letsencrypt/live/agencyboz.com/fullchain.pem", "utf8"),
+        },
+        app
+    )
+
+    console.log("hey")
     
     server.listen(port, () => {
         console.log(`[server]: Server is running at https ${port}`)
     })
-} catch {
+} catch(e) {
+    console.log(e)
     app.listen(port, () => {
         console.log(`[server]: Server is running at http ${port}`)
     })
