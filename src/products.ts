@@ -60,9 +60,10 @@ router.post("/", async (request: Request, response: Response) => {
 
         if (data.collection) {
             console.log({ collection: data.collection })
-            const categories = (await axios.get("localhost:4100/api/categories")).data as Category[]
+            const categories = (await axios.get("https://agencyboz.com:4100/api/categories")).data as Category[]
             const matched_categories = categories.filter((category) => category.collectionId == data.collection)
-            products = products.filter((product) => matched_categories.find((category) => (category.id = product.id)))
+            console.log(matched_categories)
+            products = products.filter((product) => matched_categories.find((category) => category.id == product.category))
         }
 
         console.log({ productsLength: products.length })
