@@ -22,10 +22,10 @@ const get = async (endpoint: string, params: any) => {
 
 const franchises = async (params: FranchiseParams) => (await get(`/ObterEmpresa`, params)) as Franchise[]
 const categories = async (params: CategoryParams) => (await get("/ObterGrupo", params)) as IgestCategory[]
-const colections = async (params: IgestColectionParams) => (await get("/ObterGrupoTitulo", params)) as IgestColection[]
+const collections = async (params: IgestCollectionParams) => (await get("/ObterGrupoTitulo", params)) as IgestCollection[]
 const products = async (params: ProductParams) => (await get("/ObterProduto", params)) as Product[]
 const images = async (params: ImageParams) => (await get("/ObterImagem", params)) as Image
 
-const getFunction = { franchises, products, images, categories, colections }
+const getFunction = { franchises, products, images, categories, collections }
 
 export default { get: getFunction }

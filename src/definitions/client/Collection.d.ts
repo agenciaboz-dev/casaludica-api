@@ -1,4 +1,4 @@
-declare interface Colection {
+declare interface Collection {
     id: number
     name: string
 }

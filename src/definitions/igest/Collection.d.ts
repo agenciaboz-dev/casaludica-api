@@ -1,9 +1,9 @@
-declare interface IgestColection {
+declare interface IgestCollection {
     IdGrupoTitulo: number
     Ativo: boolean
     Descricao: string
 }
 
-declare interface IgestColectionParams {
+declare interface IgestCollectionParams {
     grupoTitulo?: string
 }
