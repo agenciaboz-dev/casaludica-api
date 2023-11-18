@@ -1,11 +1,13 @@
-import express, { Express, Request, Response } from 'express'
-import { PrismaClient } from "@prisma/client"
+import express, { Express, Request, Response } from "express"
 import api from "./api/igest"
 
 const router = express.Router()
-const prisma = new PrismaClient()
 
-export const buildCategory: (category: IgestCategory) => Category = (category) => ({ id: category.IdGrupo, name: category.Descricao })
+export const buildCategory: (category: IgestCategory) => Category = (category) => ({
+    id: category.IdGrupo,
+    name: category.Descricao,
+    colectionId: category.IdGrupoTitulo,
+})
 
 router.get("/", async (request: Request, response: Response) => {
     try {
