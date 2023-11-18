@@ -9,6 +9,7 @@ export const buildCollection: (category: IgestCollection) => Collection = (colle
 })
 
 router.get("/", async (request: Request, response: Response) => {
+    console.log("collections requested")
     try {
         const igestCollections = await api.get.collections({})
         console.log(igestCollections)

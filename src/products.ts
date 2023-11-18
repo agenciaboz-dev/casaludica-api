@@ -42,7 +42,6 @@ export const buildProduct = async (product: Product, getImage?: { mainOnly: bool
 
 router.post("/", async (request: Request, response: Response) => {
     const data = request.body
-    console.log(data)
     console.log("requesting products from igest")
 
     try {
@@ -73,7 +72,6 @@ router.post("/id", async (request: Request, response: Response) => {
     try {
         const igestProducts = await igest.get.products({ empresa: data.franchise, produto: data.id })
         const product = (await Promise.all(igestProducts.map((item) => buildProduct(item, { mainOnly: false }))))[0]
-        console.log({ product })
         response.json(product)
     } catch (error) {
         response.json({ error })
@@ -82,7 +80,6 @@ router.post("/id", async (request: Request, response: Response) => {
 
 router.post("/images", async (request: Request, response: Response) => {
     const data = request.body
-    console.log(data)
 
     try {
         const images = await getProductImage(data.id, !!data.mainOnly)
