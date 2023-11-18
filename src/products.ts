@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express'
 import { PrismaClient } from "@prisma/client"
 import igest from "./api/igest"
 import normalize from "./tools/normalize"
+import axios from "axios"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -55,6 +56,13 @@ router.post("/", async (request: Request, response: Response) => {
         if (data.category) {
             console.log({ category: data.category })
             products = products.filter((product) => product.category == data.category)
+        }
+
+        if (data.collection) {
+            console.log({ collection: data.collection })
+            const categories = (await axios.get("localhost:4100/api/categories")).data as Category[]
+            const matched_categories = categories.filter((category) => category.collectionId == data.collection)
+            products = products.filter((product) => matched_categories.find((category) => (category.id = product.id)))
         }
 
         console.log({ productsLength: products.length })
