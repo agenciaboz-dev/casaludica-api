@@ -1,7 +1,8 @@
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: "https://app.agenciaboz.com.br:4118/api",
+    // baseURL: "https://app.agenciaboz.com.br:4118/api",
+    baseURL: "https://agencyboz.com:4118/api",
 })
 
 const order = {
