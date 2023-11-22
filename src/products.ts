@@ -37,6 +37,7 @@ export const buildProduct = async (product: Product, getImage?: { mainOnly: bool
         tags: product.Tags || "",
         weight: product.PesoBruto,
         ageRating: product.FaixaEtariaDescricao,
+        brand: product.MarcaDescricao,
     }
     return builtProduct
 }

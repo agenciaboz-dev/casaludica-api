@@ -17,4 +17,5 @@ declare interface ClientProduct {
     lenght?: number
     sold: number
     ageRating: string
+    brand: string
 }
