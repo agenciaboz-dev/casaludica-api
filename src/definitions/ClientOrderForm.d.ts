@@ -16,6 +16,8 @@ declare interface ClientOrderForm {
     state: string
     cpf: string
 
+    user_id?: number
+
     products: {
         name: string
         price: number

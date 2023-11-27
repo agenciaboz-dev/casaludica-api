@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express"
 import { OrderProduct, PrismaClient } from "@prisma/client"
 import unmask from "./tools/unmask"
 import bozpay from "./api/bozpay"
+import databaseHandler from "./databaseHandler"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -11,18 +12,11 @@ router.post("/new", async (request: Request, response: Response) => {
     try {
         const order = await prisma.order.create({
             data: {
-                address: data.address,
-                city: data.city,
                 datetime: new Date().getTime().toString(),
-                email: data.email,
-                lastname: data.lastname,
-                name: data.name,
-                phone: unmask(data.phone),
-                postcode: unmask(data.postcode),
                 storeId: data.storeId,
-                company: data.company,
                 notes: data.notes,
                 total: data.total,
+                userId: data.user_id || (await databaseHandler.user.createFromOrder(data)).id,
 
                 products: {
                     createMany: {
@@ -30,12 +24,12 @@ router.post("/new", async (request: Request, response: Response) => {
                             name: item.name,
                             price: item.price,
                             quantity: item.quantity,
-                            referenceId: item.id,
-                        })),
-                    },
-                },
+                            referenceId: item.id
+                        }))
+                    }
+                }
             },
-            include: { products: true },
+            include: { products: true }
         })
 
         try {
@@ -46,24 +40,24 @@ router.post("/new", async (request: Request, response: Response) => {
                 district: data.district,
                 number: data.number,
                 state: data.state,
-                complement: data.complement,
+                complement: data.complement
             }
 
             const personalData: PersonalDataForm = {
                 cpf: unmask(data.cpf),
                 email: data.email,
                 name: data.name,
-                phone: unmask(data.phone),
+                phone: unmask(data.phone)
             }
 
             const bozpayOrder = await bozpay.order.new({
                 billing: {
                     address,
-                    personalData,
+                    personalData
                 },
                 shipping: {
                     address,
-                    personalData,
+                    personalData
                 },
                 order: {
                     total: data.total,
@@ -71,9 +65,9 @@ router.post("/new", async (request: Request, response: Response) => {
                     dateCreated: order.datetime,
                     dateModified: order.datetime,
                     status: "PENDING",
-                    store: `casaludica.mkt-${order.storeId}`,
+                    store: `casaludica.mkt-${order.storeId}`
                 },
-                products: data.products.map((item) => ({ ...item, referenceId: item.id })),
+                products: data.products.map((item) => ({ ...item, referenceId: item.id }))
             })
 
             response.json({ bozpayOrder: bozpayOrder.order, order })
