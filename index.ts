@@ -6,16 +6,18 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import https from 'https'
 import fs from 'fs'
+import fileUpload from "express-fileupload"
 
 dotenv.config()
 
-const app:Express = express()
+const app: Express = express()
 const port = process.env.PORT
 
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(fileUpload())
 app.use('/api', router)
 
 try {

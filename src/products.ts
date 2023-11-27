@@ -1,10 +1,8 @@
-import express, { Express, Request, Response } from 'express'
-import { PrismaClient } from "@prisma/client"
+import express, { Express, Request, Response } from "express"
 import igest from "./api/igest"
 import normalize from "./tools/normalize"
 import axios from "axios"
 const router = express.Router()
-const prisma = new PrismaClient()
 
 const getProductImage = async (id: number, mainOnly?: boolean) => {
     const imagesObg = await igest.get.images({ produto: id, principal: !!mainOnly })
@@ -37,7 +35,7 @@ export const buildProduct = async (product: Product, getImage?: { mainOnly: bool
         tags: product.Tags || "",
         weight: product.PesoBruto,
         ageRating: product.FaixaEtariaDescricao,
-        brand: product.MarcaDescricao,
+        brand: product.MarcaDescricao
     }
     return builtProduct
 }
@@ -99,6 +97,5 @@ router.post("/images", async (request: Request, response: Response) => {
         response.json({ error })
     }
 })
-
 
 export default router
