@@ -1,3 +1,4 @@
 import user from "./user"
+import order from "./order"
 
-export default { user }
+export default { user, order }

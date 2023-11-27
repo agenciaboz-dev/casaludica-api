@@ -6,6 +6,20 @@ import databaseHandler from "./databaseHandler"
 const router = express.Router()
 const prisma = new PrismaClient()
 
+router.post("/list", async (request: Request, response: Response) => {
+    const data = request.body
+    const orders = await databaseHandler.order.list(data.storeId)
+
+    response.json(orders)
+})
+
+router.post("/id", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const order = await databaseHandler.order.get(Number(data.id))
+    response.json(order)
+})
+
 router.post("/new", async (request: Request, response: Response) => {
     const data: ClientOrderForm = request.body
 
@@ -16,7 +30,7 @@ router.post("/new", async (request: Request, response: Response) => {
                 storeId: data.storeId,
                 notes: data.notes,
                 total: data.total,
-                userId: data.user_id || (await databaseHandler.user.createFromOrder(data)).id,
+                userId: data.user_id || (await databaseHandler.user.existingUser(data))?.id || (await databaseHandler.user.createFromOrder(data)).id,
 
                 products: {
                     createMany: {
