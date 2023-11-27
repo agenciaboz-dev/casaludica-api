@@ -11,17 +11,15 @@ datasource db {
 model Order {
     id              Int         @id @default(autoincrement())
     storeId         Int
-    name            String
-    lastname        String
-    company         String?
-    postcode        String
-    address         String
-    city            String
-    phone           String
-    email           String
     notes           String?
     datetime        String
     total           Float
+
+    paymentType     String?
+    installments    Int?
+
+    userId          Int    
+    user            User        @relation(fields: [userId], references: [id])
 
     products        OrderProduct[]
 }
@@ -35,4 +33,25 @@ model OrderProduct {
 
     orderId         Int         
     order           Order       @relation(fields: [orderId], references: [id])
+}
+
+model User {
+    id              Int         @id @default(autoincrement())
+    name            String
+    lastname        String
+    cpf             String
+    company         String?
+    postcode        String
+    address         String
+    number          String
+    district        String
+    complement      String?
+    city            String
+    state           String
+    phone           String
+    email           String
+
+    profilePicUrl   String      @default("")
+
+    orders          Order[]
 }
