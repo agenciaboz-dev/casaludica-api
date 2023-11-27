@@ -37,6 +37,7 @@ model OrderProduct {
 
 model User {
     id              Int         @id @default(autoincrement())
+    password        String?
     name            String
     lastname        String
     cpf             String
@@ -51,7 +52,7 @@ model User {
     phone           String
     email           String
 
-    profilePicUrl   String      @default("")
+    profilePicUrl   String      @default("") @db.Text
 
     orders          Order[]
 }
