@@ -2,10 +2,11 @@ import { PrismaClient } from "@prisma/client"
 import unmask from "../tools/unmask"
 
 const prisma = new PrismaClient()
+const include = { orders: true }
 
-const existingUser = async (data: ClientOrderForm) =>
+const existingUser = async (login: string) =>
     await prisma.user.findFirst({
-        where: { OR: [{ cpf: data.cpf }, { email: data.email }] }
+        where: { OR: [{ cpf: login }, { email: login }] }
     })
 
 const createFromOrder = async (data: ClientOrderForm) =>
@@ -29,4 +30,9 @@ const createFromOrder = async (data: ClientOrderForm) =>
 
 const list = async () => prisma.user.findMany()
 
-export default { createFromOrder, list, existingUser }
+const login = async (login: string, password: string) =>
+    await prisma.user.findFirst({ where: { OR: [{ email: login }, { cpf: login }], AND: { password } }, include })
+
+const newPassword = async (id: number, password: string) => await prisma.user.update({ where: { id }, data: { password } })
+
+export default { include, createFromOrder, list, existingUser, login, newPassword }

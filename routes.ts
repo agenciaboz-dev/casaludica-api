@@ -1,7 +1,6 @@
-import express, { Express, Request, Response } from 'express'
-import login from './src/login'
-import products from './src/products'
-import categories from './src/categories'
+import express, { Express, Request, Response } from "express"
+import products from "./src/products"
+import categories from "./src/categories"
 import collections from "./src/collections"
 import cep from "./src/cep"
 import order from "./src/order"

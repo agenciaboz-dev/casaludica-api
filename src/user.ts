@@ -6,6 +6,24 @@ import databaseHandler from "./databaseHandler"
 const router = express.Router()
 const prisma = new PrismaClient()
 
+router.post("/exists", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const user = await databaseHandler.user.existingUser(data.login)
+    response.json(user)
+
+    if (user && !user.password) {
+        // enviar email para cadastrar a senha
+    }
+})
+
+router.post("/new_password", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const user = await databaseHandler.user.newPassword(Number(data.id), data.password)
+    response.json(user)
+})
+
 router.get("/list", async (request: Request, response: Response) => {
     const users = await databaseHandler.user.list()
     response.json(users)
@@ -23,6 +41,13 @@ router.post("/profile_pic/:user_id", async (request: Request, response: Response
             console.log(error)
         }
     }
+})
+
+router.post("/login", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const user = await databaseHandler.user.login(data.login, data.password)
+    response.json(user)
 })
 
 export default router

@@ -30,7 +30,17 @@ router.post("/new", async (request: Request, response: Response) => {
                 storeId: data.storeId,
                 notes: data.notes,
                 total: data.total,
-                userId: data.user_id || (await databaseHandler.user.existingUser(data))?.id || (await databaseHandler.user.createFromOrder(data)).id,
+                userId:
+                    data.user_id ||
+                    (
+                        await databaseHandler.user.existingUser(data.cpf)
+                    )?.id ||
+                    (
+                        await databaseHandler.user.existingUser(data.email)
+                    )?.id ||
+                    (
+                        await databaseHandler.user.createFromOrder(data)
+                    ).id,
 
                 products: {
                     createMany: {
