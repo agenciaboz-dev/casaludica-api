@@ -16,8 +16,17 @@ router.post("/list", async (request: Request, response: Response) => {
 router.post("/id", async (request: Request, response: Response) => {
     const data = request.body
 
-    const order = await databaseHandler.order.get(Number(data.id))
+    const order = await databaseHandler.order.get.id(Number(data.id))
     response.json(order)
+})
+
+router.post("/user", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const orders = await databaseHandler.order.get.user(data.user_id)
+    const bozpay_orders = await Promise.all(orders.map((order) => bozpay.order.get(bozpay.getStore(data.store_id), order.id.toString())))
+
+    response.json({ orders: bozpay_orders })
 })
 
 router.post("/new", async (request: Request, response: Response) => {
@@ -89,7 +98,7 @@ router.post("/new", async (request: Request, response: Response) => {
                     dateCreated: order.datetime,
                     dateModified: order.datetime,
                     status: "PENDING",
-                    store: `casaludica.mkt-${order.storeId}`
+                    store: bozpay.getStore(order.storeId)
                 },
                 products: data.products.map((item) => ({ ...item, referenceId: item.id }))
             })

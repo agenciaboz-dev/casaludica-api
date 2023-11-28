@@ -10,6 +10,12 @@ const order = {
         const response = await api.post("/order/new", data)
         return response.data
     },
+    get: async (store: string, referenceId: string) => {
+        const response = await api.post("/order", { store, referenceId })
+        return response.data
+    }
 }
 
-export default { order }
+const getStore = (store_id: number) => `casaludica.mkt-${store_id}`
+
+export default { order, getStore }
