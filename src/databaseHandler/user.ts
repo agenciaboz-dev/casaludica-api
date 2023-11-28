@@ -35,4 +35,6 @@ const login = async (login: string, password: string) =>
 
 const newPassword = async (id: number, password: string) => await prisma.user.update({ where: { id }, data: { password } })
 
-export default { include, createFromOrder, list, existingUser, login, newPassword }
+const updateProfilePicture = async (id: number, url: string) => await prisma.user.update({ where: { id }, data: { profilePicUrl: url } })
+
+export default { include, createFromOrder, list, existingUser, login, newPassword, updateProfilePicture }

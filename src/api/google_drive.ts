@@ -1,6 +1,7 @@
 import { UploadedFile } from "express-fileupload"
 import credentials from "../../google_cloud_credentials.json"
 import { drive_v3, google } from "googleapis"
+import { Readable } from "stream"
 
 const SCOPES = ["https://www.googleapis.com/auth/drive.file"]
 const USERS_FOLDER = "19sH4ubRz1anzI_uv0oU91aO3Ox4THMKW"
@@ -51,10 +52,14 @@ const uploadUserImage = async (file: UploadedFile, user_id: string) => {
         userFolder = { id: await createUserFolder(drive, user_id) }
     }
 
+    const bufferStream = new Readable()
+    bufferStream.push(file.data)
+    bufferStream.push(null)
+
     const gfile = await drive.files.create({
         media: {
             mimeType: file.mimetype,
-            body: file.data
+            body: bufferStream
         },
         fields: "id",
         requestBody: {
@@ -63,7 +68,19 @@ const uploadUserImage = async (file: UploadedFile, user_id: string) => {
         }
     })
 
-    return gfile.data.id
+    const file_id = gfile.data.id
+
+    if (file_id) {
+        const fileDetails = await drive.files.get({
+            fileId: file_id,
+            fields: "webViewLink, webContentLink"
+        })
+
+        let directLink = fileDetails.data.webContentLink
+        directLink = directLink?.replace("&export=download", "")
+
+        return directLink
+    }
 }
 
 export default { uploadUserImage }

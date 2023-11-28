@@ -29,16 +29,23 @@ router.get("/list", async (request: Request, response: Response) => {
     response.json(users)
 })
 
-router.post("/profile_pic/:user_id", async (request: Request, response: Response) => {
+router.post("/upload_profile_pic/:user_id", async (request: Request, response: Response) => {
     const user_id = request.params.user_id
     const file = request.files?.file
 
     if (file) {
         try {
-            const file_id = await google_drive.uploadUserImage(file as UploadedFile, user_id)
-            response.json(file_id)
+            const image_url = await google_drive.uploadUserImage(file as UploadedFile, user_id)
+
+            if (image_url) {
+                const user = await databaseHandler.user.updateProfilePicture(Number(user_id), image_url)
+                response.json({ user })
+            } else {
+                response.json({ error: "getting image url, but it was uploaded" })
+            }
         } catch (error) {
             console.log(error)
+            response.json({ error })
         }
     }
 })
