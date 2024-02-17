@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const token = "9aB4pC!qRt3xYz"
-const version = 5
+const version = 6
 
 const api = axios.create({
     // baseURL: "http://localhost:4100/api",
