@@ -3,6 +3,7 @@ import igest from "./api/igest"
 import normalize from "./tools/normalize"
 import axios from "axios"
 import { Product } from "./class/Product"
+import { Category } from "./class/Category"
 const router = express.Router()
 
 router.post("/", async (request: Request, response: Response) => {
