@@ -26,7 +26,7 @@ router.post("/new_password", async (request: Request, response: Response) => {
 })
 
 router.get("/list", async (request: Request, response: Response) => {
-    const users = await databaseHandler.user.list()
+    const users = await User.list()
     response.json(users)
 })
 

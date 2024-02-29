@@ -30,6 +30,12 @@ export class User {
         user_prisma ? this.load(user_prisma) : (this.id = id)
     }
 
+    static async list() {
+        const users_prisma = await prisma.user.findMany({ include })
+        const users = users_prisma.map((item) => new User(0, item))
+        return users
+    }
+
     static async login(login: string, password: string) {
         console.log("logging in")
         const user_prisma = await prisma.user.findFirst({ where: { OR: [{ email: login }, { cpf: login }], AND: { password } }, include })
