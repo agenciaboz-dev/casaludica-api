@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 import https from 'https'
 import fs from 'fs'
 import fileUpload from "express-fileupload"
+import { setProd } from "./src/env"
 
 dotenv.config()
 
@@ -18,7 +19,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(fileUpload())
-app.use('/api', router)
+app.use("/api", router)
+app.use("/static", express.static("static"))
 
 try {
     const server = https.createServer(
@@ -31,12 +33,12 @@ try {
     )
 
     console.log("hey!")
-    
+
     server.listen(port, () => {
         console.log(`[server]: Server is running at https ${port}`)
+        setProd()
     })
-} catch(e) {
-    console.log(e)
+} catch (e) {
     app.listen(port, () => {
         console.log(`[server]: Server is running at http ${port}`)
     })

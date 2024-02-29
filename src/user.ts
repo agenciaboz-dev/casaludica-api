@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client"
 import google_drive from "./api/google_drive"
 import { UploadedFile } from "express-fileupload"
 import databaseHandler from "./databaseHandler"
+import { User } from "./class/User"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -30,30 +31,22 @@ router.get("/list", async (request: Request, response: Response) => {
 })
 
 router.post("/upload_profile_pic/:user_id", async (request: Request, response: Response) => {
-    const user_id = request.params.user_id
+    const user_id = Number(request.params.user_id)
     const file = request.files?.file
 
     if (file) {
-        try {
-            const image_url = await google_drive.uploadUserImage(file as UploadedFile, user_id)
+        const user = new User(user_id)
+        await user.init()
+        user.updateImage(file as UploadedFile)
 
-            if (image_url) {
-                const user = await databaseHandler.user.updateProfilePicture(Number(user_id), image_url)
-                response.json({ user })
-            } else {
-                response.json({ error: "getting image url, but it was uploaded" })
-            }
-        } catch (error) {
-            console.log(error)
-            response.json({ error })
-        }
+        response.json(user)
     }
 })
 
 router.post("/login", async (request: Request, response: Response) => {
-    const data = request.body
+    const data = request.body as { login: string; password: string }
 
-    const user = await databaseHandler.user.login(data.login, data.password)
+    const user = await User.login(data.login, data.password)
     response.json(user)
 })
 
