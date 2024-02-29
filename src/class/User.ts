@@ -77,4 +77,16 @@ export class User {
         this.profilePicUrl = url
         return url
     }
+
+    async update(data: Partial<User>) {
+        const user_prisma = await prisma.user.update({
+            where: { id: this.id },
+            data: {
+                ...data,
+                orders: {},
+            },
+            include,
+        })
+        this.load(user_prisma)
+    }
 }

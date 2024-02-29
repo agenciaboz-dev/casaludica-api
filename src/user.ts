@@ -19,10 +19,18 @@ router.post("/exists", async (request: Request, response: Response) => {
 })
 
 router.post("/new_password", async (request: Request, response: Response) => {
-    const data = request.body
+    const data = request.body as { id: number; password: string }
 
-    const user = await databaseHandler.user.newPassword(Number(data.id), data.password)
-    response.json(user)
+    try {
+        const user = new User(data.id)
+        await user.init()
+        await user.update({ password: data.password })
+
+        response.json(user)
+    } catch (error) {
+        console.log(error)
+        response.status(500).send(error)
+    }
 })
 
 router.get("/list", async (request: Request, response: Response) => {
