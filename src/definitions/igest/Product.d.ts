@@ -1,4 +1,4 @@
-declare interface Product {
+declare interface IgestProduct {
     IdProduto: number
     DataAlteracao: string
     Ativo: boolean

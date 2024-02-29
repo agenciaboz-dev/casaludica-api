@@ -2,43 +2,8 @@ import express, { Express, Request, Response } from "express"
 import igest from "./api/igest"
 import normalize from "./tools/normalize"
 import axios from "axios"
+import { Product } from "./class/Product"
 const router = express.Router()
-
-const getProductImage = async (id: number, mainOnly?: boolean) => {
-    const imagesObg = await igest.get.images({ produto: id, principal: !!mainOnly })
-    const images = [imagesObg.Imagem1Base64, imagesObg.Imagem2Base64, imagesObg.Imagem3Base64, imagesObg.Imagem4Base64, imagesObg.Imagem5Base64]
-        .filter(Boolean)
-        .toString()
-
-    return images
-}
-
-export const buildProduct = async (product: Product, getImage?: { mainOnly: boolean }) => {
-    const images = getImage ? await getProductImage(product.IdProduto, getImage.mainOnly) : ""
-
-    const builtProduct: ClientProduct = {
-        id: product.IdProduto,
-        category: product.IdGrupo || 0,
-        cover: images.split(",")[0] || "",
-        date: product.DataAlteracao ? new Date(product.DataAlteracao) : undefined,
-        description: product.DescricaoEducativa || "",
-        featured: false,
-        height: product.Altura,
-        lenght: product.Comprimento,
-        width: product.Largura,
-        images,
-        name: product.Descricao || "",
-        price: product.PrecoVenda,
-        resume: product.Descricao || "",
-        sold: product.TotalVenda,
-        stock: product.EstoqueTotal,
-        tags: product.Tags || "",
-        weight: product.PesoBruto,
-        ageRating: product.FaixaEtariaDescricao,
-        brand: product.MarcaDescricao
-    }
-    return builtProduct
-}
 
 router.post("/", async (request: Request, response: Response) => {
     const data = request.body
@@ -46,7 +11,7 @@ router.post("/", async (request: Request, response: Response) => {
 
     try {
         const igestProducts = await igest.get.products({ empresa: data.franchise })
-        let products = await Promise.all(igestProducts.map((item) => buildProduct(item)))
+        let products = await Promise.all(igestProducts.map((item) => new Product(item)))
 
         if (data.search) {
             products = products.filter((product) => normalize(product.name).includes(normalize(data.search)))
@@ -79,7 +44,8 @@ router.post("/id", async (request: Request, response: Response) => {
 
     try {
         const igestProducts = await igest.get.products({ empresa: data.franchise, produto: data.id })
-        const product = (await Promise.all(igestProducts.map((item) => buildProduct(item, { mainOnly: false }))))[0]
+        const product = new Product(igestProducts[0])
+        await product.getImage()
         response.json(product)
     } catch (error) {
         response.json({ error })
@@ -90,7 +56,7 @@ router.post("/images", async (request: Request, response: Response) => {
     const data = request.body
 
     try {
-        const images = await getProductImage(data.id, !!data.mainOnly)
+        const images = await Product.getImages(data.id, !!data.mainOnly)
         response.json(images)
     } catch (error) {
         console.log(error)
