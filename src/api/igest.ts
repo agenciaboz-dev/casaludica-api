@@ -1,4 +1,5 @@
 import axios from "axios"
+import { IgestNewOrder } from "../definitions/igest/Order"
 
 const token = "9aB4pC!qRt3xYz"
 const version = 6
@@ -9,11 +10,18 @@ const api = axios.create({
     // timeout: 1000 * 10,
 })
 
+const getUrl = (endpoint: string) => {
+    const url = `${endpoint}?chave=${token}&versao=${version}`
+    return url
+}
+
 const get = async (endpoint: string, params: any) => {
+    const base_url = getUrl(endpoint)
     const paramsString = Object.entries(params)
         .map(([param, value]) => `${param}=${value}`)
         .join("&")
-    const url = `${endpoint}?chave=${token}&versao=${version}&${paramsString}`
+
+    const url = `${base_url}&${paramsString}`
 
     return await (
         await api.get(url)
@@ -26,6 +34,15 @@ const collections = async (params: IgestCollectionParams) => (await get("/ObterG
 const products = async (params: ProductParams) => (await get("/ObterProduto", params)) as IgestProduct[]
 const images = async (params: ImageParams) => (await get("/ObterImagem", params)) as Image
 
-const getFunction = { franchises, products, images, categories, collections }
+const sendOrder = async (data: IgestNewOrder) => {
+    console.log(data)
+    console.log("sending to igest")
+    const url = getUrl("/EnviarPedido")
+    const response = await api.post(url, data)
+    console.log(response.data)
+    return response.data
+}
+
+const getFunction = { franchises, products, images, categories, collections, sendOrder }
 
 export default { get: getFunction }
