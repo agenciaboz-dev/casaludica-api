@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express"
 import { OrderProduct, PrismaClient } from "@prisma/client"
 import bozpay from "./api/bozpay"
 import { Order } from "./class/Order"
+import { User } from "./class/User"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -32,7 +33,8 @@ router.post("/user", async (request: Request, response: Response) => {
 router.post("/new", async (request: Request, response: Response) => {
     const data: ClientOrderForm = request.body
 
-    const order_response = await Order.new(data)
+    const user_id = data.user_id || (await User.find(data.cpf, data.email))?.id || (await User.autoCreate(data)).id
+    const order_response = await Order.new(data, user_id)
 
     response.json(order_response.error || { ...order_response })
 })

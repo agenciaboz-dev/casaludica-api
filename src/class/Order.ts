@@ -1,11 +1,10 @@
 import { Prisma, PrismaClient } from "@prisma/client"
-import { User } from "./User"
 import { OrderProduct } from "./OrderProduct"
 import unmask from "../tools/unmask"
 import bozpay from "../api/bozpay"
 
 const prisma = new PrismaClient()
-const include = Prisma.validator<Prisma.OrderInclude>()({ products: true, user: true })
+export const include = Prisma.validator<Prisma.OrderInclude>()({ products: true })
 export type OrderPrisma = Prisma.OrderGetPayload<{ include: typeof include }>
 
 export class Order {
@@ -18,7 +17,6 @@ export class Order {
     installments: number | null
     userId: number
 
-    user: User
     products: OrderProduct[]
 
     constructor(id: number, data?: OrderPrisma) {
@@ -37,7 +35,7 @@ export class Order {
         return orders
     }
 
-    static async new(data: ClientOrderForm) {
+    static async new(data: ClientOrderForm, user_id: number) {
         try {
             const order_prisma = await prisma.order.create({
                 data: {
@@ -45,7 +43,7 @@ export class Order {
                     storeId: data.storeId,
                     notes: data.notes,
                     total: data.total,
-                    userId: data.user_id || (await User.find(data.cpf, data.email))?.id || (await User.autoCreate(data)).id,
+                    userId: user_id,
 
                     products: {
                         createMany: {
@@ -117,7 +115,6 @@ export class Order {
         this.installments = data.installments
         this.userId = data.userId
 
-        this.user = new User(0, { ...data.user, orders: [] })
-        this.products = data.products.map((item) => new OrderProduct(item))
+        this.products = data.products?.map((item) => new OrderProduct(item))
     }
 }

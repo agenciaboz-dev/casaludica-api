@@ -2,10 +2,11 @@ import { Prisma, PrismaClient } from "@prisma/client"
 import { UploadedFile } from "express-fileupload"
 import { saveImage } from "../tools/saveImage"
 import unmask from "../tools/unmask"
+import { Order, include as order_include } from "./Order"
 
 const prisma = new PrismaClient()
 
-export const include = Prisma.validator<Prisma.UserInclude>()({ orders: true })
+export const include = Prisma.validator<Prisma.UserInclude>()({ orders: { include: order_include } })
 export type UserPrisma = Prisma.UserGetPayload<{ include: typeof include }>
 
 export class User {
@@ -25,7 +26,7 @@ export class User {
     email: string
     profilePicUrl: string
 
-    orders = []
+    orders: Order[] = []
 
     constructor(id: number, user_prisma?: UserPrisma) {
         user_prisma ? this.load(user_prisma) : (this.id = id)
@@ -34,6 +35,7 @@ export class User {
     static async list() {
         const users_prisma = await prisma.user.findMany({ include })
         const users = users_prisma.map((item) => new User(0, item))
+        console.log(users)
         return users
     }
 
@@ -106,7 +108,7 @@ export class User {
         this.phone = user_prisma.phone
         this.email = user_prisma.email
         this.profilePicUrl = user_prisma.profilePicUrl
-        // this.orders = user_prisma.orders
+        this.orders = user_prisma.orders.map((item) => new Order(0, item))
     }
 
     async updateImage(file: UploadedFile) {
