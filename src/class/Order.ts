@@ -25,6 +25,18 @@ export class Order {
         data ? this.load(data) : (this.id = id)
     }
 
+    static async list(store_id?: number) {
+        const orders_prisma = await prisma.order.findMany({ where: { storeId: store_id }, include })
+        const orders = orders_prisma.map((item) => new Order(0, item))
+        return orders
+    }
+
+    static async find(data: { id?: number; user_id?: number }) {
+        const order_prisma = await prisma.order.findMany({ where: { OR: { id: data.id, userId: data.user_id } }, include })
+        const orders = order_prisma.map((item) => new Order(0, item))
+        return orders
+    }
+
     static async new(data: ClientOrderForm) {
         try {
             const order_prisma = await prisma.order.create({
