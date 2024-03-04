@@ -1,8 +1,6 @@
-import express, { Express, Request, Response } from "express"
+import express, { Request, Response } from "express"
 import { PrismaClient } from "@prisma/client"
-import google_drive from "./api/google_drive"
 import { UploadedFile } from "express-fileupload"
-import databaseHandler from "./databaseHandler"
 import { User } from "./class/User"
 const router = express.Router()
 const prisma = new PrismaClient()
@@ -10,7 +8,7 @@ const prisma = new PrismaClient()
 router.post("/exists", async (request: Request, response: Response) => {
     const data = request.body
 
-    const user = await databaseHandler.user.existingUser(data.login)
+    const user = await User.find(data.login)
     response.json(user)
 
     if (user && !user.password) {

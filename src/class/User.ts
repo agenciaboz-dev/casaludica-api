@@ -48,13 +48,15 @@ export class User {
 
     static async find(...params: string[]): Promise<User | null> {
         let user: User | null = null
-        params.forEach(async (param) => {
-            const data = await prisma.user.findFirst({
-                where: { OR: [{ cpf: param }, { email: param }] },
-                include,
+        await Promise.all(
+            params.map(async (param) => {
+                const data = await prisma.user.findFirst({
+                    where: { OR: [{ cpf: param }, { email: param }] },
+                    include,
+                })
+                if (data) user = new User(0, data)
             })
-            if (data) user = new User(0, data)
-        })
+        )
 
         return user
     }
