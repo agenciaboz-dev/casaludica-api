@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import { UploadedFile } from "express-fileupload"
 import { saveImage } from "../tools/saveImage"
+import unmask from "../tools/unmask"
 
 const prisma = new PrismaClient()
 
@@ -41,6 +42,42 @@ export class User {
         const user_prisma = await prisma.user.findFirst({ where: { OR: [{ email: login }, { cpf: login }], AND: { password } }, include })
         if (!user_prisma) return null
 
+        const user = new User(0, user_prisma)
+        return user
+    }
+
+    static async find(...params: string[]): Promise<User | null> {
+        let user: User | null = null
+        params.forEach(async (param) => {
+            const data = await prisma.user.findFirst({
+                where: { OR: [{ cpf: param }, { email: param }] },
+                include,
+            })
+            if (data) user = new User(0, data)
+        })
+
+        return user
+    }
+
+    static async autoCreate(data: ClientOrderForm) {
+        const user_prisma = await prisma.user.create({
+            data: {
+                address: data.address,
+                city: data.city,
+                cpf: unmask(data.cpf),
+                district: data.district,
+                email: data.email,
+                lastname: data.lastname,
+                name: data.name,
+                number: data.number,
+                phone: unmask(data.phone),
+                postcode: unmask(data.postcode),
+                state: data.state,
+                company: data.company,
+                complement: data.complement,
+            },
+            include,
+        })
         const user = new User(0, user_prisma)
         return user
     }
