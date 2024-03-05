@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express"
 import { PrismaClient } from "@prisma/client"
 import { UploadedFile } from "express-fileupload"
-import { User } from "./class/User"
+import { User } from "../class/User"
 const router = express.Router()
 const prisma = new PrismaClient()
 

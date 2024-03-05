@@ -1,12 +1,12 @@
 import express, { Express, Request, Response } from "express"
 import { OrderProduct, PrismaClient } from "@prisma/client"
-import bozpay from "./api/bozpay"
-import { Order } from "./class/Order"
-import { User } from "./class/User"
-import igest from "./api/igest"
-import { PaymentType } from "./types/igest/Order"
-import viacep from "./api/viacep"
-import { Charge } from "./types/bozpay/Charge"
+import bozpay from "../api/bozpay"
+import { Order } from "../class/Order"
+import { User } from "../class/User"
+import igest from "../api/igest"
+import { PaymentType } from "../types/igest/Order"
+import viacep from "../api/viacep"
+import { Charge } from "../types/bozpay/Charge"
 const router = express.Router()
 const prisma = new PrismaClient()
 

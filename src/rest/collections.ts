@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express"
-import api from "./api/igest"
-import { Collection } from "./class/Collection"
+import api from "../api/igest"
+import { Collection } from "../class/Collection"
 
 const router = express.Router()
 
