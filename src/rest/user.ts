@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express"
-import { PrismaClient } from "@prisma/client"
 import { UploadedFile } from "express-fileupload"
 import { User } from "../class/User"
+import { decrypt, encrypt } from "../tools/hash"
+import { sendMail } from "../tools/mail"
+import templates from "../templates"
 const router = express.Router()
-const prisma = new PrismaClient()
 
 router.post("/exists", async (request: Request, response: Response) => {
     const data = request.body
@@ -12,7 +13,13 @@ router.post("/exists", async (request: Request, response: Response) => {
     response.json(user)
 
     if (user && !user.password) {
-        // enviar email para cadastrar a senha
+        try {
+            const hash = encrypt(user.id)
+            const url = `http://localhost:3000/first_password/${hash}`
+            await sendMail(user.email, "Gerar senha", url, templates.email.generate_password(url))
+        } catch (error) {
+            console.log(error)
+        }
     }
 })
 
@@ -28,6 +35,26 @@ router.post("/new_password", async (request: Request, response: Response) => {
     } catch (error) {
         console.log(error)
         response.status(500).send(error)
+    }
+})
+
+router.post("/first_password", async (request: Request, response: Response) => {
+    const data = request.body as { hash: string; password: string }
+
+    try {
+        const user_id = decrypt(data.hash)
+        const user = new User(user_id)
+        await user.init()
+
+        if (!!user.password) {
+            response.json(null)
+            return
+        }
+
+        await user.update({ password: data.password })
+        response.json(user)
+    } catch (error) {
+        response.json(null)
     }
 })
 
