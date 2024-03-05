@@ -12,7 +12,10 @@ const order = {
     },
     get: async (store: string, referenceId?: string, id?: number) => {
         const response = await api.post("/order", { store, referenceId, id })
-        console.log({ store, referenceId })
+        return response.data
+    },
+    updateStatus: async (data: { status: string; id: number }) => {
+        const response = await api.post("/order/status", data)
         return response.data
     },
 }
