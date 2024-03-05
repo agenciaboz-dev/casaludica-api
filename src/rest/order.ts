@@ -7,6 +7,7 @@ import igest from "../api/igest"
 import { PaymentType } from "../types/igest/Order"
 import viacep from "../api/viacep"
 import { Charge } from "../types/bozpay/Charge"
+import { AxiosError } from "axios"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -97,7 +98,12 @@ router.post("/paid", async (request: Request, response: Response) => {
         }
     } catch (error) {
         console.log("error sending to igest")
-        console.log(error)
+
+        if (error instanceof AxiosError) {
+            console.log(error.response?.data)
+        } else {
+            console.log(error)
+        }
     }
 })
 
