@@ -32,7 +32,7 @@ router.post("/user", async (request: Request, response: Response) => {
     const orders = await Order.find({ user_id: data.user_id })
     const bozpay_orders = await Promise.all(orders.map((order) => bozpay.order.get(bozpay.getStore(data.store_id), order.id.toString())))
 
-    response.json({ orders: bozpay_orders })
+    response.json({ orders: bozpay_orders.filter((item) => !!item) })
 })
 
 router.post("/new", async (request: Request, response: Response) => {
