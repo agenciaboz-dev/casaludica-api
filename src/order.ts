@@ -58,6 +58,8 @@ router.post("/paid", async (request: Request, response: Response) => {
         await user.init()
         const via_cep = await viacep.search(user.postcode)
 
+        const products_total = order.products.reduce((total, product) => total + product.price * product.quantity, 0)
+
         const igest_response = await igest.post.order({
             IdEmpresa: order.storeId,
             IdentificadorPedido: order.id,
@@ -67,7 +69,7 @@ router.post("/paid", async (request: Request, response: Response) => {
                     : charge.payment_method.type == "BOLETO"
                     ? PaymentType.boleto
                     : PaymentType.cartao,
-            ValorFrete: 0,
+            ValorFrete: bozpay_order.total - products_total,
             Cliente: {
                 Bairro: user.district,
                 Cep: user.postcode,
