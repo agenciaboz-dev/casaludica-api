@@ -1,4 +1,4 @@
-declare interface Franchise {
+declare interface IgestFranchise {
     IdEmpresa: number
     Ativo: boolean
     RazaoSocial: string
