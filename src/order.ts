@@ -81,7 +81,7 @@ router.post("/paid", async (request: Request, response: Response) => {
                 Endereco: user.address,
                 Estado: user.state,
                 InscricaoEstadual: null,
-                Nome: user.name,
+                Nome: user.name + " " + user.lastname,
                 Numero: user.number,
                 Rg: null,
                 Telefone: user.phone,
