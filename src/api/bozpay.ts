@@ -10,10 +10,11 @@ const order = {
         const response = await api.post("/order/new", data)
         return response.data
     },
-    get: async (store: string, referenceId: string) => {
-        const response = await api.post("/order", { store, referenceId })
+    get: async (store: string, referenceId?: string, id?: number) => {
+        const response = await api.post("/order", { store, referenceId, id })
+        console.log({ store, referenceId })
         return response.data
-    }
+    },
 }
 
 const getStore = (store_id: number) => `casaludica.mkt-${store_id}`

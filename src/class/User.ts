@@ -18,6 +18,7 @@ export class User {
     company: string | null
     postcode: string
     address: string
+    number: string
     district: string
     complement: string | null
     city: string
@@ -101,6 +102,7 @@ export class User {
         this.company = user_prisma.company
         this.postcode = user_prisma.postcode
         this.address = user_prisma.address
+        this.number = user_prisma.number
         this.district = user_prisma.district
         this.complement = user_prisma.complement
         this.city = user_prisma.city

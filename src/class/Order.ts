@@ -2,6 +2,7 @@ import { Prisma, PrismaClient } from "@prisma/client"
 import { OrderProduct } from "./OrderProduct"
 import unmask from "../tools/unmask"
 import bozpay from "../api/bozpay"
+import { Charge } from "../types/bozpay/Charge"
 
 const prisma = new PrismaClient()
 export const include = Prisma.validator<Prisma.OrderInclude>()({ products: true })
@@ -21,6 +22,12 @@ export class Order {
 
     constructor(id: number, data?: OrderPrisma) {
         data ? this.load(data) : (this.id = id)
+    }
+
+    async init() {
+        const order_prisma = await prisma.order.findUnique({ where: { id: this.id }, include })
+        if (!order_prisma) throw "pedido não encontrado"
+        this.load(order_prisma)
     }
 
     static async list(store_id?: number) {
@@ -116,5 +123,30 @@ export class Order {
         this.userId = data.userId
 
         this.products = data.products?.map((item) => new OrderProduct(item))
+    }
+
+    async update(data: Partial<Order>) {
+        const order_prisma = await prisma.order.update({
+            where: { id: this.id },
+            data: {
+                ...data,
+                products: {},
+            },
+            include,
+        })
+
+        this.load(order_prisma)
+    }
+
+    async onPaid(charge: Charge) {
+        await this.update({
+            paymentType: charge.payment_method.type,
+        })
+        console.log(`pagamento: ${this.paymentType}`)
+        console.log(`pagamento: ${this.paymentType}`)
+        console.log(`pagamento: ${this.paymentType}`)
+        console.log(`pagamento: ${this.paymentType}`)
+        console.log(`pagamento: ${this.paymentType}`)
+        console.log(`pagamento: ${this.paymentType}`)
     }
 }

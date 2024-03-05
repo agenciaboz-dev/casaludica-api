@@ -1,4 +1,4 @@
-enum PaymentType {
+export enum PaymentType {
     boleto = 1,
     pix = 2,
     cartao = 3,
@@ -12,18 +12,18 @@ export declare interface IgestNewOrder {
     Cliente: {
         CpfCnpj: string
         InscricaoEstadual: string | null
-        Rg: string
+        Rg: string | null
         Nome: string
         Endereco: string
         Numero: string
         Bairro: string
-        Complemento: string
+        Complemento: string | null
         Cidade: string
         Estado: string
         Cep: string
         CodigoIbge: string
-        Telefone: string
-        Email: string
+        Telefone: string | null
+        Email: string | null
     }
 
     ListaProduto: {
@@ -31,7 +31,7 @@ export declare interface IgestNewOrder {
         Quantidade: number
         PrecoVenda: number
 
-        ListaVariacao: {
+        ListaVariacao?: {
             IdEstoqueVariacao: number
             Quantidade: number
         }[]
