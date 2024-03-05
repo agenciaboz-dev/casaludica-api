@@ -39,7 +39,7 @@ const order = async (data: IgestNewOrder) => {
     console.log("sending to igest")
     const url = getUrl("/EnviarPedido")
     const response = await api.post(url, data)
-    return response.data
+    return response
 }
 
 const getFunction = { franchises, products, images, categories, collections, order }

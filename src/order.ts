@@ -48,7 +48,6 @@ router.post("/paid", async (request: Request, response: Response) => {
     const charge = data.charge
 
     const bozpay_order = await bozpay.order.get(bozpay.getStore(data.storeId), "", Number(charge.reference_id))
-    console.log(bozpay_order)
 
     try {
         const order = new Order(Number(bozpay_order.referenceId))
@@ -62,7 +61,12 @@ router.post("/paid", async (request: Request, response: Response) => {
         const igest_response = await igest.post.order({
             IdEmpresa: order.storeId,
             IdentificadorPedido: order.id,
-            TipoPagamento: PaymentType.pix,
+            TipoPagamento:
+                charge.payment_method.type == "PIX"
+                    ? PaymentType.pix
+                    : charge.payment_method.type == "BOLETO"
+                    ? PaymentType.boleto
+                    : PaymentType.cartao,
             ValorFrete: 0,
             Cliente: {
                 Bairro: user.district,
@@ -86,7 +90,9 @@ router.post("/paid", async (request: Request, response: Response) => {
                 Quantidade: item.quantity,
             })),
         })
-        console.log(igest_response)
+        if (igest_response.status == 200) {
+            await bozpay.order.updateStatus({ status: "PROCESSANDO", id: bozpay_order.id })
+        }
     } catch (error) {
         console.log("error sending to igest")
         console.log(error)
