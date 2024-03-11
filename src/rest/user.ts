@@ -88,4 +88,18 @@ router.post("/login", async (request: Request, response: Response) => {
     response.json(user)
 })
 
+router.post("/update", async (request: Request, response: Response) => {
+    const data = request.body as Partial<User> & { id: number }
+    const user = new User(data.id)
+    await user.init()
+
+    try {
+        await user.update(data)
+        response.json(user)
+    } catch (error) {
+        console.log(error)
+        response.status(500)
+    }
+})
+
 export default router
