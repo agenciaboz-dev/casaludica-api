@@ -46,4 +46,4 @@ const getFunction = { franchises, products, images, categories, collections, ord
 
 const post = { order }
 
-export default { get: getFunction, post }
+export default { get: getFunction, post, token }
