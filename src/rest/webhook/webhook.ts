@@ -5,6 +5,7 @@ import { UploadedFile } from "express-fileupload"
 import { Order } from "../../class/Order"
 import { sendMail } from "../../tools/mail"
 import { User } from "../../class/User"
+import Mail from "nodemailer/lib/mailer"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -35,7 +36,13 @@ router.put("/invoiced_order", async (request: Request, response: Response) => {
         const buyer = new User(order.userId)
         await buyer.init()
 
-        await sendMail(buyer.email, "Seu Pedido foi Faturado - Nota Fiscal Anexa", "email em string", "<p>html</p>", [invoice])
+        const attachment: Mail.Attachment = {
+            filename: invoice.name,
+            content: invoice.data,
+            contentType: invoice.mimetype,
+        }
+
+        await sendMail(buyer.email, "Seu Pedido foi Faturado - Nota Fiscal Anexa", "email em string", "<p>html</p>", [attachment])
 
         response.json(200)
     } catch (error) {
