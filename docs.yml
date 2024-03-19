@@ -4,6 +4,9 @@ servers:
 info:
   version: 1.0.0
   title: Casa Lúdica - IGEST
+  description: >
+    This API requires clients to authenticate via the Authorization header with a value of "Basic TOKEN".
+    Please include this header in all requests to the API.
   contact:
     email: fernando@agenciaboz.com.br
 paths:
