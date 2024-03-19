@@ -6,12 +6,41 @@ import { Order } from "../../class/Order"
 import { sendMail } from "../../tools/mail"
 import { User } from "../../class/User"
 import Mail from "nodemailer/lib/mailer"
+import bozpay from "../../api/bozpay"
 const router = express.Router()
 const prisma = new PrismaClient()
 
 router.use(authentication)
 
-router.put("/invoiced_order", async (request: Request, response: Response) => {
+router.patch("/sent_order", async (request: Request, response: Response) => {
+    const data = request.body as { order_id: number }
+
+    if (!data.order_id) {
+        response.status(400).json({ error: '"order_id" key is required in the request data' })
+        return
+    }
+
+    if (typeof data.order_id != "number") {
+        response.status(400).json({ error: '"order_id" key must be number' })
+        return
+    }
+
+    const order = new Order(data.order_id)
+    await order.init()
+
+    const bozpay_order = await bozpay.order.get(bozpay.getStore(order.storeId), order.id.toString())
+    const bozpay_response = await bozpay.order.updateStatus({ id: bozpay_order.id, status: "Em trânsito" })
+    console.log({ bozpay_response })
+
+    const buyer = new User(order.userId)
+    await buyer.init()
+
+    await sendMail(buyer.email, "Sua Compra Está a Caminho!", "email em string", "<p>html</p>")
+
+    response.json(200)
+})
+
+router.patch("/invoiced_order", async (request: Request, response: Response) => {
     try {
         const data = JSON.parse(request.body.data) as { order_id: number }
         const invoice = request.files?.file as UploadedFile
