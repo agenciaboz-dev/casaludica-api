@@ -37,7 +37,7 @@ router.patch("/sent_order", async (request: Request, response: Response) => {
 
     await sendMail(buyer.email, "Sua Compra Está a Caminho!", "email em string", "<p>html</p>")
 
-    response.json(200)
+    response.status(200).json({ success: true })
 })
 
 router.patch("/invoiced_order", async (request: Request, response: Response) => {
@@ -73,7 +73,7 @@ router.patch("/invoiced_order", async (request: Request, response: Response) => 
 
         await sendMail(buyer.email, "Seu Pedido foi Faturado - Nota Fiscal Anexa", "email em string", "<p>html</p>", [attachment])
 
-        response.json(200)
+        response.status(200).json({ success: true })
     } catch (error) {
         if (error instanceof SyntaxError) {
             response
@@ -83,7 +83,7 @@ router.patch("/invoiced_order", async (request: Request, response: Response) => 
         }
 
         console.log(error)
-        response.status(500)
+        response.status(500).json()
     }
 })
 
