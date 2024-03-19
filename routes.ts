@@ -7,6 +7,7 @@ import order from "./src/rest/order"
 import user from "./src/rest/user"
 import franchise from "./src/rest/franchise"
 import webhook from "./src/rest/webhook/webhook"
+import newsletter from "./src/rest/newsletter"
 
 export const router = express.Router()
 
@@ -18,3 +19,4 @@ router.use("/order", order)
 router.use("/user", user)
 router.use("/franchise", franchise)
 router.use("/webhook", webhook)
+router.use("/newsletter", newsletter)
