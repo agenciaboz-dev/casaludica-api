@@ -1,0 +1,70 @@
+openapi: 3.0.0
+servers:
+  - url: https://agencyboz.com:4100/api
+info:
+  version: 1.0.0
+  title: Casa Lúdica - IGEST
+  contact:
+    email: fernando@agenciaboz.com.br
+paths:
+  /webhook/invoiced_order:
+    patch:
+      summary: Upload an invoiced order and send email with PDF attachment
+      operationId: uploadInvoicedOrder
+      tags:
+        - Update order
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                  description: >
+                    Stringified JSON object containing the order details. 
+                    Must include an `order_id` key with a numeric value.
+                file:
+                  type: string
+                  format: binary
+                  description: The PDF invoice file to be attached to the email.
+              required:
+                - data
+                - file
+      responses:
+        '200':
+          description: Invoice uploaded and email sent successfully.
+        '400':
+          description: Bad request due to missing file, invalid `order_id`, or non-JSON parseable body.
+        '401':
+          description: Authorization information is missing or invalid.
+        '500':
+          description: Internal server error.
+  /webhook/sent_order:
+    patch:
+      summary: update order with sent status, as well as trigger e-mail
+      operationId: sentOder
+      tags:
+        - Update order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                 type: integer
+                 description: The reference id of the order.
+              required:
+               - order_id
+      responses:
+        '200':
+          description: Order updated to sent status and email triggered successfully.
+        '400':
+          description: Bad request due to invalid `order_id`.
+        '401':
+          description: Authorization information is missing or invalid.
+        '500':
+          description: Internal server error.
