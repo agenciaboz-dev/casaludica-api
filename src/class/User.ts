@@ -54,7 +54,7 @@ export class User {
         await Promise.all(
             params.map(async (param) => {
                 const data = await prisma.user.findFirst({
-                    where: { OR: [{ cpf: param }, { email: param }] },
+                    where: { OR: [{ cpf: param.replace(/\D/g, "") }, { email: param }] },
                     include,
                 })
                 if (data) user = new User(0, data)

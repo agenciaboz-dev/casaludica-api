@@ -102,4 +102,13 @@ router.post("/update", async (request: Request, response: Response) => {
     }
 })
 
+router.post("/find", async (request: Request, response: Response) => {
+    const data = request.body as { cpf: string; email: string }
+    console.log(data)
+
+    const user = await User.find(data.cpf, data.email)
+
+    response.json(user?.id)
+})
+
 export default router

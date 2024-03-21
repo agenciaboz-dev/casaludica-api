@@ -39,6 +39,7 @@ router.post("/new", async (request: Request, response: Response) => {
     const data: ClientOrderForm = request.body
 
     const user_id = data.user_id || (await User.find(data.cpf, data.email))?.id || (await User.autoCreate(data)).id
+    console.log({ user_id })
     const order_response = await Order.new(data, user_id)
 
     response.json(order_response.error || { ...order_response })
