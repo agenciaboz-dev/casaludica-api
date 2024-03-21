@@ -42,7 +42,10 @@ export class User {
 
     static async login(login: string, password: string) {
         console.log("logging in")
-        const user_prisma = await prisma.user.findFirst({ where: { OR: [{ email: login }, { cpf: login }], AND: { password } }, include })
+        const user_prisma = await prisma.user.findFirst({
+            where: { OR: [{ email: login }, { cpf: login.replace(/\D/g, "") }], AND: { password } },
+            include,
+        })
         if (!user_prisma) return null
 
         const user = new User(0, user_prisma)
