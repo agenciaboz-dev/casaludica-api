@@ -10,7 +10,7 @@ router.post("/", async (request: Request, response: Response) => {
     const data = request.body as CepResult
 
     const franchises = await igest.get.franchises({})
-    const franchise = new Franchise(franchises.find((item) => item.Endereco.CodigoIbge == data.ibge) || franchises[1])
+    const franchise = new Franchise(franchises.find((item) => item.Endereco.CodigoIbge == data.ibge && item.Ativo) || franchises[1])
     response.json(franchise)
 })
 
