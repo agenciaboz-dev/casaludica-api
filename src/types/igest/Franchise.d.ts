@@ -4,6 +4,8 @@ declare interface IgestFranchise {
     RazaoSocial: string
     NomeFantasia: string
     Cnpj: string
+    Email: string
+    Whatsapp: string
     Endereco: {
         Logradouro: string
         Numero: string

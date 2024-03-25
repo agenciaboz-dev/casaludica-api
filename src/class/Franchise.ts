@@ -4,6 +4,8 @@ export class Franchise {
     name: string
     fantasy_name: string
     cnpj: string
+    email: string
+    phone: string
     address: {
         street: string
         number: string
@@ -21,6 +23,8 @@ export class Franchise {
         this.name = data.RazaoSocial
         this.fantasy_name = data.NomeFantasia
         this.cnpj = data.Cnpj
+        this.email = data.Email
+        this.phone = data.Whatsapp
         this.address = {
             street: data.Endereco.Logradouro,
             number: data.Endereco.Numero,
