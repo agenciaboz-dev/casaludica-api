@@ -3,11 +3,15 @@ import { UploadedFile } from "express-fileupload"
 import { saveImage } from "../tools/saveImage"
 import unmask from "../tools/unmask"
 import { Order, include as order_include } from "./Order"
+import igest from "../api/igest"
+import { sendMail } from "../tools/mail"
+import { WithoutFunctions } from "./helpers"
 
 const prisma = new PrismaClient()
 
 export const include = Prisma.validator<Prisma.UserInclude>()({ orders: { include: order_include } })
 export type UserPrisma = Prisma.UserGetPayload<{ include: typeof include }>
+export type UserForm = Omit<WithoutFunctions<User>, "id" | "orders">
 
 export class User {
     id: number
@@ -67,27 +71,40 @@ export class User {
         return user
     }
 
-    static async autoCreate(data: ClientOrderForm) {
-        const user_prisma = await prisma.user.create({
-            data: {
-                address: data.address,
-                city: data.city,
-                cpf: unmask(data.cpf),
-                district: data.district,
-                email: data.email,
-                lastname: data.lastname,
-                name: data.name,
-                number: data.number,
-                phone: unmask(data.phone),
-                postcode: unmask(data.postcode),
-                state: data.state,
-                company: data.company,
-                complement: data.complement,
-            },
-            include,
-        })
-        const user = new User(0, user_prisma)
-        return user
+    static async signup(data: UserForm) {
+        try {
+            const user_prisma = await prisma.user.create({
+                data: {
+                    address: data.address,
+                    city: data.city,
+                    cpf: unmask(data.cpf),
+                    district: data.district,
+                    email: data.email.toLowerCase(),
+                    lastname: data.lastname,
+                    name: data.name,
+                    number: data.number,
+                    phone: unmask(data.phone),
+                    postcode: unmask(data.postcode),
+                    state: data.state,
+                    company: data.company,
+                    complement: data.complement,
+                },
+                include,
+            })
+            const user = new User(0, user_prisma)
+
+            sendMail(user.email, "nova conta - usuário", "nova conta - usuário", "<p>nova conta - usuário</p>")
+            igest.get.franchises({}).then((result) => {
+                const franchisor = result.find((item) => item.IdEmpresa == 2)
+                if (franchisor) {
+                    sendMail(franchisor.Whatsapp, "nova conta - adm", "nova conta - adm", "<p>nova conta - adm</p>")
+                }
+            })
+
+            return user
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async init() {

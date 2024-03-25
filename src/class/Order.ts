@@ -3,6 +3,8 @@ import { OrderProduct } from "./OrderProduct"
 import unmask from "../tools/unmask"
 import bozpay from "../api/bozpay"
 import { Charge } from "../types/bozpay/Charge"
+import { sendMail } from "../tools/mail"
+import igest from "../api/igest"
 
 const prisma = new PrismaClient()
 export const include = Prisma.validator<Prisma.OrderInclude>()({ products: true })
@@ -103,6 +105,12 @@ export class Order {
                     store: bozpay.getStore(order.storeId),
                 },
                 products: data.products.map((item) => ({ ...item, referenceId: item.id })),
+            })
+
+            sendMail(data.email, "novo pedido - usuário", "novo pedido - usuário", "<p>novo pedido - usuário</p>")
+            igest.get.franchises({ empresa: data.storeId }).then((result) => {
+                const franchisor = result[0]
+                sendMail(franchisor.Email, "novo pedido - adm", "novo pedido - adm", "<p>novo pedido - adm</p>")
             })
 
             return { bozpayOrder: bozpayOrder.order, order }

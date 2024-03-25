@@ -38,11 +38,20 @@ router.post("/user", async (request: Request, response: Response) => {
 router.post("/new", async (request: Request, response: Response) => {
     const data: ClientOrderForm = request.body
 
-    const user_id = data.user_id || (await User.find(data.cpf, data.email))?.id || (await User.autoCreate(data)).id
+    const user_id =
+        data.user_id ||
+        (await User.find(data.cpf, data.email))?.id ||
+        (await User.signup({ ...data, password: null, profilePicUrl: "", complement: data.complement || null }))?.id
     console.log({ user_id })
-    const order_response = await Order.new(data, user_id)
 
-    response.json(order_response.error || { ...order_response })
+    if (user_id) {
+        const order_response = await Order.new(data, user_id)
+        response.json(order_response.error || { ...order_response })
+    } else {
+        response.json({ error: "nao foi possível localizar ou criar um usuário, revise os dados" })
+    }
+
+
 })
 
 router.post("/paid", async (request: Request, response: Response) => {
