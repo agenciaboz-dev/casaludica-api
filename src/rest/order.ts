@@ -8,6 +8,7 @@ import { PaymentType } from "../types/igest/Order"
 import viacep from "../api/viacep"
 import { Charge } from "../types/bozpay/Charge"
 import { AxiosError } from "axios"
+import { sendMail } from "../tools/mail"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -105,6 +106,11 @@ router.post("/paid", async (request: Request, response: Response) => {
         })
         if (igest_response.status == 200) {
             await bozpay.order.updateStatus({ status: "PROCESSANDO", id: bozpay_order.id })
+            sendMail(user.email, "processando pedido - usuário", "processando pedido - usuário", "html")
+            igest.get.franchises({ empresa: order.storeId }).then((result) => {
+                const franchise = result[0]
+                sendMail(franchise.Email, "processando pedido - ADM", "processando pedido - ADM", "html")
+            })
         }
     } catch (error) {
         console.log("error sending to igest")
