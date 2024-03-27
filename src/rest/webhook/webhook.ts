@@ -7,6 +7,7 @@ import { sendMail } from "../../tools/mail"
 import { User } from "../../class/User"
 import Mail from "nodemailer/lib/mailer"
 import bozpay from "../../api/bozpay"
+import igest from "../../api/igest"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -71,7 +72,11 @@ router.patch("/invoiced_order", async (request: Request, response: Response) => 
             contentType: invoice.mimetype,
         }
 
-        await sendMail(buyer.email, "Seu Pedido foi Faturado - Nota Fiscal Anexa", "email em string", "<p>html</p>", [attachment])
+        sendMail(buyer.email, "Seu Pedido foi Faturado - Nota Fiscal Anexa", "email em string", "<p>html</p>", [attachment])
+        igest.get.franchises({ empresa: order.storeId }).then((result) => {
+            const franchise = result[0]
+            sendMail(franchise.Email, "faturado - ADM", "email em string", "<p>html</p>", [attachment])
+        })
 
         response.status(200).json({ success: true })
     } catch (error) {
