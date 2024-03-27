@@ -6,6 +6,7 @@ import { Order, include as order_include } from "./Order"
 import igest from "../api/igest"
 import { sendMail } from "../tools/mail"
 import { WithoutFunctions } from "./helpers"
+import templates from "../templates"
 
 const prisma = new PrismaClient()
 
@@ -97,7 +98,23 @@ export class User {
             igest.get.franchises({}).then((result) => {
                 const franchisor = result.find((item) => item.IdEmpresa == 2)
                 if (franchisor) {
-                    sendMail(franchisor.Whatsapp, "nova conta - adm", "nova conta - adm", "<p>nova conta - adm</p>")
+                    sendMail(
+                        franchisor.Whatsapp,
+                        "Nova Conta Criada no Marketplace",
+                        `
+                        Olá equipe Casa Lúdica, temos novidades boas! Uma nova conta foi criada em nosso marketplace. Isso significa mais uma pessoa pronta para embarcar nas aventuras que só a Casa Lúdica pode oferecer.
+                        Detalhes da Conta:
+                            Nome: ${user.name} ${user.lastname},
+                            Endereço: ${user.address},
+                            Bairro: ${user.district},
+                            Cidade: ${user.city},
+                            CEP: ${user.postcode},
+                            E-mail: ${user.email},
+                            Telefone: ${user.phone}.
+                            É um ótimo momento para assegurar que tudo esteja perfeito para receber nosso novo membro. Vamos continuar trabalhando para fazer da Casa Lúdica o melhor lugar para nossos clientes encontrarem o que amam.
+                        `,
+                        templates.email.novaContaAdm(user)
+                    )
                 }
             })
 
