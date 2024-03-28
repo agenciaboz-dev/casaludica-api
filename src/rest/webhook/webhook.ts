@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from "express"
-import { PrismaClient } from "@prisma/client"
 import { authentication } from "../../middlewares/auth"
 import { UploadedFile } from "express-fileupload"
 import { Order } from "../../class/Order"
@@ -9,7 +8,6 @@ import Mail from "nodemailer/lib/mailer"
 import bozpay from "../../api/bozpay"
 import igest from "../../api/igest"
 const router = express.Router()
-const prisma = new PrismaClient()
 
 router.use(authentication)
 
