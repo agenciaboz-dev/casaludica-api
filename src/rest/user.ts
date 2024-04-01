@@ -16,7 +16,19 @@ router.post("/exists", async (request: Request, response: Response) => {
         try {
             const hash = encrypt(user.id)
             const url = `https://lojas.casaludica.com.br/first_password/${hash}`
-            await sendMail(user.email, "Gerar senha", url, templates.email.generate_password(url))
+            await sendMail(
+                user.email,
+                "Gerar senha",
+                `
+                Olá ${user.name},
+                    Recebemos uma solicitação para redefinir a sua senha na Casa Lúdica. Estamos aqui para ajudar!
+                    Se você fez essa solicitação, clique no link para definir uma nova senha: ${url}
+                    Este link expirará em 24 horas para garantir a segurança da sua conta. Se você não solicitou a redefinição de senha, por favor, ignore este e-mail ou entre em contato conosco se tiver alguma dúvida.
+                    Lembre-se, sua segurança é importante para nós! Nunca solicitaremos sua senha por e-mail.
+                    Agradecemos por escolher a Casa Lúdica para suas aventuras lúdicas!
+                `,
+                templates.email.generate_password(user, url)
+            )
         } catch (error) {
             console.log(error)
         }
