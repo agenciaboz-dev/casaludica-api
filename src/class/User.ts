@@ -94,7 +94,19 @@ export class User {
             })
             const user = new User(0, user_prisma)
 
-            sendMail(user.email, "nova conta - usuário", "nova conta - usuário", "<p>nova conta - usuário</p>")
+            sendMail(
+                user.email,
+                "Bem-Vindo à Casa Lúdica!",
+                `
+                Olá ${user.name},
+                Estamos super empolgados em te dar as boas-vindas à Casa Lúdica! Sua conta foi criada com sucesso e agora você faz parte da nossa comunidade de entusiastas e aventureiros em busca das melhores experiências.
+                Aqui na Casa Lúdica, você encontrará tudo o que precisa para tornar cada dia mais especial e divertido. De brinquedos a livros, garantimos que há sempre algo novo para explorar.
+                Para começar sua jornada, por que não dar uma olhada em nossas novidades?
+                https://lojas.casaludica.com.br
+                Se tiver alguma dúvida ou precisar de ajuda, estamos aqui para você. Basta nos enviar uma mensagem!
+                `,
+                templates.email.novaContaUsuario(user)
+            )
             igest.get.franchises({}).then((result) => {
                 const franchisor = result.find((item) => item.IdEmpresa == 2)
                 if (franchisor) {
