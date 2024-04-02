@@ -113,7 +113,12 @@ router.post("/paid", async (request: Request, response: Response) => {
             )
             igest.get.franchises({ empresa: order.storeId }).then((result) => {
                 const franchise = result[0]
-                sendMail(franchise.Email, "processando pedido - ADM", "processando pedido - ADM", "html")
+                sendMail(
+                    franchise.Email,
+                    `Confirmado Pagamento - Pedido Nº ${order.id}`,
+                    templates.email.processandoPedidoAdmString(user, order),
+                    templates.email.processandoPedidoAdm(user, order)
+                )
             })
         }
     } catch (error) {
