@@ -1,5 +1,15 @@
 import { User } from "../../class/User"
 
+export const generate_password_string = (user: User, url: string) =>
+    `
+    Olá ${user.name},
+    Recebemos uma solicitação para redefinir a sua senha na Casa Lúdica. Estamos aqui para ajudar!
+    Se você fez essa solicitação, clique no link para definir uma nova senha: ${url}
+    Este link expirará em 24 horas para garantir a segurança da sua conta. Se você não solicitou a redefinição de senha, por favor, ignore este e-mail ou entre em contato conosco se tiver alguma dúvida.
+    Lembre-se, sua segurança é importante para nós! Nunca solicitaremos sua senha por e-mail.
+    Agradecemos por escolher a Casa Lúdica para suas aventuras lúdicas!
+`
+
 export const generate_password = (user: User, url: string) => `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
