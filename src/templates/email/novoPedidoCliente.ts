@@ -1,34 +1,69 @@
-import { User } from "../../class/User"
+import { Order } from "../../class/Order"
+import { OrderProduct } from "../../class/OrderProduct"
 
-export const novaContaAdmString = (user: User) =>
+const fetchProductString = (product: OrderProduct) =>
     `
-    Olá equipe Casa Lúdica, temos novidades boas! Uma nova conta foi criada em nosso marketplace. Isso significa mais uma pessoa pronta para embarcar nas aventuras que só a Casa Lúdica pode oferecer.
-    Detalhes da Conta:
-    Nome: ${user.name} ${user.lastname},
-    Endereço: ${user.address},
-    Bairro: ${user.district},
-    Cidade: ${user.city},
-    CEP: ${user.postcode},
-    E-mail: ${user.email},
-    Telefone: ${user.phone}.
-    É um ótimo momento para assegurar que tudo esteja perfeito para receber nosso novo membro. Vamos continuar trabalhando para fazer da Casa Lúdica o melhor lugar para nossos clientes encontrarem o que amam.
+    Produto: ${product.name}
+    Quantidade: ${product.quantity}
+    Valor: R$${product.price.toString().replace(".", ",")}
 `
 
-export const novaContaAdm = (user: User) =>
-    `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+export const novoPedidoClienteString = (order_data: ClientOrderForm, order: Order) =>
+    `
+    Olá ${order_data.name},
+    Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
+    Manteremos você atualizado a cada passo do caminho.
+
+    ${order.products.map((product) => fetchProductString(product))}
+
+    Total: R$${order.total.toString().replace(".", ",")}
+
+    Endereço de entrega:
+    ${order_data.name} ${order_data.lastname}<br>
+    ${order_data.address}<br>
+    ${order_data.district}<br>
+    ${order_data.city}<br>
+    ${order_data.postcode}<br>
+    ${order_data.email}<br>
+`
+
+const fetchProduct = (product: OrderProduct) =>
+    `
+    <tr class="product-list">
+        <td  class="product-table">
+            <img src="https://casaludica.com.br/wp-content/uploads/2023/10/Peca-1-Pilhantras.png" width="50%">
+        </td>
+        <td class="product-table" style="padding:0 20px;">
+            <h4>${product.name}</h4>
+        </td>
+        <td class="product-table">
+            <h5>
+                ${product.quantity}
+            </h5>
+        </td>
+        <td class="product-table">
+            <h5>
+                R$${product.price.toString().replace(".", ",")}
+            </h5>
+        </td>
+    </tr>
+`
+
+export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
+    `
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nova Conta Criada no Marketplace</title>
+<title>Novo pedido realizado!</title>
 <style type="text/css">
 	/* FONTS  */
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 	/* CSS  */
 	body {
 		margin: 0;
-		background-color: #363775;
 	}
 	table {
 		border-spacing: 0;
@@ -38,6 +73,9 @@ export const novaContaAdm = (user: User) =>
 	}
 	img {
 		border: 0;
+	}
+	body{
+		background-color: #363775;
 	}
 	.wrapper{
 		width: 100%;
@@ -210,37 +248,84 @@ export const novaContaAdm = (user: User) =>
 
 						<tr>
 							<td>
-								<h3>Nova Conta Criada no Marketplace</h3>
+								<h3>Obrigado pelo seu pedido!</h3>
 								<p style="text-align: left;">
-									Olá equipe Casa Lúdica,
+									Olá ${order_data.name},
 								</p>
 								<p>
-									Temos novidades boas! Uma nova conta foi criada em nosso marketplace. Isso significa mais uma pessoa pronta para embarcar nas aventuras que só a Casa Lúdica pode oferecer.
-								</p>
-								<h4>Detalhes da Conta:</h4>
-								<p style="text-align: left;">
-									${user.name} ${user.lastname}<br>
-									${user.address}<br>
-									${user.district}<br>
-									${user.city}<br>
-									${user.postcode}<br>
-									${user.email}<br>
-									${user.phone}
-								</p>
-								<p>
-									É um ótimo momento para assegurar que tudo esteja perfeito para receber nosso novo membro. Vamos continuar trabalhando para fazer da Casa Lúdica o melhor lugar para nossos clientes encontrarem o que amam.
-
+									Sua compra número <b>${
+                                        order.id
+                                    }</b> está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita. Manteremos você atualizado a cada passo do caminho.
 								</p>
 							</td>
-						</tr>	
+						</tr>				
+								
+						<tr>
+							<td style="padding: 14px 0 4px;">
+								<table width="100%">
+									<tr>
+										<td>
+											<table class="two-columns">
+												<tr class="product-list">
+													<td width="20%" class="product-table-header">
+														
+													</td>
+													<td width="50%" class="product-table-header">
+														
+													</td>
+													<td width="10%" class="product-table-header">
+														<h5>
+															Qtd.
+														</h5>
+													</td>
+													<td width="20%" class="product-table-header">
+														<h5>
+															Valor
+														</h5>
+													</td>
+												</tr>
+                                                
+												${order.products.map((product) => fetchProduct(product))}
+												
+												<tr class="product-list">
+													<td  class="product-table"></td>
+													<td class="product-table" style="padding:0 20px;"></td>
+													<td class="product-table">
+														<h5>
+															Total:
+														</h5>
+													</td>
+													<td class="product-table">
+														<h5>
+                                                            R$${order.total.toString().replace(".", ",")}
+														</h5>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+						
+								</table>
+							</td>
+						</tr>
+						
 						<tr>
 							<td>
+								<h4>Endereço de entrega</h4>
+								<p style="text-align: left;">
+                                ${order_data.name} ${order_data.lastname}<br>
+                                ${order_data.address}<br>
+                                ${order_data.district}<br>
+                                ${order_data.city}<br>
+                                ${order_data.postcode}<br>
+                                ${order_data.email}<br>
+								</p>
 								<p>
-									Agradecemos por fazerem parte desta jornada conosco!
+									Agradecemos sua paciência e compreensão.
 								</p>
 								<p>
 									Atenciosamente,<br>
-									Marketplace Casa Lúdica
+									Equipe Casa Lúdica
 								</p>
 							</td>
 						</tr>	
@@ -299,5 +384,4 @@ export const novaContaAdm = (user: User) =>
 	</center> <!-- End Wrapper -->
 
 </body>
-</html>
-`
+</html>`

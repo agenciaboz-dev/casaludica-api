@@ -7,6 +7,7 @@ import { User } from "../../class/User"
 import Mail from "nodemailer/lib/mailer"
 import bozpay from "../../api/bozpay"
 import igest from "../../api/igest"
+import templates from "../../templates"
 const router = express.Router()
 
 router.use(authentication)
@@ -70,10 +71,22 @@ router.patch("/invoiced_order", async (request: Request, response: Response) => 
             contentType: invoice.mimetype,
         }
 
-        sendMail(buyer.email, "Seu Pedido foi Faturado - Nota Fiscal Anexa", "email em string", "<p>html</p>", [attachment])
+        sendMail(
+            buyer.email,
+            "Seu Pedido foi Faturado - Nota Fiscal Anexa",
+            templates.email.pedidoFaturadoClienteString(buyer, order),
+            templates.email.pedidoFaturadoCliente(buyer, order),
+            [attachment]
+        )
         igest.get.franchises({ empresa: order.storeId }).then((result) => {
             const franchise = result[0]
-            sendMail(franchise.Email, "faturado - ADM", "email em string", "<p>html</p>", [attachment])
+            sendMail(
+                franchise.Email,
+                `Pedido Nº ${order.id} Faturado - Nota Fiscal Emitida`,
+                templates.email.pedidoFaturadoAdmString(buyer, order),
+                templates.email.pedidoFaturadoAdm(buyer, order),
+                [attachment]
+            )
         })
 
         response.status(200).json({ success: true })

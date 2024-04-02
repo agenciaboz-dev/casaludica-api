@@ -16,7 +16,12 @@ router.post("/exists", async (request: Request, response: Response) => {
         try {
             const hash = encrypt(user.id)
             const url = `https://lojas.casaludica.com.br/first_password/${hash}`
-            await sendMail(user.email, "Gerar senha", url, templates.email.generate_password(url))
+            await sendMail(
+                user.email,
+                "Gerar senha",
+                templates.email.generate_password_string(user, url),
+                templates.email.generate_password(user, url)
+            )
         } catch (error) {
             console.log(error)
         }
