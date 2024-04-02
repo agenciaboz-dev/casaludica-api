@@ -111,8 +111,8 @@ export class Order {
             sendMail(
                 data.email,
                 "Novo pedido realizado!",
-                templates.email.novoPedidoUsuarioString(data, order),
-                templates.email.novoPedidoUsuario(data, order)
+                templates.email.novoPedidoClienteString(data, order),
+                templates.email.novoPedidoCliente(data, order)
             )
             igest.get.franchises({ empresa: data.storeId }).then((result) => {
                 const franchisor = result[0]

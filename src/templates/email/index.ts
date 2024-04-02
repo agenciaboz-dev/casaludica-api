@@ -2,22 +2,22 @@ import { generate_password } from "./generate_password"
 import { generate_password_string } from "./generate_password"
 import { novaContaAdm } from "./novaContaAdm"
 import { novaContaAdmString } from "./novaContaAdm"
-import { novaContaUsuario } from "./novaContaUsuario"
-import { novaContaUsuarioString } from "./novaContaUsuario"
+import { novaContaCliente } from "./novaContaCliente"
+import { novaContaClienteString } from "./novaContaCliente"
 import { novoPedidoAdm } from "./novoPedidoAdm"
 import { novoPedidoAdmString } from "./novoPedidoAdm"
-import { novoPedidoUsuario } from "./novoPedidoUsuario"
-import { novoPedidoUsuarioString } from "./novoPedidoUsuario"
+import { novoPedidoCliente } from "./novoPedidoCliente"
+import { novoPedidoClienteString } from "./novoPedidoCliente"
 
 export default {
     generate_password,
     generate_password_string,
     novaContaAdm,
     novaContaAdmString,
-    novaContaUsuario,
-    novaContaUsuarioString,
+    novaContaCliente,
+    novaContaClienteString,
     novoPedidoAdm,
     novoPedidoAdmString,
-    novoPedidoUsuario,
-    novoPedidoUsuarioString,
+    novoPedidoCliente,
+    novoPedidoClienteString,
 }

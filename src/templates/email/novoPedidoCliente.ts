@@ -8,7 +8,7 @@ const fetchProductString = (product: OrderProduct) =>
     Valor: R$${product.price.toString().replace(".", ",")}
 `
 
-export const novoPedidoUsuarioString = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoClienteString = (order_data: ClientOrderForm, order: Order) =>
     `
     Olá ${order_data.name},
     Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
@@ -49,7 +49,7 @@ const fetchProduct = (product: OrderProduct) =>
     </tr>
 `
 
-export const novoPedidoUsuario = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
     `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

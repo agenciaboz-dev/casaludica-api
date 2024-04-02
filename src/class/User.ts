@@ -94,7 +94,7 @@ export class User {
             })
             const user = new User(0, user_prisma)
 
-            sendMail(user.email, "Bem-Vindo à Casa Lúdica!", templates.email.novaContaUsuarioString(user), templates.email.novaContaUsuario(user))
+            sendMail(user.email, "Bem-Vindo à Casa Lúdica!", templates.email.novaContaClienteString(user), templates.email.novaContaCliente(user))
             igest.get.franchises({}).then((result) => {
                 const franchisor = result.find((item) => item.IdEmpresa == 2)
                 if (franchisor) {
