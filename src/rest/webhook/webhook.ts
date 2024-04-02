@@ -80,7 +80,13 @@ router.patch("/invoiced_order", async (request: Request, response: Response) => 
         )
         igest.get.franchises({ empresa: order.storeId }).then((result) => {
             const franchise = result[0]
-            sendMail(franchise.Email, "faturado - ADM", "email em string", "<p>html</p>", [attachment])
+            sendMail(
+                franchise.Email,
+                `Pedido Nº ${order.id} Faturado - Nota Fiscal Emitida`,
+                templates.email.pedidoFaturadoAdmString(buyer, order),
+                templates.email.pedidoFaturadoAdm(buyer, order),
+                [attachment]
+            )
         })
 
         response.status(200).json({ success: true })
