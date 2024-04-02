@@ -1,5 +1,19 @@
 import { User } from "../../class/User"
 
+export const novaContaAdmString = (user: User) =>
+    `
+    Olá equipe Casa Lúdica, temos novidades boas! Uma nova conta foi criada em nosso marketplace. Isso significa mais uma pessoa pronta para embarcar nas aventuras que só a Casa Lúdica pode oferecer.
+    Detalhes da Conta:
+    Nome: ${user.name} ${user.lastname},
+    Endereço: ${user.address},
+    Bairro: ${user.district},
+    Cidade: ${user.city},
+    CEP: ${user.postcode},
+    E-mail: ${user.email},
+    Telefone: ${user.phone}.
+    É um ótimo momento para assegurar que tudo esteja perfeito para receber nosso novo membro. Vamos continuar trabalhando para fazer da Casa Lúdica o melhor lugar para nossos clientes encontrarem o que amam.
+`
+
 export const novaContaAdm = (user: User) =>
     `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
