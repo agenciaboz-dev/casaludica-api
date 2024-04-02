@@ -8,6 +8,8 @@ import { novoPedidoAdm } from "./novoPedidoAdm"
 import { novoPedidoAdmString } from "./novoPedidoAdm"
 import { novoPedidoCliente } from "./novoPedidoCliente"
 import { novoPedidoClienteString } from "./novoPedidoCliente"
+import { pedidoFaturadoCliente } from "./pedidoFaturadoCliente"
+import { pedidoFaturadoClienteString } from "./pedidoFaturadoCliente"
 
 export default {
     generate_password,
@@ -20,4 +22,6 @@ export default {
     novoPedidoAdmString,
     novoPedidoCliente,
     novoPedidoClienteString,
+    pedidoFaturadoCliente,
+    pedidoFaturadoClienteString,
 }
