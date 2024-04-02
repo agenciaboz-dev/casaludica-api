@@ -9,6 +9,7 @@ import viacep from "../api/viacep"
 import { Charge } from "../types/bozpay/Charge"
 import { AxiosError } from "axios"
 import { sendMail } from "../tools/mail"
+import templates from "../templates"
 const router = express.Router()
 const prisma = new PrismaClient()
 
@@ -51,8 +52,6 @@ router.post("/new", async (request: Request, response: Response) => {
     } else {
         response.json({ error: "nao foi possível localizar ou criar um usuário, revise os dados" })
     }
-
-
 })
 
 router.post("/paid", async (request: Request, response: Response) => {
@@ -106,7 +105,12 @@ router.post("/paid", async (request: Request, response: Response) => {
         })
         if (igest_response.status == 200) {
             await bozpay.order.updateStatus({ status: "PROCESSANDO", id: bozpay_order.id })
-            sendMail(user.email, "processando pedido - usuário", "processando pedido - usuário", "html")
+            sendMail(
+                user.email,
+                "Sua Compra Está Sendo Preparada!",
+                templates.email.processandoPedidoClienteString(user, order),
+                templates.email.processandoPedidoCliente(user, order)
+            )
             igest.get.franchises({ empresa: order.storeId }).then((result) => {
                 const franchise = result[0]
                 sendMail(franchise.Email, "processando pedido - ADM", "processando pedido - ADM", "html")
