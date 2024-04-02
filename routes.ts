@@ -8,6 +8,7 @@ import user from "./src/rest/user"
 import franchise from "./src/rest/franchise"
 import webhook from "./src/rest/webhook/webhook"
 import newsletter from "./src/rest/newsletter"
+import instagram from "./src/rest/instagram"
 
 export const router = express.Router()
 
@@ -20,3 +21,4 @@ router.use("/user", user)
 router.use("/franchise", franchise)
 router.use("/webhook", webhook)
 router.use("/newsletter", newsletter)
+router.use("/instagram", instagram)
