@@ -6,6 +6,8 @@ import { novaContaUsuario } from "./novaContaUsuario"
 import { novaContaUsuarioString } from "./novaContaUsuario"
 import { novoPedidoAdm } from "./novoPedidoAdm"
 import { novoPedidoAdmString } from "./novoPedidoAdm"
+import { novoPedidoUsuario } from "./novoPedidoUsuario"
+import { novoPedidoUsuarioString } from "./novoPedidoUsuario"
 
 export default {
     generate_password,
@@ -16,4 +18,6 @@ export default {
     novaContaUsuarioString,
     novoPedidoAdm,
     novoPedidoAdmString,
+    novoPedidoUsuario,
+    novoPedidoUsuarioString,
 }

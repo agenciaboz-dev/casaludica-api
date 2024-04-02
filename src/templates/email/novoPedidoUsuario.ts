@@ -6,28 +6,25 @@ const fetchProductString = (product: OrderProduct) =>
     Produto: ${product.name}
     Quantidade: ${product.quantity}
     Valor: R$${product.price.toString().replace(".", ",")}
-    
 `
 
-export const novoPedidoAdmString = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoUsuarioString = (order_data: ClientOrderForm, order: Order) =>
     `
-    Olá equipe Casa Lúdica,
-    uma nova jornada acaba de começar! Recebemos uma nova compra, número ${order.id}.
+    Olá ${order_data.name},
+    Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
+    Manteremos você atualizado a cada passo do caminho.
 
     ${order.products.map((product) => fetchProductString(product))}
 
     Total: R$${order.total.toString().replace(".", ",")}
-    Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.
+
     Endereço de entrega:
-        ${order_data.name} ${order_data.lastname}<br>
-        ${order_data.address}<br>
-        ${order_data.district}<br>
-        ${order_data.city}<br>
-        ${order_data.postcode}<br>
-        ${order_data.email}<br>
-        Agradecemos por tornar cada experiência única!
-        Atenciosamente,
-        Marketplace Casa Lúdica
+    ${order_data.name} ${order_data.lastname}<br>
+    ${order_data.address}<br>
+    ${order_data.district}<br>
+    ${order_data.city}<br>
+    ${order_data.postcode}<br>
+    ${order_data.email}<br>
 `
 
 const fetchProduct = (product: OrderProduct) =>
@@ -52,23 +49,21 @@ const fetchProduct = (product: OrderProduct) =>
     </tr>
 `
 
-export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoUsuario = (order_data: ClientOrderForm, order: Order) =>
     `
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nova Compra Realizada!</title>
+<title>Novo pedido realizado!</title>
 <style type="text/css">
 	/* FONTS  */
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 	/* CSS  */
 	body {
 		margin: 0;
-		background-color: #363775;
 	}
 	table {
 		border-spacing: 0;
@@ -78,6 +73,9 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
 	}
 	img {
 		border: 0;
+	}
+	body{
+		background-color: #363775;
 	}
 	.wrapper{
 		width: 100%;
@@ -250,14 +248,14 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
 
 						<tr>
 							<td>
-								<h3>Nova Compra Realizada!</h3>
+								<h3>Obrigado pelo seu pedido!</h3>
 								<p style="text-align: left;">
-									Olá equipe Casa Lúdica,
+									Olá ${order_data.name},
 								</p>
 								<p>
-									Uma nova jornada acaba de começar! Recebemos uma nova compra, número ${
+									Sua compra número <b>${
                                         order.id
-                                    }. Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.
+                                    }</b> está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita. Manteremos você atualizado a cada passo do caminho.
 								</p>
 							</td>
 						</tr>				
@@ -286,9 +284,9 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
 														</h5>
 													</td>
 												</tr>
-
-                                                ${order.products.map((product) => fetchProduct(product))}
-
+                                                
+												${order.products.map((product) => fetchProduct(product))}
+												
 												<tr class="product-list">
 													<td  class="product-table"></td>
 													<td class="product-table" style="padding:0 20px;"></td>
@@ -315,19 +313,19 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
 							<td>
 								<h4>Endereço de entrega</h4>
 								<p style="text-align: left;">
-									${order_data.name} ${order_data.lastname}<br>
-									${order_data.address}<br>
-									${order_data.district}<br>
-									${order_data.city}<br>
-									${order_data.postcode}<br>
-									${order_data.email}<br>
+                                ${order_data.name} ${order_data.lastname}<br>
+                                ${order_data.address}<br>
+                                ${order_data.district}<br>
+                                ${order_data.city}<br>
+                                ${order_data.postcode}<br>
+                                ${order_data.email}<br>
 								</p>
 								<p>
-									Agradecemos por tornar cada experiência única!
+									Agradecemos sua paciência e compreensão.
 								</p>
 								<p>
 									Atenciosamente,<br>
-									Marketplace Casa Lúdica
+									Equipe Casa Lúdica
 								</p>
 							</td>
 						</tr>	
@@ -386,5 +384,4 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
 	</center> <!-- End Wrapper -->
 
 </body>
-</html>
-    `
+</html>`

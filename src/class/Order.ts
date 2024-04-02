@@ -108,7 +108,12 @@ export class Order {
                 products: data.products.map((item) => ({ ...item, referenceId: item.id })),
             })
 
-            sendMail(data.email, "novo pedido - usuário", "novo pedido - usuário", "<p>novo pedido - usuário</p>")
+            sendMail(
+                data.email,
+                "Novo pedido realizado!",
+                templates.email.novoPedidoUsuarioString(data, order),
+                templates.email.novoPedidoUsuario(data, order)
+            )
             igest.get.franchises({ empresa: data.storeId }).then((result) => {
                 const franchisor = result[0]
                 sendMail(
