@@ -1,5 +1,15 @@
 import { User } from "../../class/User"
 
+export const novaContaUsuarioString = (user: User) =>
+    `
+Olá ${user.name},
+Estamos super empolgados em te dar as boas-vindas à Casa Lúdica! Sua conta foi criada com sucesso e agora você faz parte da nossa comunidade de entusiastas e aventureiros em busca das melhores experiências.
+Aqui na Casa Lúdica, você encontrará tudo o que precisa para tornar cada dia mais especial e divertido. De brinquedos a livros, garantimos que há sempre algo novo para explorar.
+Para começar sua jornada, por que não dar uma olhada em nossas novidades?
+https://lojas.casaludica.com.br
+Se tiver alguma dúvida ou precisar de ajuda, estamos aqui para você. Basta nos enviar uma mensagem!
+`
+
 export const novaContaUsuario = (user: User) =>
     `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
