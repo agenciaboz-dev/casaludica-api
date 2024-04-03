@@ -13,7 +13,7 @@ export const processandoPedidoClienteString = (user: User, order: Order) =>
     `
     Olá ${user.name}, ótimas notícias! Sua compra número ${order.id} está sendo preparada.
     Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.
-    Você pode verificar os detalhes do seu pedido aqui: <a href="https://lojas.casaludica.com.br/">Clique para acessar</a>.
+    Você pode verificar os detalhes do seu pedido aqui: <a href="https://lojas.casaludica.com.br/order/${order.id}">Clique para acessar</a>.
 
     ${order.products.map((product) => fetchProductString(product))}
                                                 
@@ -262,7 +262,7 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
                                     } está sendo preparada. Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.
 								</p>
 								<p>
-									Você pode verificar os detalhes do seu pedido aqui: <a href="https://lojas.casaludica.com.br/">Clique para acessar</a>.
+									Você pode verificar os detalhes do seu pedido aqui: <a href="https://lojas.casaludica.com.br/order/${order.id}">Clique para acessar</a>.
 								</p>
 							</td>
 						</tr>				
