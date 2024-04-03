@@ -8,6 +8,7 @@ import https from 'https'
 import fs from 'fs'
 import fileUpload from "express-fileupload"
 import { setProd } from "./src/env"
+import instagram from "./src/api/instagram"
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ app.use(cookieParser())
 app.use(fileUpload())
 app.use("/api", router)
 app.use("/static", express.static("static"))
+
 
 try {
     const server = https.createServer(
@@ -37,6 +39,7 @@ try {
     server.listen(port, () => {
         console.log(`[server]: Server is running at https ${port}`)
         setProd()
+        instagram.fetchPosts()
     })
 } catch (e) {
     app.listen(port, () => {
