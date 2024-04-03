@@ -1,5 +1,7 @@
 import { generate_password } from "./generate_password"
 import { generate_password_string } from "./generate_password"
+import { newsletterWelcome } from "./newsletter"
+import { newsletterWelcomeString } from "./newsletter"
 import { novaContaAdm } from "./novaContaAdm"
 import { novaContaAdmString } from "./novaContaAdm"
 import { novaContaCliente } from "./novaContaCliente"
@@ -20,6 +22,8 @@ import { processandoPedidoAdmString } from "./processandoPedidoAdm"
 export default {
     generate_password,
     generate_password_string,
+    newsletterWelcome,
+    newsletterWelcomeString,
     novaContaAdm,
     novaContaAdmString,
     novaContaCliente,
