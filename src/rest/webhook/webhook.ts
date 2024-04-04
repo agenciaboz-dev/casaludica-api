@@ -35,7 +35,12 @@ router.patch("/sent_order", async (request: Request, response: Response) => {
     const buyer = new User(order.userId)
     await buyer.init()
 
-    sendMail(buyer.email, "Sua Compra Está a Caminho!", "email em string", "<p>html</p>")
+    sendMail(
+        buyer.email,
+        "Sua Compra Está a Caminho!",
+        templates.email.pedidoConcluidoClienteString(buyer, order),
+        templates.email.pedidoConcluidoCliente(buyer, order)
+    )
     igest.get.franchises({ empresa: order.storeId }).then((result) => {
         const franchise = result[0]
         sendMail(

@@ -20,6 +20,8 @@ import { processandoPedidoAdm } from "./processandoPedidoAdm"
 import { processandoPedidoAdmString } from "./processandoPedidoAdm"
 import { pedidoConcluidoAdm } from "./pedidoConcluidoAdm"
 import { pedidoConcluidoAdmString } from "./pedidoConcluidoAdm"
+import { pedidoConcluidoCliente } from "./pedidoConcluidoCliente"
+import { pedidoConcluidoClienteString } from "./pedidoConcluidoCliente"
 
 export default {
     generate_password,
@@ -44,4 +46,6 @@ export default {
     processandoPedidoAdmString,
     pedidoConcluidoAdm,
     pedidoConcluidoAdmString,
+    pedidoConcluidoCliente,
+    pedidoConcluidoClienteString,
 }
