@@ -218,15 +218,15 @@ export const processandoPedidoAdm = (user: User, order: Order) =>
 									<tr>
 										<td class="social-media">
 											<a href="https://api.whatsapp.com/send?phone=5547991684299&text=Ol%C3%A1,%20Casa%20L%C3%BAdica!" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/whatsapp.png" alt="WhatsApp">
+												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/whatsapp.png" alt="WhatsApp">
 											</a>	
 								   
 											<a href="https://www.instagram.com/casaludica" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/instagram.png" alt="Instagram">
+												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/instagram.png" alt="Instagram">
 											</a>	
 								   
 											<a href="https://www.facebook.com/casaludica.com.br" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/facebook.png" alt="Facebook">
+												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/facebook.png" alt="Facebook">
 											</a>	
 									 
 											<a href="https://www.youtube.com/@casaludica6482" target="_blank">
@@ -361,15 +361,15 @@ export const processandoPedidoAdm = (user: User, order: Order) =>
 									Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474
 								</p>	
 							<a href="https://api.whatsapp.com/send?phone=5547991684299&text=Ol%C3%A1,%20Casa%20L%C3%BAdica!" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/whatsapp.png" alt="WhatsApp">
+								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/whatsapp.png" alt="WhatsApp">
 							</a>	
 				   
 							<a href="https://www.instagram.com/casaludica/" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/instagram.png" alt="Instagram">
+								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/instagram.png" alt="Instagram">
 							</a>	
 				   
 							<a href="https://www.facebook.com/casaludica.com.br" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/facebook.png" alt="Facebook">
+								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/facebook.png" alt="Facebook">
 							</a>	
 					 
 							<a href="https://www.youtube.com/@casaludica6482" target="_blank">
