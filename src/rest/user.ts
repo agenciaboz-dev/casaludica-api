@@ -116,4 +116,31 @@ router.post("/find", async (request: Request, response: Response) => {
     response.json(user?.id)
 })
 
+router.post("/signup", async (request: Request, response: Response) => {
+    const data = request.body as { email: string; password: string }
+    try {
+        const user = await User.signup({
+            address: "",
+            city: "",
+            company: "",
+            complement: "",
+            cpf: "",
+            district: "",
+            email: data.email,
+            lastname: "",
+            name: data.email.split("@")[0],
+            number: "",
+            password: data.password,
+            phone: "",
+            postcode: "",
+            profilePicUrl: "",
+            state: "BA",
+        })
+
+        response.json(user)
+    } catch (error) {
+        response.status(500).send()
+    }
+})
+
 export default router

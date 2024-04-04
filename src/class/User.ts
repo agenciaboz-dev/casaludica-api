@@ -94,18 +94,27 @@ export class User {
             })
             const user = new User(0, user_prisma)
 
-            sendMail(user.email, "Bem-Vindo à Casa Lúdica!", templates.email.novaContaClienteString(user), templates.email.novaContaCliente(user))
-            igest.get.franchises({}).then((result) => {
-                const franchisor = result.find((item) => item.IdEmpresa == 2)
-                if (franchisor) {
-                    sendMail(
-                        franchisor.Whatsapp,
-                        "Nova Conta Criada no Marketplace",
-                        templates.email.novaContaAdmString(user),
-                        templates.email.novaContaAdm(user)
-                    )
-                }
-            })
+            try {
+                console.log("sending mail to user")
+                sendMail(user.email, "Bem-Vindo à Casa Lúdica!", templates.email.novaContaClienteString(user), templates.email.novaContaCliente(user))
+                    .then((result) => console.log("sent"))
+                    .catch((error) => console.log("error sending mail to user"))
+
+                igest.get.franchises({}).then((result) => {
+                    const franchisor = result.find((item) => item.IdEmpresa == 2)
+                    if (franchisor) {
+                        console.log("sending mail to adm")
+                        sendMail(
+                            franchisor.Email,
+                            "Nova Conta Criada no Marketplace",
+                            templates.email.novaContaAdmString(user),
+                            templates.email.novaContaAdm(user)
+                        ).catch((error) => console.log("error sending mail to adm"))
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+            }
 
             return user
         } catch (error) {
