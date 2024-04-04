@@ -165,4 +165,23 @@ router.post("/confirm_receiving", async (request: Request, response: Response) =
     response.status(200).json()
 })
 
+router.post("/review", async (request: Request, response: Response) => {
+    const data = request.body as { ratings: { id: number; rating: number }[] }
+
+    const url = igest.getUrl("/EnviarAvaliacao")
+
+    await Promise.all(
+        data.ratings.map(async (rating) => {
+            try {
+                const igest_response = await igest.api.post(url, { IdProduto: rating.id, Nota: rating.rating })
+                console.log(igest_response.status)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    )
+
+    response.status(200).json()
+})
+
 export default router
