@@ -65,6 +65,22 @@ router.post("/paid", async (request: Request, response: Response) => {
         await order.init()
         await order.onPaid(charge)
 
+        sendMail(
+            bozpay_order.email,
+            "Novo pedido realizado!",
+            templates.email.novoPedidoClienteString(bozpay_order, order),
+            templates.email.novoPedidoCliente(bozpay_order, order)
+        )
+        igest.get.franchises({ empresa: data.storeId }).then((result) => {
+            const franchisor = result[0]
+            sendMail(
+                franchisor.Email,
+                "Nova Compra Realizada!",
+                templates.email.novoPedidoAdmString(bozpay_order, order),
+                templates.email.novoPedidoAdm(bozpay_order, order)
+            )
+        })
+
         const user = new User(order.userId)
         await user.init()
         const via_cep = await viacep.search(user.postcode)
@@ -130,6 +146,22 @@ router.post("/paid", async (request: Request, response: Response) => {
             console.log(error)
         }
     }
+})
+
+router.post("/confirm_receiving", async (request: Request, response: Response) => {
+    const data = request.body as { bozpay_id: number; reference_id: string }
+    const url = igest.getUrl("/EnviarEntrega")
+    const receiving_date = JSON.stringify(new Date()).split("T")[0].replace('"', "")
+    console.log(receiving_date)
+    console.log("confirming receivement to igest")
+    const igest_reponse = await igest.api.post(url, { IdentificadorPedido: data.reference_id, DataEntrega: receiving_date })
+    console.log(igest_reponse.status)
+
+    console.log("updating status on bozpay")
+    const bozpay_response = await bozpay.order.updateStatus({ id: data.bozpay_id, status: "Concluído" })
+    console.log({ bozpay_response })
+
+    response.status(200).json()
 })
 
 export default router

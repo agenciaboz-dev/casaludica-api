@@ -108,22 +108,6 @@ export class Order {
                 products: data.products.map((item) => ({ ...item, referenceId: item.id })),
             })
 
-            sendMail(
-                data.email,
-                "Novo pedido realizado!",
-                templates.email.novoPedidoClienteString(data, order),
-                templates.email.novoPedidoCliente(data, order)
-            )
-            igest.get.franchises({ empresa: data.storeId }).then((result) => {
-                const franchisor = result[0]
-                sendMail(
-                    franchisor.Email,
-                    "Nova Compra Realizada!",
-                    templates.email.novoPedidoAdmString(data, order),
-                    templates.email.novoPedidoAdm(data, order)
-                )
-            })
-
             return { bozpayOrder: bozpayOrder.order, order }
         } catch (error) {
             console.log(error)
@@ -161,11 +145,5 @@ export class Order {
         await this.update({
             paymentType: charge.payment_method.type,
         })
-        console.log(`pagamento: ${this.paymentType}`)
-        console.log(`pagamento: ${this.paymentType}`)
-        console.log(`pagamento: ${this.paymentType}`)
-        console.log(`pagamento: ${this.paymentType}`)
-        console.log(`pagamento: ${this.paymentType}`)
-        console.log(`pagamento: ${this.paymentType}`)
     }
 }
