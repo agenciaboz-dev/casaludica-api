@@ -24,6 +24,8 @@ declare interface IgestProduct {
     TotalVenda: number
     TotalVenda7Dias: number
     TotalVenda30Dias: number
+    AvaliacaoNota: number
+    AvaliacaoQuantidade: number
 
     EstoqueVariacao: Variant
 }

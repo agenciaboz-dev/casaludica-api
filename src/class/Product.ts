@@ -23,6 +23,7 @@ export class Product {
     sold: number
     ageRating: string
     brand: string
+    rating: number
 
     constructor(igest_product: IgestProduct) {
         this.id = igest_product.IdProduto
@@ -42,6 +43,7 @@ export class Product {
         this.weight = igest_product.PesoBruto
         this.ageRating = igest_product.FaixaEtariaDescricao
         this.brand = igest_product.MarcaDescricao
+        this.rating = igest_product.AvaliacaoNota
     }
 
     static async getImages(id: number, mainOnly?: boolean) {
