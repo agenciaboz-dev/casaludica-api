@@ -112,6 +112,7 @@ router.post("/find", async (request: Request, response: Response) => {
     console.log(data)
 
     const user = await User.find(data.cpf, data.email)
+    console.log(user)
 
     response.json(user?.id)
 })
