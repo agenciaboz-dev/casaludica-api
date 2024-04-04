@@ -1,5 +1,5 @@
-import express, { Express, Request, Response } from "express"
-import { OrderProduct, PrismaClient } from "@prisma/client"
+import express, { Request, Response } from "express"
+import { PrismaClient } from "@prisma/client"
 import bozpay from "../api/bozpay"
 import { Order } from "../class/Order"
 import { User } from "../class/User"
@@ -10,6 +10,7 @@ import { Charge } from "../types/bozpay/Charge"
 import { AxiosError } from "axios"
 import { sendMail } from "../tools/mail"
 import templates from "../templates"
+
 const router = express.Router()
 const prisma = new PrismaClient()
 
