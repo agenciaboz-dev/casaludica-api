@@ -1,6 +1,6 @@
 import { User } from "../../class/User"
 
-export const generate_password_string = (user: User, url: string) =>
+export const forgot_password_string = (user: User, url: string) =>
     `
     Olá ${user.name},
     Recebemos uma solicitação para redefinir a sua senha na Casa Lúdica. Estamos aqui para ajudar!
@@ -10,14 +10,14 @@ export const generate_password_string = (user: User, url: string) =>
     Agradecemos por escolher a Casa Lúdica para suas aventuras lúdicas!
 `
 
-export const generate_password = (user: User, url: string) => `
+export const forgot_password = (user: User, url: string) => `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bem-Vindo à Casa Lúdica!</title>
+<title>Esqueceu sua senha? Não tem problema, vamos resolver!</title>
 <style type="text/css">
 	/* FONTS  */
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -108,7 +108,6 @@ export const generate_password = (user: User, url: string) => `
 		padding: 0;
 		text-align: left;
 	}
-	
 	.button{
 		background-color: #363775;
 		font-family: 'Poppins', sans-serif;
@@ -120,7 +119,7 @@ export const generate_password = (user: User, url: string) => `
 	a{
 		color: #fff!important;
 		font-weight: 600;
-		text-decoration: none;;
+		text-decoration: none;
 	}
 	.footer{
 		background-color: #fff;
@@ -211,21 +210,31 @@ export const generate_password = (user: User, url: string) => `
 
 						<tr>
 							<td>
-								<h3>Bem-Vindo à Casa Lúdica!</h3>
+								<h3>Esqueceu sua senha? Não tem problema, vamos resolver!</h3>
 								<p style="text-align: left;">
 									Olá ${user.name},
 								</p>
 								<p>
-									Para começar sua jornada, clique no botão abaixo para que você possa gerar sua senha. Você pode alterar essa senha a futuramente.
+									Recebemos uma solicitação para redefinir a sua senha na Casa Lúdica. Estamos aqui para ajudar!
+								</p>
+								<p>
+									Se você fez essa solicitação, clique no link abaixo para definir uma nova senha:
 								</p>
 								<a href="${url}"><button class="button">
-									Gerar nova Senha!
+									Redefinir Minha Senha
 								</a></button>
 								<p>
-									Se tiver alguma dúvida ou precisar de ajuda, estamos aqui para você. Basta nos enviar uma mensagem!
+									Este link expirará em 24 horas para garantir a segurança da sua conta. Se você não solicitou a redefinição de senha, por favor, ignore este e-mail ou entre em contato conosco se tiver alguma dúvida.
+								</p>
+								<p>
+									Lembre-se, sua segurança é importante para nós! Nunca solicitaremos sua senha por e-mail.
+								</p>
+								<p>
+									Agradecemos por escolher a Casa Lúdica para suas aventuras lúdicas!
 								</p>
 							</td>
 						</tr>	
+						
 						<tr>
 							<td>
 								<p>
