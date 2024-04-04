@@ -66,20 +66,30 @@ router.post("/paid", async (request: Request, response: Response) => {
         await order.init()
         await order.onPaid(charge)
 
-        sendMail(
-            bozpay_order.email,
-            "Novo pedido realizado!",
-            templates.email.novoPedidoClienteString(bozpay_order, order),
-            templates.email.novoPedidoCliente(bozpay_order, order)
-        )
-        igest.get.franchises({ empresa: data.storeId }).then((result) => {
-            const franchisor = result[0]
+        console.log("sending new order mail to client")
+        try {
             sendMail(
-                franchisor.Email,
-                "Nova Compra Realizada!",
-                templates.email.novoPedidoAdmString(bozpay_order, order),
-                templates.email.novoPedidoAdm(bozpay_order, order)
+                bozpay_order.email,
+                "Novo pedido realizado!",
+                templates.email.novoPedidoClienteString(bozpay_order, order),
+                templates.email.novoPedidoCliente(bozpay_order, order)
             )
+        } catch (error) {
+            console.log("error sending new order mail to client")
+        }
+        console.log("sending new order mail to adm")
+        igest.get.franchises({ empresa: data.storeId }).then((result) => {
+            try {
+                const franchisor = result[0]
+                sendMail(
+                    franchisor.Email,
+                    "Nova Compra Realizada!",
+                    templates.email.novoPedidoAdmString(bozpay_order, order),
+                    templates.email.novoPedidoAdm(bozpay_order, order)
+                )
+            } catch (error) {
+                console.log("error sending new order mail to adm")
+            }
         })
 
         const user = new User(order.userId)
@@ -88,6 +98,7 @@ router.post("/paid", async (request: Request, response: Response) => {
 
         const products_total = order.products.reduce((total, product) => total + product.price * product.quantity, 0)
 
+        console.log("sending to igest")
         const igest_response = await igest.post.order({
             IdEmpresa: order.storeId,
             IdentificadorPedido: order.id,
@@ -122,20 +133,31 @@ router.post("/paid", async (request: Request, response: Response) => {
         })
         if (igest_response.status == 200) {
             await bozpay.order.updateStatus({ status: "PROCESSANDO", id: bozpay_order.id })
-            sendMail(
-                user.email,
-                "Sua Compra Está Sendo Preparada!",
-                templates.email.processandoPedidoClienteString(user, order),
-                templates.email.processandoPedidoCliente(user, order)
-            )
+            try {
+                console.log("sending paid order email to client")
+                sendMail(
+                    bozpay_order.email,
+                    "Sua Compra Está Sendo Preparada!",
+                    templates.email.processandoPedidoClienteString(user, order),
+                    templates.email.processandoPedidoCliente(user, order)
+                )
+            } catch (error) {
+                console.log("error sending paid order to client")
+            }
+
+            console.log("sending paid order to adm")
             igest.get.franchises({ empresa: order.storeId }).then((result) => {
                 const franchise = result[0]
-                sendMail(
-                    franchise.Email,
-                    `Confirmado Pagamento - Pedido Nº ${order.id}`,
-                    templates.email.processandoPedidoAdmString(user, order),
-                    templates.email.processandoPedidoAdm(user, order)
-                )
+                try {
+                    sendMail(
+                        franchise.Email,
+                        `Confirmado Pagamento - Pedido Nº ${order.id}`,
+                        templates.email.processandoPedidoAdmString(user, order),
+                        templates.email.processandoPedidoAdm(user, order)
+                    )
+                } catch (error) {
+                    console.log("error sending paid order to adm")
+                }
             })
         }
     } catch (error) {
