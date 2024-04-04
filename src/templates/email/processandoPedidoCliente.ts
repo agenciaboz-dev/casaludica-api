@@ -230,7 +230,7 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
 											</a>	
 									 
 											<a href="https://www.youtube.com/@casaludica6482" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/youtube.png" alt="Youtube">
+												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/youtube.png" alt="Youtube">
 											</a>
 										</td>
 									</tr>
@@ -375,7 +375,7 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
 							</a>	
 					 
 							<a href="https://www.youtube.com/@casaludica6482" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/03/youtube.png" alt="Youtube">
+								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/youtube.png" alt="Youtube">
 							</a>
 							
 						</td>
