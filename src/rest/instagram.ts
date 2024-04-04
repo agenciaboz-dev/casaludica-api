@@ -1,7 +1,6 @@
-import express, { Express, Request, Response } from "express"
-import playwright from "playwright"
+import express, { Request, Response } from "express"
 import instagram from "../api/instagram"
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 
 const router = express.Router()
 

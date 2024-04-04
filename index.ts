@@ -8,7 +8,6 @@ import https from 'https'
 import fs from 'fs'
 import fileUpload from "express-fileupload"
 import { setProd } from "./src/env"
-import instagram from "./src/api/instagram"
 
 dotenv.config()
 
@@ -39,7 +38,6 @@ try {
     server.listen(port, () => {
         console.log(`[server]: Server is running at https ${port}`)
         setProd()
-        instagram.fetchPosts()
     })
 } catch (e) {
     app.listen(port, () => {

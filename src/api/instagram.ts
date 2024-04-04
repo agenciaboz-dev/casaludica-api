@@ -1,5 +1,6 @@
 import { ApifyClient } from "apify-client"
 import { InstagramPost } from "../types/shared/instagram/post"
+import fs from "fs"
 
 const apify_token = "apify_api_IMnanN6Fzye4D7bwu5JOgPgUwvLitc3aG5iB"
 const client = new ApifyClient({
@@ -17,19 +18,22 @@ const input = {
     searchType: "hashtag",
 }
 
-let posts: InstagramPost[] = []
-
-const getPosts = () => posts
+const getPosts = () => {
+    try {
+        const posts = JSON.parse(fs.readFileSync("./instagram_posts.json", { encoding: "utf-8" })) as InstagramPost[]
+        return posts
+    } catch (error) {
+        console.log(error)
+        return []
+    }
+}
 
 const fetchPosts = async () => {
     console.log("fetching posts")
     const run = await client.actor("shu8hvrXbJbY3Eb9W").call(input)
     const { items } = await client.dataset(run.defaultDatasetId).listItems()
-
-    console.log("done. saving posts")
-    // @ts-ignore
-    posts = items
+    fs.writeFileSync("./instagram_posts.json", JSON.stringify(items, null, 4))
     return items
 }
 
-export default { fetchPosts, posts, getPosts }
+export default { fetchPosts, getPosts }
