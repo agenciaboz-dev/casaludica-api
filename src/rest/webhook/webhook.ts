@@ -55,6 +55,9 @@ router.patch("/sent_order", async (request: Request, response: Response) => {
 })
 
 router.patch("/invoiced_order", async (request: Request, response: Response) => {
+    console.log("invoiced order")
+    console.log(request.body)
+    console.log(request.files)
     try {
         const data = JSON.parse(request.body.data) as { order_id: number }
         const invoice = request.files?.file as UploadedFile

@@ -40,7 +40,6 @@ const router = express.Router()
 
 router.get("/scrape", async (request: Request, response: Response) => {
     let posts = instagram.getPosts()
-    console.log(posts)
     response.json(posts)
 })
 
