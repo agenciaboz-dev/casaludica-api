@@ -24,348 +24,534 @@ Equipe Casa Lúdica
     `
 
 const fetchProduct = (product: OrderProduct) =>
-    `
-    <tr class="product-list">
-        <td  class="product-table">
-            <img src="https://casaludica.com.br/wp-content/uploads/2023/10/Peca-1-Pilhantras.png" width="50%">
-        </td>
-        <td class="product-table" style="padding:0 20px;">
-            <h4>${product.name}</h4>
-        </td>
-        <td class="product-table">
-            <h5>
-                ${product.quantity}
-            </h5>
-        </td>
-        <td class="product-table">
-            <h5>
-                R$${product.price.toString().replace(".", ",")}
-            </h5>
-        </td>
-    </tr>
+    ` 
+<tr>
+<td style="padding: 10px 0;"><img src="https://casaludica.com.br/wp-content/uploads/2024/04/shop.png" width="50%"></td>
+<td style="padding: 0 15px 0 0;">${product.name}</td>
+<td style="text-align:center;">${product.quantity}</td>
+<td style="text-align:center">R$${product.price.toString().replace(".", ",")}</td>
+</tr>
 `
 
 export const pedidoConcluidoCliente = (user: User, order: Order) =>
     `
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sua Compra Está a Caminho!</title>
-<style type="text/css">
-	/* FONTS  */
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-	/* CSS  */
-	body {
-		margin: 0;
-	}
-	table {
-		border-spacing: 0;
-	}
-	td {
-		padding: 0;
-	}
-	img {
-		border: 0;
-	}
-	body{
-		background-color: #363775;
-	}
-	.wrapper{
-		width: 100%;
-		table-layout: fixed;
-		padding: 60px 0px;
-	}
-	.main{
-		width: 100%;
-		max-width: 600px;
-		background-color: #fff;
-		font-family: 'Poppins', sans-serif;
-		color: #282828;
-		border-radius:15px;
-		overflow: hidden;
-		text-align: center;
-		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	}
-	.social{
-		width: 55px;
-	}
-	.social-media{
-		padding: 15% 0px 15% 62px;
-	}
-	.two-columns{
-		font-size: 0;
-		text-align: center;
-	}
-	.two-columns .column{
-		width: 100%;
-		max-width: 300px;
-		display: inline-block;
-		vertical-align: top;
-	}
-	.product-column .product-img{
+  <title>
+  </title>
+  <!--[if !mso]><!-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--<![endif]-->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    #outlook a {
+      padding: 0;
+    }
 
-	}
-	.product-column .product-info{
+    body {
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
 
-	}
-	h3{
-		font-family: 'Poppins', sans-serif;
-		font-size: 28px;
-		font-weight: 500!important;
-		margin: 0 0 15px;
-		text-align: left;
-	}
-	h4{
-		font-family: 'Poppins', sans-serif;
-		font-size: 17px;
-		font-weight: 500!important;
-		margin: 0;
-		text-align: left;
-		text-overflow: ellipsis!important;
-	}
-	h5{
-		font-family: 'Poppins', sans-serif;
-		font-size: 14px;
-		font-weight: 500!important;
-		margin: 0;
-	}
-	p{
-		line-height: 23px;
-		font-size: 15px;
-		padding: 5px 0 1px;
-		text-align: justify;
-	}
-	span{
-		line-height: 18px;
-		font-size: 12px;
-		padding: 0;
-		text-align: left;
-	}
-	.button{
-		background-color: #282828;
-		font-family: 'Poppins', sans-serif;
-		color: #fff!important;
-		text-decoration: none;
-		padding: 10px 15px;
-	}
-	a{
-		color: #363775!important;
-		font-weight: 600;
-	}
-	.footer{
-		background-color: #fff;
-		font-size: 0;
-	}
-	.img-logo{
-		width: 120px;
-	}
-	.product-table-header {
-		padding:0;
-		vertical-align: top;
-		text-align: center;
-	}
-	.product-table{
-		vertical-align: middle;
-		padding:10px 0px;
-	}
-	@media only screen and (max-width: 650px) {
-		.social-media{
-			padding: 0px  25px;
-		}
-		.img-logo{
-			width: 220px;
-			padding: 0;
-			margin: 0;
-		}
-	}
+    table,
+    td {
+      border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
 
-</style>
+    img {
+      border: 0;
+      height: auto;
+      line-height: 100%;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
+
+    p {
+      display: block;
+      margin: 13px 0;
+    }
+  </style>
+  <!--[if mso]>
+    <noscript>
+    <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    </noscript>
+    <![endif]-->
+  <!--[if lte mso 11]>
+    <style type="text/css">
+      .mj-outlook-group-fix { width:100% !important; }
+    </style>
+    <![endif]-->
+  <!--[if !mso]><!-->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);
+    @import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+  </style>
+  <!--<![endif]-->
+  <style type="text/css">
+    @media only screen and (min-width:480px) {
+      .mj-column-per-100 {
+        width: 100% !important;
+        max-width: 100%;
+      }
+
+      .mj-column-px-300 {
+        width: 300px !important;
+        max-width: 300px;
+      }
+    }
+  </style>
+  <style media="screen and (min-width:480px)">
+    .moz-text-html .mj-column-per-100 {
+      width: 100% !important;
+      max-width: 100%;
+    }
+
+    .moz-text-html .mj-column-px-300 {
+      width: 300px !important;
+      max-width: 300px;
+    }
+  </style>
+  <style type="text/css">
+    @media only screen and (max-width:480px) {
+      table.mj-full-width-mobile {
+        width: 100% !important;
+      }
+
+      td.mj-full-width-mobile {
+        width: auto !important;
+      }
+    }
+  </style>
+  <style type="text/css">
+  </style>
 </head>
-<body>
 
-	<center class="wrapper">
-
-		<table class="main" width="100%">
-		
-		<!-- LOGO & SOCIAL MEDIA SECTION -->
-			<tr>
-				<td style="padding: 14px 0 4px;">
-					<table width="100%">
-
-						<tr>
-							<td class="two-columns">
-
-								<table class="column">
-									<tr>
-										<td style="padding: 10px 22px 10px;">
-											<a href="https://casaludica.com.br/"><img src="https://casaludica.com.br/wp-content/uploads/2022/10/logo.png" alt="Casa Lúdica - Logo" title="Casa Lúdica" class="img-logo"></a>
-										</td>
-									</tr>
-								</table>
-
-								<table class="column">
-									<tr>
-										<td class="social-media">
-											<a href="https://api.whatsapp.com/send?phone=5547991684299&text=Ol%C3%A1,%20Casa%20L%C3%BAdica!" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/whatsapp.png" alt="WhatsApp">
-											</a>	
-								   
-											<a href="https://www.instagram.com/casaludica" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/instagram.png" alt="Instagram">
-											</a>	
-								   
-											<a href="https://www.facebook.com/casaludica.com.br" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/facebook.png" alt="Facebook">
-											</a>	
-									 
-											<a href="https://www.youtube.com/@casaludica6482" target="_blank">
-												<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/youtube.png" alt="Youtube">
-											</a>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-
-					</table>
-				</td>
-			</tr>
-					
-		<!-- BANNER IMAGE -->
-
-		<!-- TITLE, TEXT & BUTTON -->
-			
-			<tr>
-				<td style="padding: 20px 35px 0px;">
-					<table width="100%">
-
-						<tr>
-							<td>
-								<h3>Sua Compra Está a Caminho!</h3>
-								<p style="text-align: left;">
-									Olá ${user.name},
-								</p>
-								<p>
-									Sua compra número ${order.id} foi concluída e está a caminho! Preparamos tudo com muito cuidado e esperamos que você desfrute de cada momento.
-								</p>
-								<p>
-									Fique de olho na sua caixa de correio!
-								</p>
-							</td>
-						</tr>	
-						<tr>
-							<td style="padding: 14px 0 4px;">
-								<table width="100%">
-									<tr>
-										<td>
-											<table class="two-columns">
-												<tr class="product-list">
-													<td width="20%" class="product-table-header">
-														
-													</td>
-													<td width="50%" class="product-table-header">
-														
-													</td>
-													<td width="10%" class="product-table-header">
-														<h5>
-															Qtd.
-														</h5>
-													</td>
-													<td width="20%" class="product-table-header">
-														<h5>
-															Valor
-														</h5>
-													</td>
-												</tr>
-
-												${order.products.map((product) => fetchProduct(product))}
-
-												<tr class="product-list">
-													<td  class="product-table"></td>
-													<td class="product-table" style="padding:0 20px;"></td>
-													<td class="product-table">
-														<h5>
-															Total:
-														</h5>
-													</td>
-													<td class="product-table">
-														<h5>
-                                                            R$${order.total.toString().replace(".", ",")}
-														</h5>
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-						
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>
-									Atenciosamente,<br>
-									Equipe Casa Lúdica
-								</p>
-							</td>
-						</tr>	
-					</table>
-				</td>
-			</tr>
-
-		<!-- BORDER -->
-					
-		<!-- THREE COLUMN SECTION -->
-					
-		<!-- BORDER -->
-					
-		<!-- TWO COLUMN SECTION -->
-					
-		<!-- FOOTER SECTION -->
-
-			<tr>
-				<td class="footer">
-					<table width="100%">
-
-						<td style="padding: 45px 20px;">
-							<a href="https://casaludica.com.br/"><img src="https://casaludica.com.br/wp-content/uploads/2022/10/logo.png" alt="Casa Lúdica - Logo" title="Casa Lúdica" width="160"></a>
-								<p style="text-align: center; font-size: 10px;">
-									Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys
-								</p>	
-								<p style="text-align: center; font-size: 10px;">
-									Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474
-								</p>	
-							<a href="https://api.whatsapp.com/send?phone=5547991684299&text=Ol%C3%A1,%20Casa%20L%C3%BAdica!" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/whatsapp.png" alt="WhatsApp">
-							</a>	
-				   
-							<a href="https://www.instagram.com/casaludica/" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/instagram.png" alt="Instagram">
-							</a>	
-				   
-							<a href="https://www.facebook.com/casaludica.com.br" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/facebook.png" alt="Facebook">
-							</a>	
-					 
-							<a href="https://www.youtube.com/@casaludica6482" target="_blank">
-								<img class="social" src="https://casaludica.com.br/wp-content/uploads/2024/04/youtube.png" alt="Youtube">
-							</a>
-							
-						</td>
-
-					</table>
-				</td>
-			</tr>
-
-			
-
-		</table> <!-- End Main Class -->
-
-	</center> <!-- End Wrapper -->
-
+<body style="word-spacing:normal;background-color:#363775;">
+  <div style="background-color:#363775;">
+    <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#363775" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#363775;background-color:#363775;margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#363775;background-color:#363775;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td style="font-size:0px;word-break:break-word;">
+                        <div style="height:20px;line-height:20px;">&#8202;</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;border-radius:25px 25px 0px 0px;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;border-radius:25px 25px 0px 0px;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:middle;width:300px;" ><![endif]-->
+              <div class="mj-column-px-300 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                          <tbody>
+                            <tr>
+                              <td style="width:120px;">
+                                <a href="https://casaludica.com.br/" target="_blank">
+                                  <img height="auto" src="https://casaludica.com.br/wp-content/uploads/2022/10/logo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="120" />
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td><td class="" style="vertical-align:middle;width:300px;" ><![endif]-->
+              <div class="mj-column-px-300 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:0px;word-break:break-word;">
+                        <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" ><tr><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://api.whatsapp.com/send?phone=5547991684299&text=Ol%C3%A1,%20Casa%20L%C3%BAdica!" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/whatsapp.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://www.instagram.com/casaludica" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/instagram.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://www.facebook.com/casaludica.com.br" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/facebook.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://www.youtube.com/@casaludica6482" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/youtube.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td></tr></table><![endif]-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:center;color:#282828;">
+                          <h1> Sua Compra Está a Caminho!</h1>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${user.name},</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Sua compra número ${order.id} foi concluída e está a caminho! Preparamos tudo com muito cuidado e esperamos que você desfrute de cada momento.</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Fique de olho na sua caixa de correio!</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:fixed;width:100%;border:none;">
+                          <tr style="text-align:left;padding:10px 0;">
+                            <th style="padding: 0;"></th>
+                            <th style="padding: 0 15px;"></th>
+                            <th style="text-align:center">Qtd.</th>
+                            <th style="text-align:center;">Valor</th>
+                          </tr>
+						  ${order.products.map((product) => fetchProduct(product))}
+                          <tr style="border: solid #e1e1e1;border-width:1px 0px 0px 0px;">
+                            <td style="padding: 10px 0;"></td>
+                            <td style="padding: 0 15px 0 0;"></td>
+                            <td style="text-align:center;padding:20px 0px;">Total:</td>
+                            <td style="text-align:center;padding:20px 0px;">R$${order.total.toString().replace(".", ",")}</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;"><br>Atenciosamente,</br> Equipe Casa Lúdica</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:middle;width:600px;" ><![endif]-->
+              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                          <tbody>
+                            <tr>
+                              <td style="width:160px;">
+                                <a href="https://casaludica.com.br/" target="_blank">
+                                  <img height="auto" src="https://casaludica.com.br/wp-content/uploads/2022/10/logo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="160" />
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:Poppins;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#ffffff;background-color:#ffffff;margin:0px auto;border-radius:0px 0px 25px 25px;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;border-radius:0px 0px 25px 25px;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:middle;width:600px;" ><![endif]-->
+              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:0px 0px 25px 0px;word-break:break-word;">
+                        <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" ><tr><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://api.whatsapp.com/send?phone=5547991684299&text=Ol%C3%A1,%20Casa%20L%C3%BAdica!" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/whatsapp.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://www.instagram.com/casaludica" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/instagram.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://www.facebook.com/casaludica.com.br" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/facebook.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td><td><![endif]-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                          <tbody>
+                            <tr>
+                              <td style="padding:4px;vertical-align:middle;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:55px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-size:0;height:55px;vertical-align:middle;width:55px;">
+                                        <a href="https://www.youtube.com/@casaludica6482" target="_blank">
+                                          <img height="55" src="https://casaludica.com.br/wp-content/uploads/2024/04/youtube.png" style="border-radius:3px;display:block;" width="55" />
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--[if mso | IE]></td></tr></table><![endif]-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#363775" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    <div style="background:#363775;background-color:#363775;margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#363775;background-color:#363775;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+              <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+              <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tbody>
+                    <tr>
+                      <td style="font-size:0px;word-break:break-word;">
+                        <div style="height:20px;line-height:20px;">&#8202;</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--[if mso | IE]></td></tr></table><![endif]-->
+  </div>
 </body>
+
 </html>
 `

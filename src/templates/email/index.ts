@@ -1,3 +1,5 @@
+import { forgot_password } from "./forgot_password"
+import { forgot_password_string } from "./forgot_password"
 import { generate_password } from "./generate_password"
 import { generate_password_string } from "./generate_password"
 import { newsletterWelcome } from "./newsletter"
@@ -24,6 +26,8 @@ import { pedidoConcluidoCliente } from "./pedidoConcluidoCliente"
 import { pedidoConcluidoClienteString } from "./pedidoConcluidoCliente"
 
 export default {
+    forgot_password,
+    forgot_password_string,
     generate_password,
     generate_password_string,
     newsletterWelcome,
