@@ -79,7 +79,7 @@ router.post("/upload_profile_pic/:user_id", async (request: Request, response: R
         try {
             const user = new User(user_id)
             await user.init()
-            user.updateImage(file as UploadedFile)
+            await user.updateImage(file as UploadedFile)
 
             response.json(user)
         } catch (error) {

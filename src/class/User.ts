@@ -91,6 +91,7 @@ export class User {
                     state: data.state,
                     company: data.company,
                     complement: data.complement,
+                    password: data.password,
                 },
                 include,
             })
