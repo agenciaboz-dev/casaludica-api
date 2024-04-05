@@ -4,12 +4,15 @@ import { User } from "../class/User"
 import { decrypt, encrypt } from "../tools/hash"
 import { sendMail } from "../tools/mail"
 import templates from "../templates"
+import unmask from "../tools/unmask"
+import { handlePrismaError } from "../prisma_errors"
 const router = express.Router()
 
 router.post("/exists", async (request: Request, response: Response) => {
     const data = request.body
 
     const user = await User.find(data.login)
+    console.log(user)
     response.json(user)
 
     if (user && !user.password) {
@@ -118,14 +121,15 @@ router.post("/find", async (request: Request, response: Response) => {
 })
 
 router.post("/signup", async (request: Request, response: Response) => {
-    const data = request.body as { email: string; password: string }
+    const data = request.body as { email: string; password: string; cpf: string }
+    console.log(data)
     try {
         const user = await User.signup({
             address: "",
             city: "",
             company: "",
             complement: "",
-            cpf: "",
+            cpf: unmask(data.cpf),
             district: "",
             email: data.email,
             lastname: "",
@@ -137,10 +141,14 @@ router.post("/signup", async (request: Request, response: Response) => {
             profilePicUrl: "",
             state: "BA",
         })
-
-        response.json(user)
+        if (user) {
+            response.json(user)
+        } else {
+            response.status(500).send("Não foi possível criar o usuário")
+        }
     } catch (error) {
-        response.status(500).send()
+        const message = handlePrismaError(error)
+        response.status(500).send(message)
     }
 })
 
