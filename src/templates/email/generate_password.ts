@@ -281,19 +281,19 @@ export const generate_password = (user: User, url: string) => `
                   <tbody>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:center;color:#282828;">
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:center;color:#282828;">
                           <h1>Bem-Vindo à Casa Lúdica!</h1>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${user.name},</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${user.name},</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Para começar sua jornada, clique no botão abaixo para que você possa gerar sua senha. Você pode alterar essa senha a futuramente.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Para começar sua jornada, clique no botão abaixo para que você possa gerar sua senha. Você pode alterar essa senha a futuramente.</div>
                       </td>
                     </tr>
                     <tr>
@@ -311,12 +311,12 @@ export const generate_password = (user: User, url: string) => `
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Se tiver alguma dúvida ou precisar de ajuda, estamos aqui para você. Basta nos enviar uma mensagem!</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Se tiver alguma dúvida ou precisar de ajuda, estamos aqui para você. Basta nos enviar uma mensagem!</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Atenciosamente,</br> Equipe Casa Lúdica</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Atenciosamente,</br> Equipe Casa Lúdica</div>
                       </td>
                     </tr>
                   </tbody>
@@ -374,12 +374,12 @@ export const generate_password = (user: User, url: string) => `
                   <tbody>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
                       </td>
                     </tr>
                   </tbody>

@@ -287,29 +287,29 @@ export const newsletterWelcome = (name: string) =>
                   <tbody>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:center;color:#282828;">
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:center;color:#282828;">
                           <h1>Bem-vindo à Casa Lúdica 🎉</h1>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${name},</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${name},</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Estamos super empolgados por ter você conosco! 🌟 Bem-vindo(a) à nossa comunidade de entusiastas por um lar mais feliz e cheio de personalidade.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Estamos super empolgados por ter você conosco! 🌟 Bem-vindo(a) à nossa comunidade de entusiastas por um lar mais feliz e cheio de personalidade.</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Ao se inscrever em nossa newsletter, você deu um passo incrível para transformar seu espaço com estilo, conforto e muita diversão. Aqui na Casa Lúdica, acreditamos que cada detalhe faz a diferença e estamos aqui para te ajudar a encontrar exatamente o que seu coração deseja.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Ao se inscrever em nossa newsletter, você deu um passo incrível para transformar seu espaço com estilo, conforto e muita diversão. Aqui na Casa Lúdica, acreditamos que cada detalhe faz a diferença e estamos aqui para te ajudar a encontrar exatamente o que seu coração deseja.</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">
                           <h2>O que você pode esperar?</h2>
                           <ul>
                             <li>🚀 Lançamentos Exclusivos: Seja o primeiro a saber sobre nossas novidades e coleções limitadas.</li>
@@ -322,24 +322,24 @@ export const newsletterWelcome = (name: string) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">
                           <h2>Sua Opinião Importa</h2>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Estamos sempre buscando melhorar e oferecer o que há de melhor para você. Não hesite em nos contar o que gostaria de ver em nossas newsletters ou como podemos tornar sua experiência ainda mais incrível.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Estamos sempre buscando melhorar e oferecer o que há de melhor para você. Não hesite em nos contar o que gostaria de ver em nossas newsletters ou como podemos tornar sua experiência ainda mais incrível.</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Agradecemos por se juntar a nós. Prepare-se para descobertas incríveis!</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Agradecemos por se juntar a nós. Prepare-se para descobertas incríveis!</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Atenciosamente,</br> Equipe Casa Lúdica</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Atenciosamente,</br> Equipe Casa Lúdica</div>
                       </td>
                     </tr>
                   </tbody>
@@ -397,12 +397,12 @@ export const newsletterWelcome = (name: string) =>
                   <tbody>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
                       </td>
                     </tr>
                   </tbody>

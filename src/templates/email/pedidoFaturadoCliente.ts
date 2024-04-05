@@ -317,24 +317,24 @@ export const pedidoFaturadoCliente = (user: User, order: Order) =>
                   <tbody>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:center;color:#282828;">
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:center;color:#282828;">
                           <h1>Seu Pedido foi Faturado - Nota Fiscal Anexa!</h1>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${user.name},</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${user.name},</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Temos boas notícias! Seu pedido número ${order.id} foi faturado e estamos um passo mais perto de enviar sua compra até você.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Temos boas notícias! Seu pedido número ${order.id} foi faturado e estamos um passo mais perto de enviar sua compra até você.</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Anexamos a nota fiscal deste pedido para sua conveniência e registro. É importante guardar este documento, pois ele contém informações valiosas sobre sua compra.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Anexamos a nota fiscal deste pedido para sua conveniência e registro. É importante guardar este documento, pois ele contém informações valiosas sobre sua compra.</div>
                       </td>
                     </tr>
                     <tr>
@@ -358,24 +358,24 @@ export const pedidoFaturadoCliente = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">
                           <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${user.postcode}<br> ${user.email}<br>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Agora, estamos trabalhando para preparar e enviar sua compra o mais rápido possível.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Agora, estamos trabalhando para preparar e enviar sua compra o mais rápido possível.</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Se tiver qualquer dúvida ou precisar de assistência, não hesite em nos contatar. Estamos aqui para ajudar!</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Se tiver qualquer dúvida ou precisar de assistência, não hesite em nos contatar. Estamos aqui para ajudar!</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;"><br>Atenciosamente,</br> Equipe Casa Lúdica</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;"><br>Atenciosamente,</br> Equipe Casa Lúdica</div>
                       </td>
                     </tr>
                   </tbody>
@@ -433,12 +433,12 @@ export const pedidoFaturadoCliente = (user: User, order: Order) =>
                   <tbody>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:10px;line-height:20px;text-align:center;color:#282828;">Somos uma loja de brinquedos que ama o que faz, especializada em Brinquedos Educativos, Instrumentos Musicais, Playgrounds e Mobiliários, Materiais Pedagógicos, Jogos e Desafios, Espumados Babys</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:10px;line-height:30px;text-align:center;color:#282828;">Rua 1950, número 720, sala 02 Centro - Balneário Camboriú - SC, 88330-474</div>
                       </td>
                     </tr>
                   </tbody>
