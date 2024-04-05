@@ -66,16 +66,21 @@ router.post("/paid", async (request: Request, response: Response) => {
         await order.init()
         await order.onPaid(charge)
 
+        const user = new User(order.userId)
+        await user.init()
+
         console.log("sending new order mail to client")
+        console.log({ destination: user.email })
         try {
             sendMail(
-                bozpay_order.email,
+                user.email,
                 "Novo pedido realizado!",
-                templates.email.novoPedidoClienteString(bozpay_order, order),
-                templates.email.novoPedidoCliente(bozpay_order, order)
+                templates.email.novoPedidoClienteString(user, order),
+                templates.email.novoPedidoCliente(user, order)
             )
         } catch (error) {
             console.log("error sending new order mail to client")
+            console.log(error)
         }
         console.log("sending new order mail to adm")
         igest.get.franchises({ empresa: data.storeId }).then((result) => {
@@ -84,16 +89,15 @@ router.post("/paid", async (request: Request, response: Response) => {
                 sendMail(
                     franchisor.Email,
                     "Nova Compra Realizada!",
-                    templates.email.novoPedidoAdmString(bozpay_order, order),
-                    templates.email.novoPedidoAdm(bozpay_order, order)
+                    templates.email.novoPedidoAdmString(user, order),
+                    templates.email.novoPedidoAdm(user, order)
                 )
             } catch (error) {
                 console.log("error sending new order mail to adm")
+                console.log(error)
             }
         })
 
-        const user = new User(order.userId)
-        await user.init()
         const via_cep = await viacep.search(user.postcode)
 
         const products_total = order.products.reduce((total, product) => total + product.price * product.quantity, 0)
@@ -135,14 +139,16 @@ router.post("/paid", async (request: Request, response: Response) => {
             await bozpay.order.updateStatus({ status: "PROCESSANDO", id: bozpay_order.id })
             try {
                 console.log("sending paid order email to client")
+                console.log({ destination: user.email })
                 sendMail(
-                    bozpay_order.email,
+                    user.email,
                     "Sua Compra Está Sendo Preparada!",
                     templates.email.processandoPedidoClienteString(user, order),
                     templates.email.processandoPedidoCliente(user, order)
                 )
             } catch (error) {
                 console.log("error sending paid order to client")
+                console.log(error)
             }
 
             console.log("sending paid order to adm")
@@ -157,6 +163,7 @@ router.post("/paid", async (request: Request, response: Response) => {
                     )
                 } catch (error) {
                     console.log("error sending paid order to adm")
+                    console.log(error)
                 }
             })
         }

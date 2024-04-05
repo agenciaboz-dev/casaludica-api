@@ -1,5 +1,6 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
+import { User } from "../../class/User"
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -9,7 +10,7 @@ const fetchProductString = (product: OrderProduct) =>
     
 `
 
-export const novoPedidoAdmString = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoAdmString = (user: User, order: Order) =>
     `
     Olá equipe Casa Lúdica,
     uma nova jornada acaba de começar! Recebemos uma nova compra, número ${order.id}.
@@ -19,12 +20,12 @@ export const novoPedidoAdmString = (order_data: ClientOrderForm, order: Order) =
     Total: R$${order.total.toString().replace(".", ",")}
     Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.
     Endereço de entrega:
-        ${order_data.name} ${order_data.lastname}<br>
-        ${order_data.address}<br>
-        ${order_data.district}<br>
-        ${order_data.city}<br>
-        ${order_data.postcode}<br>
-        ${order_data.email}<br>
+        ${user.name} ${user.lastname}<br>
+        ${user.address}<br>
+        ${user.district}<br>
+        ${user.city}<br>
+        ${user.postcode}<br>
+        ${user.email}<br>
         Agradecemos por tornar cada experiência única!
         Atenciosamente,
         Marketplace Casa Lúdica
@@ -40,9 +41,8 @@ const fetchProduct = (product: OrderProduct) =>
 </tr>
 `
 
-export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) => `
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+export const novoPedidoAdm = (user: User, order: Order) =>
+    `
 
 <head>
   <title>
@@ -348,7 +348,7 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) => `
 						<tr>
 						  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 							<div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">
-							  <h3>Endereço de Entrega</h3> ${order_data.name} ${order_data.lastname}<br> ${order_data.address}<br> ${order_data.district}<br> ${order_data.city}<br> ${order_data.postcode}<br> ${order_data.email}<br>
+							  <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${user.postcode}<br> ${user.email}<br>
 							</div>
 						  </td>
 						</tr>

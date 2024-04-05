@@ -25,6 +25,12 @@ export const sendMail = async (destination: string, subject: string, text?: stri
         attachments,
     }
 
-    const response = await transporter.sendMail(mailOptions)
-    return response
+    try {
+        const response = await transporter.sendMail(mailOptions)
+        return response
+    } catch (error) {
+        console.log("error sending mail")
+        console.log({ destination })
+        console.log(error)
+    }
 }

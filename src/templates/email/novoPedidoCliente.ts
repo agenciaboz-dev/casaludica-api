@@ -1,5 +1,6 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
+import { User } from "../../class/User"
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -8,9 +9,9 @@ const fetchProductString = (product: OrderProduct) =>
     Valor: R$${product.price.toString().replace(".", ",")}
 `
 
-export const novoPedidoClienteString = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoClienteString = (user: User, order: Order) =>
     `
-    Olá ${order_data.name},
+    Olá ${user.name},
     Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
     Manteremos você atualizado a cada passo do caminho.
 
@@ -19,12 +20,12 @@ export const novoPedidoClienteString = (order_data: ClientOrderForm, order: Orde
     Total: R$${order.total.toString().replace(".", ",")}
 
     Endereço de entrega:
-    ${order_data.name} ${order_data.lastname}<br>
-    ${order_data.address}<br>
-    ${order_data.district}<br>
-    ${order_data.city}<br>
-    ${order_data.postcode}<br>
-    ${order_data.email}<br>
+    ${user.name} ${user.lastname}<br>
+    ${user.address}<br>
+    ${user.district}<br>
+    ${user.city}<br>
+    ${user.postcode}<br>
+    ${user.email}<br>
 `
 
 const fetchProduct = (product: OrderProduct) =>
@@ -37,7 +38,7 @@ const fetchProduct = (product: OrderProduct) =>
   	</tr>
 `
 
-export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoCliente = (user: User, order: Order) =>
     `
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -316,7 +317,7 @@ export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${order_data.name},</div>
+                        <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">Olá ${user.name},</div>
                       </td>
                     </tr>
                     <tr>
@@ -346,7 +347,7 @@ export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                         <div style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;">
-                          <h3>Endereço de Entrega</h3> ${order_data.name} ${order_data.lastname}<br> ${order_data.address}<br> ${order_data.district}<br> ${order_data.city}<br> ${order_data.postcode}<br> ${order_data.email}<br>
+                          <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${user.postcode}<br> ${user.email}<br>
                         </div>
                       </td>
                     </tr>
