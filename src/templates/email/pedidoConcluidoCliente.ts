@@ -12,7 +12,7 @@ const fetchProductString = (product: OrderProduct) =>
 export const pedidoConcluidoClienteString = (user: User, order: Order) =>
     `
 Olá ${user.name},
-Sua compra número <b>#${order.id}<b> foi concluída e está a caminho! Preparamos tudo com muito cuidado e esperamos que você desfrute de cada momento.
+Sua compra número <b>#${order.id}</b> foi concluída e está a caminho! Preparamos tudo com muito cuidado e esperamos que você desfrute de cada momento.
 Fique de olho na sua caixa de correio!
 
 ${order.products.map((product) => fetchProductString(product))}
@@ -317,7 +317,7 @@ export const pedidoConcluidoCliente = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Sua compra número <b>#${order.id}<b> foi concluída e está a caminho! Preparamos tudo com muito cuidado e esperamos que você desfrute de cada momento.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Sua compra número <b>#${order.id}</b> foi concluída e está a caminho! Preparamos tudo com muito cuidado e esperamos que você desfrute de cada momento.</div>
                       </td>
                     </tr>
                     <tr>
