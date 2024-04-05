@@ -84,7 +84,7 @@ export class Order {
             const personalData: PersonalDataForm = {
                 cpf: unmask(data.cpf),
                 email: data.email,
-                name: data.name,
+                name: `${data.name} ${data.lastname}`,
                 phone: unmask(data.phone),
             }
 
