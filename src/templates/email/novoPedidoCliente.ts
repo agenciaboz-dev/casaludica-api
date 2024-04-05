@@ -1,5 +1,6 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
+import { User } from "../../class/User"
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -8,9 +9,9 @@ const fetchProductString = (product: OrderProduct) =>
     Valor: R$${product.price.toString().replace(".", ",")}
 `
 
-export const novoPedidoClienteString = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoClienteString = (user: User, order: Order) =>
     `
-    Olá ${order_data.name},
+    Olá ${user.name},
     Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
     Manteremos você atualizado a cada passo do caminho.
 
@@ -19,12 +20,12 @@ export const novoPedidoClienteString = (order_data: ClientOrderForm, order: Orde
     Total: R$${order.total.toString().replace(".", ",")}
 
     Endereço de entrega:
-    ${order_data.name} ${order_data.lastname}<br>
-    ${order_data.address}<br>
-    ${order_data.district}<br>
-    ${order_data.city}<br>
-    ${order_data.postcode}<br>
-    ${order_data.email}<br>
+    ${user.name} ${user.lastname}<br>
+    ${user.address}<br>
+    ${user.district}<br>
+    ${user.city}<br>
+    ${user.postcode}<br>
+    ${user.email}<br>
 `
 
 const fetchProduct = (product: OrderProduct) =>
@@ -49,7 +50,7 @@ const fetchProduct = (product: OrderProduct) =>
     </tr>
 `
 
-export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoCliente = (user: User, order: Order) =>
     `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -250,7 +251,7 @@ export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
 							<td>
 								<h3>Obrigado pelo seu pedido!</h3>
 								<p style="text-align: left;">
-									Olá ${order_data.name},
+									Olá ${user.name},
 								</p>
 								<p>
 									Sua compra número <b>${
@@ -313,12 +314,12 @@ export const novoPedidoCliente = (order_data: ClientOrderForm, order: Order) =>
 							<td>
 								<h4>Endereço de entrega</h4>
 								<p style="text-align: left;">
-                                ${order_data.name} ${order_data.lastname}<br>
-                                ${order_data.address}<br>
-                                ${order_data.district}<br>
-                                ${order_data.city}<br>
-                                ${order_data.postcode}<br>
-                                ${order_data.email}<br>
+                                ${user.name} ${user.lastname}<br>
+                                ${user.address}<br>
+                                ${user.district}<br>
+                                ${user.city}<br>
+                                ${user.postcode}<br>
+                                ${user.email}<br>
 								</p>
 								<p>
 									Agradecemos sua paciência e compreensão.

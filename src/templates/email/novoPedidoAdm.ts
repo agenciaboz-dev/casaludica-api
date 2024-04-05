@@ -1,5 +1,6 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
+import { User } from "../../class/User"
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -9,7 +10,7 @@ const fetchProductString = (product: OrderProduct) =>
     
 `
 
-export const novoPedidoAdmString = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoAdmString = (order_data: User, order: Order) =>
     `
     Olá equipe Casa Lúdica,
     uma nova jornada acaba de começar! Recebemos uma nova compra, número ${order.id}.
@@ -52,7 +53,7 @@ const fetchProduct = (product: OrderProduct) =>
     </tr>
 `
 
-export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
+export const novoPedidoAdm = (user: User, order: Order) =>
     `
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -315,12 +316,12 @@ export const novoPedidoAdm = (order_data: ClientOrderForm, order: Order) =>
 							<td>
 								<h4>Endereço de entrega</h4>
 								<p style="text-align: left;">
-									${order_data.name} ${order_data.lastname}<br>
-									${order_data.address}<br>
-									${order_data.district}<br>
-									${order_data.city}<br>
-									${order_data.postcode}<br>
-									${order_data.email}<br>
+									${user.name} ${user.lastname}<br>
+									${user.address}<br>
+									${user.district}<br>
+									${user.city}<br>
+									${user.postcode}<br>
+									${user.email}<br>
 								</p>
 								<p>
 									Agradecemos por tornar cada experiência única!
