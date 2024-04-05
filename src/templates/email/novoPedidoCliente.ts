@@ -12,7 +12,7 @@ const fetchProductString = (product: OrderProduct) =>
 export const novoPedidoClienteString = (user: User, order: Order) =>
     `
     Olá ${user.name},
-    Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
+    Sua compra número <b>#${order.id}<b> está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita.
     Manteremos você atualizado a cada passo do caminho.
 
     ${order.products.map((product) => fetchProductString(product))}
@@ -322,7 +322,7 @@ export const novoPedidoCliente = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Sua compra número ${order.id} está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita. Manteremos você atualizado a cada passo do caminho.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Sua compra número <b>#${order.id}<b> está em espera. Estamos checando alguns detalhes para garantir que sua aventura conosco seja perfeita. Manteremos você atualizado a cada passo do caminho.</div>
                       </td>
                     </tr>
                     <tr>

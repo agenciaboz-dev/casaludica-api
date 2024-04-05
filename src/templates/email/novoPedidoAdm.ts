@@ -13,7 +13,7 @@ const fetchProductString = (product: OrderProduct) =>
 export const novoPedidoAdmString = (user: User, order: Order) =>
     `
     Olá equipe Casa Lúdica,
-    uma nova jornada acaba de começar! Recebemos uma nova compra, número ${order.id}.
+    uma nova jornada acaba de começar! Recebemos uma nova compra, número <b>#${order.id}<b>.
 
     ${order.products.map((product) => fetchProductString(product))}
 
@@ -323,7 +323,7 @@ export const novoPedidoAdm = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Uma nova jornada acaba de começar! Recebemos uma nova compra, número ${order.id}. Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Uma nova jornada acaba de começar! Recebemos uma nova compra, número <b>#${order.id}<b>. Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.</div>
                       </td>
                     </tr>
                     <tr>

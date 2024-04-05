@@ -11,7 +11,7 @@ const fetchProductString = (product: OrderProduct) =>
 
 export const pedidoFaturadoClienteString = (user: User, order: Order) =>
     `
-    Olá ${user.name}, temos boas notícias! Seu pedido número ${order.id} foi faturado e estamos um passo mais perto de enviar sua compra até você.
+    Olá ${user.name}, temos boas notícias! Seu pedido número <b>#${order.id}<b> foi faturado e estamos um passo mais perto de enviar sua compra até você.
 	Anexamos a nota fiscal deste pedido para sua conveniência e registro.
     É importante guardar este documento, pois ele contém informações valiosas sobre sua compra.
 												
@@ -329,7 +329,7 @@ export const pedidoFaturadoCliente = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Temos boas notícias! Seu pedido número ${order.id} foi faturado e estamos um passo mais perto de enviar sua compra até você.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Temos boas notícias! Seu pedido número <b>#${order.id}<b> foi faturado e estamos um passo mais perto de enviar sua compra até você.</div>
                       </td>
                     </tr>
                     <tr>

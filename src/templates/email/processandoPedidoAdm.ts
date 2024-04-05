@@ -12,7 +12,7 @@ const fetchProductString = (product: OrderProduct) =>
 export const processandoPedidoAdmString = (user: User, order: Order) =>
     `
     Pedido Nº ${order.id} em Processamento!
-    Olá equipe Casa Lúdica! Preparar, apontar... e vamos nessa! O pedido número ${order.id} acaba de entrar na fase de processamento.
+    Olá equipe Casa Lúdica! Preparar, apontar... e vamos nessa! O pedido número <b>#${order.id}<b> acaba de entrar na fase de processamento.
     Isso significa que tudo está correndo conforme o planejado e estamos um passo mais perto de completar mais uma entrega mágica.
 	Por favor, continuem com o excelente trabalho, assegurando que todos os detalhes estejam perfeitos para enviar ao nosso cliente uma experiência inesquecível.
 

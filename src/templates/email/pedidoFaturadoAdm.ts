@@ -13,7 +13,7 @@ export const pedidoFaturadoAdmString = (user: User, order: Order) =>
     `
     Pedido Nº ${order.id} Faturado - Nota Fiscal Emitida.
 	Olá equipe Casa Lúdica,
-	Mais uma etapa concluída com sucesso! O pedido número ${order.id}, realizado por ${user.name},
+	Mais uma etapa concluída com sucesso! O pedido número <b>#${order.id}<b>, realizado por ${user.name},
     foi devidamente faturado, e a nota fiscal correspondente já foi emitida e anexada.
 
 	${order.products.map((product) => fetchProductString(product))}
@@ -331,7 +331,7 @@ export const pedidoFaturadoAdm = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Mais uma etapa concluída com sucesso! O pedido número ${order.id}, realizado por ${user.name}, foi devidamente faturado, e a nota fiscal correspondente já foi emitida e anexada.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Mais uma etapa concluída com sucesso! O pedido número <b>#${order.id}<b>, realizado por ${user.name}, foi devidamente faturado, e a nota fiscal correspondente já foi emitida e anexada.</div>
                       </td>
                     </tr>
                     <tr>
