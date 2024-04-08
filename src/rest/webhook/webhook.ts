@@ -12,6 +12,38 @@ const router = express.Router()
 
 router.use(authentication)
 
+router.patch("/delivered_order", async (request: Request, response: Response) => {
+    const data = request.body as { order_id: number }
+
+    if (!data.order_id) {
+        response.status(400).json({ error: '"order_id" key is required in the request data' })
+        return
+    }
+
+    if (typeof data.order_id != "number") {
+        response.status(400).json({ error: '"order_id" key must be number' })
+        return
+    }
+
+    const order = new Order(data.order_id)
+    await order.init()
+
+    const bozpay_order = await bozpay.order.get(bozpay.getStore(order.storeId), order.id.toString())
+    const bozpay_response = await bozpay.order.updateStatus({ id: bozpay_order.id, status: "concluído" })
+    console.log({ bozpay_response })
+
+    const buyer = new User(order.userId)
+    await buyer.init()
+
+    sendMail(buyer.email, "entregue", "entregue string", "entrega html")
+    igest.get.franchises({ empresa: order.storeId }).then((result) => {
+        const franchise = result[0]
+        sendMail(franchise.Email, `Pedido Nº ${order.id} entregue`, "entregue adm string", "entrega html")
+    })
+
+    response.status(200).json({ success: true })
+})
+
 router.patch("/sent_order", async (request: Request, response: Response) => {
     const data = request.body as { order_id: number }
 
@@ -119,5 +151,6 @@ router.patch("/invoiced_order", async (request: Request, response: Response) => 
         response.status(500).json()
     }
 })
+
 
 export default router
