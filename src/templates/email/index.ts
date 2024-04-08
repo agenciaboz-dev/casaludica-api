@@ -12,6 +12,10 @@ import { novoPedidoAdm } from "./novoPedidoAdm"
 import { novoPedidoAdmString } from "./novoPedidoAdm"
 import { novoPedidoCliente } from "./novoPedidoCliente"
 import { novoPedidoClienteString } from "./novoPedidoCliente"
+import { pedidoChegouCliente } from "./pedidoChegouCliente"
+import { pedidoChegouClienteString } from "./pedidoChegouCliente"
+import { pedidoChegouAdm } from "./pedidoChegouAdm"
+import { pedidoChegouAdmString } from "./pedidoChegouAdm"
 import { pedidoFaturadoCliente } from "./pedidoFaturadoCliente"
 import { pedidoFaturadoClienteString } from "./pedidoFaturadoCliente"
 import { pedidoFaturadoAdm } from "./pedidoFaturadoAdm"
@@ -40,6 +44,10 @@ export default {
     novoPedidoAdmString,
     novoPedidoCliente,
     novoPedidoClienteString,
+    pedidoChegouCliente,
+    pedidoChegouClienteString,
+    pedidoChegouAdm,
+    pedidoChegouAdmString,
     pedidoFaturadoCliente,
     pedidoFaturadoClienteString,
     pedidoFaturadoAdm,
