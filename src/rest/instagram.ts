@@ -38,6 +38,11 @@ const router = express.Router()
 //     }
 // })
 
+router.get("/fetch", async (request: Request, response: Response) => {
+    let posts = await instagram.fetchPosts()
+    response.json(posts)
+})
+
 router.get("/scrape", async (request: Request, response: Response) => {
     let posts = instagram.getPosts()
     response.json(posts)
