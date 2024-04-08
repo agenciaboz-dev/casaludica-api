@@ -11,7 +11,7 @@ const fetchProductString = (product: OrderProduct) =>
 
 export const processandoPedidoClienteString = (user: User, order: Order) =>
     `
-    Olá ${user.name}, ótimas notícias! Sua compra número <b>#${order.id}<b> está sendo preparada.
+    Olá ${user.name}, ótimas notícias! Sua compra número <b>#${order.id}</b> está sendo preparada.
     Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.
     Você pode verificar os detalhes do seu pedido aqui: <a href="https://lojas.casaludica.com.br/order/${order.id}">Clique para acessar</a>.
 
@@ -325,7 +325,7 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Ótimas notícias! Sua compra número <b>#${order.id}<b> está sendo preparada. Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Ótimas notícias! Sua compra número <b>#${order.id}</b> está sendo preparada. Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.</div>
                       </td>
                     </tr>
                     <tr>

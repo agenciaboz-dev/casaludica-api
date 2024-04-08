@@ -3,7 +3,7 @@ import { User } from "../../class/User"
 
 export const pedidoConcluidoAdmString = (user: User, order: Order) =>
     `
-Olá equipe Casa Lúdica, temos ótimas notícias! O pedido número <b>#${order.id}<b>, feito por ${user.name}, foi concluído e enviado com sucesso.
+Olá equipe Casa Lúdica, temos ótimas notícias! O pedido número <b>#${order.id}</b>, feito por ${user.name}, foi concluído e enviado com sucesso.
 Este é mais um marco em nossa jornada, demonstrando o compromisso e a eficiência da nossa equipe em proporcionar as melhores experiências aos nossos clientes.
 Detalhes do Pedido Concluído:
 ${user.name}
@@ -299,7 +299,7 @@ export const pedidoConcluidoAdm = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Temos ótimas notícias! O pedido número <b>#${order.id}<b>, feito por ${user.name}, foi concluído e enviado com sucesso. Este é mais um marco em nossa jornada, demonstrando o compromisso e a eficiência da nossa equipe em proporcionar as melhores experiências aos nossos clientes.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Temos ótimas notícias! O pedido número <b>#${order.id}</b>, feito por ${user.name}, foi concluído e enviado com sucesso. Este é mais um marco em nossa jornada, demonstrando o compromisso e a eficiência da nossa equipe em proporcionar as melhores experiências aos nossos clientes.</div>
                       </td>
                     </tr>
                     <tr>
