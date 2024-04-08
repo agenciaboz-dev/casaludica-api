@@ -139,7 +139,7 @@ router.post("/signup", async (request: Request, response: Response) => {
             phone: "",
             postcode: "",
             profilePicUrl: "",
-            state: "BA",
+            state: "",
         })
         if (user) {
             response.json(user)
