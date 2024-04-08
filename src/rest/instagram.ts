@@ -61,7 +61,7 @@ router.post("/image", async (request: Request, response: Response) => {
         response.send(`data:${contentType};base64,${base64Image}`)
     } catch (error) {
         console.log("error")
-        console.log(url)
+        response.send(url)
         // console.error("Failed to fetch the image:", error)
         // response.status(500).send("Failed to fetch the image")
     }
