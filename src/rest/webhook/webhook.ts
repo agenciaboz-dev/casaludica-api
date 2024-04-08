@@ -35,10 +35,20 @@ router.patch("/delivered_order", async (request: Request, response: Response) =>
     const buyer = new User(order.userId)
     await buyer.init()
 
-    sendMail(buyer.email, "entregue", "entregue string", "entrega html")
+    sendMail(
+        buyer.email,
+        "Seu pedido da Casa Lúdica chegou! 🎉",
+        templates.email.pedidoChegouClienteString(buyer, order),
+        templates.email.pedidoChegouCliente(buyer, order)
+    )
     igest.get.franchises({ empresa: order.storeId }).then((result) => {
         const franchise = result[0]
-        sendMail(franchise.Email, `Pedido Nº ${order.id} entregue`, "entregue adm string", "entrega html")
+        sendMail(
+            franchise.Email,
+            `Confirmação de Entrega do Pedido - #${order.id}`,
+            templates.email.pedidoChegouAdmString(buyer, order),
+            templates.email.pedidoChegouAdm(buyer, order)
+        )
     })
 
     response.status(200).json({ success: true })
