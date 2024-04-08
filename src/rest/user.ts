@@ -8,6 +8,25 @@ import unmask from "../tools/unmask"
 import { handlePrismaError } from "../prisma_errors"
 const router = express.Router()
 
+router.post("/forget_password", async (request: Request, response: Response) => {
+    const data = request.body as { login: string }
+
+    const user = await User.find(data.login)
+
+    if (user) {
+        try {
+            const hash = encrypt(user.id)
+            const url = `https://lojas.casaludica.com.br/first_password/${hash}`
+            await sendMail(user.email, "Gerar senha", templates.email.forgot_password_string(user, url), templates.email.forgot_password(user, url))
+            response.status(200).send()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    response.status(500).send()
+})
+
 router.post("/exists", async (request: Request, response: Response) => {
     const data = request.body
 
