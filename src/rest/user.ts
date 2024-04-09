@@ -73,10 +73,10 @@ router.post("/first_password", async (request: Request, response: Response) => {
         const user = new User(user_id)
         await user.init()
 
-        if (!!user.password) {
-            response.json(null)
-            return
-        }
+        // if (!!user.password) {
+        //     response.json(null)
+        //     return
+        // }
 
         await user.update({ password: data.password })
         response.json(user)
