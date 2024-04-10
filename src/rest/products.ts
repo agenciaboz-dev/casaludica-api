@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.post("/", async (request: Request, response: Response) => {
     const data = request.body
-    console.log("requesting products from igest")
+    // console.log("requesting products from igest")
 
     try {
         const igestProducts = await igest.get.products({ empresa: data.franchise })
@@ -19,19 +19,19 @@ router.post("/", async (request: Request, response: Response) => {
         }
 
         if (data.category) {
-            console.log({ category: data.category })
+            // console.log({ category: data.category })
             products = products.filter((product) => product.category == data.category)
         }
 
         if (data.collection) {
-            console.log({ collection: data.collection })
+            // console.log({ collection: data.collection })
             const categories = (await axios.get("https://agencyboz.com:4100/api/categories")).data as Category[]
             const matched_categories = categories.filter((category) => category.collectionId == data.collection)
-            console.log(matched_categories)
+            // console.log(matched_categories)
             products = products.filter((product) => matched_categories.find((category) => category.id == product.category))
         }
 
-        console.log({ productsLength: products.length })
+        // console.log({ productsLength: products.length })
 
         response.json(products)
     } catch (error) {

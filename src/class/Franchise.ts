@@ -16,6 +16,9 @@ export class Franchise {
         uf: string
         ibge: string
     }
+    pagseguro_token: string
+    pagseguro_token_sandbox: string
+    credit_card_public_key: string
 
     constructor(data: IgestFranchise) {
         this.id = data.IdEmpresa
@@ -35,5 +38,8 @@ export class Franchise {
             uf: data.Endereco.Estado,
             ibge: data.Endereco.CodigoIbge,
         }
+        this.pagseguro_token = data.PagSeguroToken
+        this.pagseguro_token_sandbox = data.PagSeguroTokenSandbox
+        this.credit_card_public_key = data.CartaoCreditoChavePublica
     }
 }

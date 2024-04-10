@@ -16,6 +16,9 @@ declare interface IgestFranchise {
         Estado: string
         CodigoIbge: string
     }
+    PagSeguroToken: string
+    PagSeguroTokenSandbox: string
+    CartaoCreditoChavePublica: string
 }
 
 declare interface FranchiseParams {

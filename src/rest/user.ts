@@ -31,7 +31,7 @@ router.post("/exists", async (request: Request, response: Response) => {
     const data = request.body
 
     const user = await User.find(data.login)
-    console.log(user)
+    // console.log(user)
     response.json(user)
 
     if (user && !user.password) {
@@ -131,17 +131,17 @@ router.post("/update", async (request: Request, response: Response) => {
 
 router.post("/find", async (request: Request, response: Response) => {
     const data = request.body as { cpf: string; email: string }
-    console.log(data)
+    // console.log(data)
 
     const user = await User.find(data.cpf, data.email)
-    console.log(user)
+    // console.log(user)
 
     response.json(user?.id)
 })
 
 router.post("/signup", async (request: Request, response: Response) => {
     const data = request.body as { email: string; password: string; cpf: string }
-    console.log(data)
+    // console.log(data)
     try {
         const user = await User.signup({
             address: "",
