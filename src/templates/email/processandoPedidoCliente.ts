@@ -325,12 +325,16 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Ótimas notícias! Sua compra número <b>#${order.id}</b> está sendo preparada. Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Ótimas notícias! Sua compra número <b>#${
+                            order.id
+                        }</b> está sendo preparada. Estamos cuidando de cada detalhe com muito carinho para que sua experiência seja incrível.</div>
                       </td>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Você pode verificar os detalhes do seu pedido, <a href="https://lojas.casaludica.com.br/order/${order.id}" style="color:#363775;font-weight:bold;">Clique para acessar</a>.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Você pode verificar os detalhes do seu pedido, <a href="https://lojas.casaludica.com.br/order/${
+                            order.id
+                        }" style="color:#363775;font-weight:bold;">Clique para acessar</a>.</div>
                       </td>
                     </tr>
                     <tr>
@@ -347,7 +351,7 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
                             <td style="padding: 10px 0;"></td>
                             <td style="padding: 0 15px 0 0;"></td>
                             <td style="text-align:center;padding:20px 0px;">Total:</td>
-                            <td style="text-align:center;padding:20px 0px;">R$${order.total.toString().replace(".", ",")}</td>
+                            <td style="text-align:center;padding:20px 0px;">R$${order.total.toFixed(2).replace(".", ",")}</td>
                           </tr>
                         </table>
                       </td>
@@ -355,7 +359,9 @@ export const processandoPedidoCliente = (user: User, order: Order) =>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                         <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">
-                          <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${user.postcode}<br> ${user.email}<br>
+                          <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${
+        user.postcode
+    }<br> ${user.email}<br>
                         </div>
                       </td>
                     </tr>
