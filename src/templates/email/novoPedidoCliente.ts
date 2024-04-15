@@ -6,7 +6,7 @@ const fetchProductString = (product: OrderProduct) =>
     `
     Produto: ${product.name}
     Quantidade: ${product.quantity}
-    Valor: R$${product.price.toString().replace(".", ",")}
+    Valor: R$ ${product.price.toString().replace(".", ",")}
 `
 
 export const novoPedidoClienteString = (user: User, order: Order) =>
@@ -17,7 +17,7 @@ export const novoPedidoClienteString = (user: User, order: Order) =>
 
     ${order.products.map((product) => fetchProductString(product))}
 
-    Total: R$${order.total.toString().replace(".", ",")}
+    Total: R$ ${order.total.toString().replace(".", ",")}
 
     Endereço de entrega:
     ${user.name} ${user.lastname}<br>
@@ -34,7 +34,7 @@ const fetchProduct = (product: OrderProduct) =>
 	<td style="padding: 10px 0;"><img src="https://casaludica.com.br/wp-content/uploads/2024/04/shop.png" width="50%"></td>
 	<td style="padding: 0 15px 0 0;">${product.name}</td>
 	<td style="text-align:center;">${product.quantity}</td>
-	<td style="text-align:center">R$${product.price.toString().replace(".", ",")}</td>
+	<td style="text-align:center">R$ ${product.price.toString().replace(".", ",")}</td>
   	</tr>
 `
 
@@ -339,7 +339,7 @@ export const novoPedidoCliente = (user: User, order: Order) =>
                             <td style="padding: 10px 0;"></td>
                             <td style="padding: 0 15px 0 0;"></td>
                             <td style="text-align:center;padding:20px 0px;">Total:</td>
-                            <td style="text-align:center;padding:20px 0px;">R$${order.total.toString().replace(".", ",")}</td>
+                            <td style="text-align:center;padding:20px 0px;">R$ ${order.total.toString().replace(".", ",")}</td>
                           </tr>
                         </table>
                       </td>
