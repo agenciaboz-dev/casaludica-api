@@ -11,7 +11,7 @@ router.post("/", async (request: Request, response: Response) => {
 
     const franchises = await igest.get.franchises({})
     console.log(franchises)
-    const franchise = new Franchise(franchises.find((item) => item.Endereco.CodigoIbge == data.ibge && item.Ativo) || franchises[0])
+    const franchise = new Franchise(franchises.find((item) => item.Endereco.CodigoIbge == data.ibge && item.Ativo) || (await igest.get.franchisor()))
     response.json(franchise)
 })
 

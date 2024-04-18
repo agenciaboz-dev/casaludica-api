@@ -42,7 +42,12 @@ const order = async (data: IgestNewOrder) => {
     return response
 }
 
-const getFunction = { franchises, products, images, categories, collections, order }
+const franchisor = async () => {
+    const list = (await get(`/ObterEmpresa`, { empresa: 2 })) as IgestFranchise[]
+    return list[0]
+}
+
+const getFunction = { franchises, products, images, categories, collections, order, franchisor }
 
 const post = { order }
 
