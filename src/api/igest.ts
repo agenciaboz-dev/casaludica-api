@@ -2,7 +2,7 @@ import axios from "axios"
 import { IgestNewOrder } from "../types/igest/Order"
 
 const token = "9aB4pC!qRt3xYz"
-const version = 10
+const version = 11
 
 const api = axios.create({
     // baseURL: "http://localhost:4100/api",
