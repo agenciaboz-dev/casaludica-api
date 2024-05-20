@@ -48,7 +48,13 @@ export class Product {
 
     static async getImages(id: number, mainOnly?: boolean) {
         const imagesObg = await igest.get.images({ produto: id, principal: !!mainOnly })
-        const images = [imagesObg.Imagem1Base64, imagesObg.Imagem2Base64, imagesObg.Imagem3Base64, imagesObg.Imagem4Base64, imagesObg.Imagem5Base64]
+        const images = [
+            imagesObg?.Imagem1Base64,
+            imagesObg?.Imagem2Base64,
+            imagesObg?.Imagem3Base64,
+            imagesObg?.Imagem4Base64,
+            imagesObg?.Imagem5Base64,
+        ]
             .filter(Boolean)
             .toString()
 
