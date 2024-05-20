@@ -22,6 +22,9 @@ model Order {
     user            User        @relation(fields: [userId], references: [id])
 
     products        OrderProduct[]
+
+    requestLog      String?     @db.Text
+    responseLog     String?     @db.Text
 }
 
 model OrderProduct {

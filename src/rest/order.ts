@@ -61,14 +61,14 @@ router.post("/paid", async (request: Request, response: Response) => {
 
     const bozpay_order = await bozpay.order.get(bozpay.getStore(data.storeId), "", Number(charge.reference_id))
 
+    const order = new Order(Number(bozpay_order.referenceId))
+    await order.init()
+    await order.onPaid(charge)
+
+    const user = new User(order.userId)
+    await user.init()
+
     try {
-        const order = new Order(Number(bozpay_order.referenceId))
-        await order.init()
-        await order.onPaid(charge)
-
-        const user = new User(order.userId)
-        await user.init()
-
         console.log("sending new order mail to client")
         console.log({ destination: user.email })
         try {
@@ -103,38 +103,41 @@ router.post("/paid", async (request: Request, response: Response) => {
         const products_total = order.products.reduce((total, product) => total + product.price * product.quantity, 0)
 
         console.log("sending to igest")
-        const igest_response = await igest.post.order({
-            IdEmpresa: order.storeId,
-            IdentificadorPedido: order.id,
-            TipoPagamento:
-                charge.payment_method.type == "PIX"
-                    ? PaymentType.pix
-                    : charge.payment_method.type == "BOLETO"
-                    ? PaymentType.boleto
-                    : PaymentType.cartao,
-            ValorFrete: bozpay_order.total - products_total,
-            Cliente: {
-                Bairro: user.district,
-                Cep: user.postcode,
-                Cidade: user.city,
-                CodigoIbge: via_cep.ibge,
-                Complemento: user.complement,
-                CpfCnpj: user.cpf,
-                Email: user.email,
-                Endereco: user.address,
-                Estado: user.state,
-                InscricaoEstadual: null,
-                Nome: user.name + " " + user.lastname,
-                Numero: user.number,
-                Rg: null,
-                Telefone: user.phone,
+        const igest_response = await igest.post.order(
+            {
+                IdEmpresa: order.storeId,
+                IdentificadorPedido: order.id,
+                TipoPagamento:
+                    charge.payment_method.type == "PIX"
+                        ? PaymentType.pix
+                        : charge.payment_method.type == "BOLETO"
+                        ? PaymentType.boleto
+                        : PaymentType.cartao,
+                ValorFrete: bozpay_order.total - products_total,
+                Cliente: {
+                    Bairro: user.district,
+                    Cep: user.postcode,
+                    Cidade: user.city,
+                    CodigoIbge: via_cep.ibge,
+                    Complemento: user.complement,
+                    CpfCnpj: user.cpf,
+                    Email: user.email,
+                    Endereco: user.address,
+                    Estado: user.state,
+                    InscricaoEstadual: null,
+                    Nome: user.name + " " + user.lastname,
+                    Numero: user.number,
+                    Rg: null,
+                    Telefone: user.phone,
+                },
+                ListaProduto: order.products.map((item) => ({
+                    IdProduto: item.referenceId,
+                    PrecoVenda: item.price,
+                    Quantidade: item.quantity,
+                })),
             },
-            ListaProduto: order.products.map((item) => ({
-                IdProduto: item.referenceId,
-                PrecoVenda: item.price,
-                Quantidade: item.quantity,
-            })),
-        })
+            order
+        )
         if (igest_response.status == 200) {
             await bozpay.order.updateStatus({ status: "PROCESSANDO", id: bozpay_order.id })
             try {
@@ -171,6 +174,7 @@ router.post("/paid", async (request: Request, response: Response) => {
         console.log("error sending to igest")
 
         if (error instanceof AxiosError) {
+            await order.logPaidResponse(error.response)
             console.log(error.response?.data)
         } else {
             console.log(error)
@@ -211,6 +215,24 @@ router.post("/review", async (request: Request, response: Response) => {
     )
 
     response.status(200).json()
+})
+
+router.get("/logs", async (request: Request, response: Response) => {
+    const order_id = request.query.order_id as string | undefined
+
+    if (order_id) {
+        try {
+            const order = new Order(Number(order_id))
+            await order.init()
+            const logs = await order.getLogs()
+            response.json(logs)
+        } catch (error) {
+            console.log(error)
+            response.status(500).send(error)
+        }
+    } else {
+        response.status(400).send("order_id param is required")
+    }
 })
 
 export default router

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { IgestNewOrder } from "../types/igest/Order"
+import { Order } from "../class/Order"
 
 const token = "9aB4pC!qRt3xYz"
 const version = 11
@@ -34,8 +35,9 @@ const collections = async (params: IgestCollectionParams) => (await get("/ObterG
 const products = async (params: ProductParams) => (await get("/ObterProduto", params)) as IgestProduct[]
 const images = async (params: ImageParams) => (await get("/ObterImagem", params)) as Image
 
-const order = async (data: IgestNewOrder) => {
+const order = async (data: IgestNewOrder, order: Order) => {
     console.log(data)
+    await order.logPaidRequest(data)
     console.log("sending to igest")
     const url = getUrl("/EnviarPedido")
     const response = await api.post(url, data)

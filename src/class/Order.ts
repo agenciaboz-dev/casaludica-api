@@ -6,6 +6,7 @@ import { Charge } from "../types/bozpay/Charge"
 import { sendMail } from "../tools/mail"
 import igest from "../api/igest"
 import templates from "../templates"
+import { IgestNewOrder } from "../types/igest/Order"
 
 const prisma = new PrismaClient()
 export const include = Prisma.validator<Prisma.OrderInclude>()({ products: true })
@@ -22,6 +23,8 @@ export class Order {
     userId: number
 
     products: OrderProduct[]
+    requestLog: string | null
+    responseLog: string | null
 
     constructor(id: number, data?: OrderPrisma) {
         data ? this.load(data) : (this.id = id)
@@ -124,6 +127,8 @@ export class Order {
         this.paymentType = data.paymentType
         this.installments = data.installments
         this.userId = data.userId
+        this.requestLog = data.requestLog
+        this.responseLog = data.responseLog
 
         this.products = data.products?.map((item) => new OrderProduct(item))
     }
@@ -145,5 +150,17 @@ export class Order {
         await this.update({
             paymentType: charge.payment_method.type,
         })
+    }
+
+    async logPaidRequest(data: IgestNewOrder) {
+        await this.update({ requestLog: JSON.stringify(data, null, 4) })
+    }
+
+    async logPaidResponse(data: any) {
+        await this.update({ responseLog: JSON.stringify(data, null, 4) })
+    }
+
+    async getLogs() {
+        return { request: JSON.parse(this.requestLog || "null"), response: JSON.parse(this.responseLog || "null") }
     }
 }
