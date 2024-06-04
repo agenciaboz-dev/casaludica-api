@@ -494,7 +494,14 @@ export const pedidoChegouCliente = (user: User, order: Order) =>
             <th style="text-align:center;">Valor</th>
           </tr>
           ${order.products.map((product) => fetchProduct(product))}
-          <tr style="border: solid #e1e1e1;border-width:1px 0px 0px 0px;"> 
+          
+                          <tr style="border: solid #e1e1e1;border-width:1px 0px 0px 0px;">
+                            <td style="padding: 10px 0;"></td>
+                            <td style="padding: 0 15px 0 0;"></td>
+                            <td style="text-align:center;padding:20px 0px;">Frete:</td>
+                            <td style="text-align:center;padding:20px 0px;">${fretão}</td>
+                          </tr>
+                          <tr style="border: solid #e1e1e1;border-width:1px 0px 0px 0px;"> 
             <td style="padding: 10px 0;"></td>
             <td style="padding: 0 15px 0 0;"></td>
             <td style="text-align:center;padding:20px 0px;">Total:</td>
