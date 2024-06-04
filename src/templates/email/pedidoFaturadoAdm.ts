@@ -18,7 +18,9 @@ export const pedidoFaturadoAdmString = (user: User, order: Order) =>
 
 	${order.products.map((product) => fetchProductString(product))}
 												
-	Total: R$${order.total.toString().replace(".", ",")}
+	Frete: ${fretão}
+
+  Total: R$${order.total.toString().replace(".", ",")}
 
     Endereço de entrega:
 

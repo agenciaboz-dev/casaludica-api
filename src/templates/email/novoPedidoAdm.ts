@@ -17,6 +17,8 @@ export const novoPedidoAdmString = (user: User, order: Order) =>
 
     ${order.products.map((product) => fetchProductString(product))}
 
+    Frete: ${fretão}
+
     Total: R$${order.total.toString().replace(".", ",")}
     Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.
     Endereço de entrega:

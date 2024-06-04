@@ -17,6 +17,8 @@ export const processandoPedidoClienteString = (user: User, order: Order) =>
 
     ${order.products.map((product) => fetchProductString(product))}
                                                 
+    Frete: ${fretão}
+
     Total: R$${order.total.toString().replace(".", ",")}
 
     Endereço de entrega:

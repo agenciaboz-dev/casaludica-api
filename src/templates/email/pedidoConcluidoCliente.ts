@@ -17,6 +17,8 @@ Fique de olho na sua caixa de correio!
 
 ${order.products.map((product) => fetchProductString(product))}
 
+Frete: ${fretão}
+
 Total: R$${order.total.toString().replace(".", ",")}
 
 Atenciosamente,
