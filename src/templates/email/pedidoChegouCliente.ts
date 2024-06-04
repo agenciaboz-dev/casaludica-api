@@ -1,6 +1,7 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
 import { User } from "../../class/User"
+import { getShippingPrice } from "../../tools/getShippingPrice"
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -20,7 +21,7 @@ Aqui está um lembrete do que você encontrará em seu pacote:
 
 ${order.products.map((product) => fetchProductString(product))}
 
-Frete: ${fretão}
+Frete: ${getShippingPrice(order, order.products)}
 
 Total: R$${order.total.toString().replace(".", ",")}
 
@@ -500,7 +501,7 @@ export const pedidoChegouCliente = (user: User, order: Order) =>
             <td style="padding: 10px 0;"></td>
             <td style="padding: 0 15px 0 0;"></td>
             <td style="text-align:center;padding:20px 0px;">Frete:</td>
-            <td style="text-align:center;padding:20px 0px;">${fretão}</td>
+            <td style="text-align:center;padding:20px 0px;">${getShippingPrice(order, order.products)}</td>
           </tr>
           <tr style="border: solid #e1e1e1;border-width:0px 0px 0px 0px;"> 
             <td style="padding: 10px 0;"></td>
@@ -539,7 +540,9 @@ export const pedidoChegouCliente = (user: User, order: Order) =>
                align="center" bgcolor="#363775" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#363775;" valign="middle"
             >
               <a
-                 href="https://lojas.casaludica.com.br/order/${order.id}" style="display:inline-block;background:#363775;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"
+                 href="https://lojas.casaludica.com.br/order/${
+                     order.id
+                 }" style="display:inline-block;background:#363775;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"
               >
                 Avalie sua compra
               </a>

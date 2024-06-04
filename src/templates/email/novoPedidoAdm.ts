@@ -1,6 +1,7 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
 import { User } from "../../class/User"
+import { getShippingPrice } from "../../tools/getShippingPrice"
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -17,7 +18,7 @@ export const novoPedidoAdmString = (user: User, order: Order) =>
 
     ${order.products.map((product) => fetchProductString(product))}
 
-    Frete: ${fretão}
+    Frete: ${getShippingPrice(order, order.products)}
 
     Total: R$${order.total.toString().replace(".", ",")}
     Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.
@@ -34,7 +35,7 @@ export const novoPedidoAdmString = (user: User, order: Order) =>
 `
 
 const fetchProduct = (product: OrderProduct) =>
-`
+    `
 <tr>
 <td style="padding: 10px 0;"><img src="https://casaludica.com.br/wp-content/uploads/2024/04/shop.png" width="50%"></td>
 <td style="padding: 0 15px 0 0;">${product.name}</td>
@@ -325,7 +326,9 @@ export const novoPedidoAdm = (user: User, order: Order) =>
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Uma nova jornada acaba de começar! Recebemos uma nova compra, número <b>#${order.id}</b>. Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.</div>
+                        <div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">Uma nova jornada acaba de começar! Recebemos uma nova compra, número <b>#${
+                            order.id
+                        }</b>. Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.</div>
                       </td>
                     </tr>
                     <tr>
@@ -342,7 +345,7 @@ export const novoPedidoAdm = (user: User, order: Order) =>
                 <td style="padding: 10px 0;"></td>
                 <td style="padding: 0 15px 0 0;"></td>
                 <td style="text-align:center;padding:20px 0px;">Frete:</td>
-                <td style="text-align:center;padding:20px 0px;">${fretão}</td>
+                <td style="text-align:center;padding:20px 0px;">${getShippingPrice(order, order.products)}</td>
               </tr>
               <tr style="border: solid #e1e1e1;border-width:0px 0px 0px 0px;">
                 <td style="padding: 10px 0;"></td>
@@ -356,7 +359,9 @@ export const novoPedidoAdm = (user: User, order: Order) =>
 						<tr>
 						  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 							<div style="font-family:Poppins,Helvetica;font-size:15px;line-height:30px;text-align:left;color:#282828;">
-							  <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${user.postcode}<br> ${user.email}<br>
+							  <h3>Endereço de Entrega</h3> ${user.name} ${user.lastname}<br> ${user.address}<br> ${user.district}<br> ${user.city}<br> ${user.postcode}<br> ${
+        user.email
+    }<br>
 							</div>
 						  </td>
 						</tr>
