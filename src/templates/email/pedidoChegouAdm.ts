@@ -6,17 +6,19 @@ const fetchProductString = (product: OrderProduct) =>
     `
     Produto: ${product.name}
     Quantidade: ${product.quantity}
-    Valor: R$${product.price.toString().replace(".", ",")}
+    Valor: R$${product.price.toFixed(2).replace(".", ",")}
 `
 
 export const pedidoChegouAdmString = (user: User, order: Order) =>
     `
 Olá Casa Lúdica,
-Espero que esteja tendo um ótimo dia. Este e-mail serve como confirmação de que o pedido número <b>#${order.id}</b> , realizado no dia <b>${order.datetime}</b>, foi entregue com sucesso ao endereço do cliente. Abaixo estão os detalhes do pedido e da entrega:
+Espero que esteja tendo um ótimo dia. Este e-mail serve como confirmação de que o pedido número <b>#${order.id}</b> , realizado no dia <b>${new Date(
+        order.datetime
+    ).toLocaleDateString("pt-br")}</b>, foi entregue com sucesso ao endereço do cliente. Abaixo estão os detalhes do pedido e da entrega:
 
 ${order.products.map((product) => fetchProductString(product))}
 
-Total: R$${order.total.toString().replace(".", ",")}
+Total: R$${order.total.toFixed(2).replace(".", ",")}
 
 Detalhes da Compra:
 Nome: ${user.name} ${user.lastname}<br>
@@ -43,7 +45,7 @@ const fetchProduct = (product: OrderProduct) =>
 <td style="padding: 10px 0;"><img src="https://casaludica.com.br/wp-content/uploads/2024/04/shop.png" width="50%"></td>
 <td style="padding: 0 15px 0 0;">${product.name}</td>
 <td style="text-align:center;">${product.quantity}</td>
-<td style="text-align:center">R$${product.price.toString().replace(".", ",")}</td>
+<td style="text-align:center">R$${product.price.toFixed(2).replace(".", ",")}</td>
 </tr>
 `
 
@@ -453,7 +455,11 @@ export const pedidoChegouAdm = (user: User, order: Order) =>
                   
       <div
          style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;"
-      >Espero que esteja tendo um ótimo dia. Este e-mail serve como confirmação de que o pedido número <b>#${order.id}</b>, realizado no dia <b>${order.datetime}</b>, foi entregue com sucesso ao endereço do cliente. Abaixo estão os detalhes do pedido e da entrega:</div>
+      >Espero que esteja tendo um ótimo dia. Este e-mail serve como confirmação de que o pedido número <b>#${
+          order.id
+      }</b>, realizado no dia <b>${new Date(order.datetime).toLocaleDateString(
+        "pt-br"
+    )}</b>, foi entregue com sucesso ao endereço do cliente. Abaixo estão os detalhes do pedido e da entrega:</div>
     
                 </td>
               </tr>
@@ -477,7 +483,7 @@ export const pedidoChegouAdm = (user: User, order: Order) =>
             <td style="padding: 10px 0;"></td>
             <td style="padding: 0 15px 0 0;"></td>
             <td style="text-align:center;padding:20px 0px;">Total:</td>
-            <td style="text-align:center;padding:20px 0px;">R$${order.total.toString().replace(".", ",")}</td>
+            <td style="text-align:center;padding:20px 0px;">R$${order.total.toFixed(2).replace(".", ",")}</td>
           </tr>
       </table>
     
@@ -529,7 +535,9 @@ export const pedidoChegouAdm = (user: User, order: Order) =>
                   
       <div
          style="font-family:Poppins;font-size:15px;line-height:30px;text-align:left;color:#282828;"
-      ><h3>Detalhes da Compra</h3> Nome: ${user.name} ${user.lastname}<br> Endereço: ${user.address}<br> Bairro: ${user.district}<br> Cidade: ${user.city}<br> CEP: ${user.postcode}<br> E-mail: ${user.email}<br> Telefone: ${user.phone}<br></div>
+      ><h3>Detalhes da Compra</h3> Nome: ${user.name} ${user.lastname}<br> Endereço: ${user.address}<br> Bairro: ${user.district}<br> Cidade: ${
+        user.city
+    }<br> CEP: ${user.postcode}<br> E-mail: ${user.email}<br> Telefone: ${user.phone}<br></div>
     
                 </td>
               </tr>
