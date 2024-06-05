@@ -1,13 +1,13 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
 import { User } from "../../class/User"
-import { getShippingPrice } from "../../tools/getShippingPrice"
+
 
 const fetchProductString = (product: OrderProduct) =>
     `
     Produto: ${product.name}
     Quantidade: ${product.quantity}
-    Valor: R$${product.price.toString().replace(".", ",")}
+    Valor: R$${product.price.toFixed(2).replace(".", ",")}
     
 `
 
@@ -18,9 +18,9 @@ export const novoPedidoAdmString = (user: User, order: Order) =>
 
     ${order.products.map((product) => fetchProductString(product))}
 
-    Frete: ${getShippingPrice(order, order.products)}
+    Frete: R$${order.shippingPrice.toFixed(2).replace(".", ",")}
 
-    Total: R$${order.total.toString().replace(".", ",")}
+    Total: R$${order.total.toFixed(2).replace(".", ",")}
     Por favor, preparem-se para embarcar nesta aventura, verificando os detalhes do pedido e iniciando o processo de preparação.
     Endereço de entrega:
         ${user.name} ${user.lastname}<br>
@@ -40,7 +40,7 @@ const fetchProduct = (product: OrderProduct) =>
 <td style="padding: 10px 0;"><img src="https://casaludica.com.br/wp-content/uploads/2024/04/shop.png" width="50%"></td>
 <td style="padding: 0 15px 0 0;">${product.name}</td>
 <td style="text-align:center;">${product.quantity}</td>
-<td style="text-align:center">R$${product.price.toString().replace(".", ",")}</td>
+<td style="text-align:center">R$${product.price.toFixed(2).replace(".", ",")}</td>
 </tr>
 `
 
@@ -345,13 +345,13 @@ export const novoPedidoAdm = (user: User, order: Order) =>
                 <td style="padding: 10px 0;"></td>
                 <td style="padding: 0 15px 0 0;"></td>
                 <td style="text-align:center;padding:20px 0px;">Frete:</td>
-                <td style="text-align:center;padding:20px 0px;">${getShippingPrice(order, order.products)}</td>
+                <td style="text-align:center;padding:20px 0px;">${"R$ " + order.shippingPrice.toFixed(2).replace(".", ",")}</td>
               </tr>
               <tr style="border: solid #e1e1e1;border-width:0px 0px 0px 0px;">
                 <td style="padding: 10px 0;"></td>
                 <td style="padding: 0 15px 0 0;"></td>
                 <td style="text-align:center;padding:20px 0px;">Total:</td>
-                <td style="text-align:center;padding:20px 0px;">R$${order.total.toString().replace(".", ",")}</td>
+                <td style="text-align:center;padding:20px 0px;">R$${order.total.toFixed(2).replace(".", ",")}</td>
 							</tr>
 							</table>
 						  </td>

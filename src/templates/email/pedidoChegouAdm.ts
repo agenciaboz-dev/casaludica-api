@@ -1,7 +1,7 @@
 import { Order } from "../../class/Order"
 import { OrderProduct } from "../../class/OrderProduct"
 import { User } from "../../class/User"
-import { getShippingPrice } from "../../tools/getShippingPrice"
+
 
 const fetchProductString = (product: OrderProduct) =>
     `
@@ -484,7 +484,7 @@ export const pedidoChegouAdm = (user: User, order: Order) =>
             <td style="padding: 10px 0;"></td>
             <td style="padding: 0 15px 0 0;"></td>
             <td style="text-align:center;padding:20px 0px;">Frete:</td>
-            <td style="text-align:center;padding:20px 0px;">${getShippingPrice(order, order.products)}</td>
+            <td style="text-align:center;padding:20px 0px;">${"R$ " + order.shippingPrice.toFixed(2).replace(".", ",")}</td>
           </tr>
           <tr style="border: solid #e1e1e1;border-width:0px 0px 0px 0px;">
             <td style="padding: 10px 0;"></td>

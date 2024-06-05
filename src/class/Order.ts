@@ -18,6 +18,7 @@ export class Order {
     notes: string | null
     datetime: string
     total: number
+    shippingPrice: number
     paymentType: string | null
     installments: number | null
     userId: number
@@ -124,6 +125,7 @@ export class Order {
         this.notes = data.notes
         this.datetime = data.datetime
         this.total = data.total
+        this.shippingPrice = data.shippingPrice
         this.paymentType = data.paymentType
         this.installments = data.installments
         this.userId = data.userId
@@ -147,8 +149,10 @@ export class Order {
     }
 
     async onPaid(charge: Charge) {
+        const total = charge.amount.value / 100
         await this.update({
             paymentType: charge.payment_method.type,
+            shippingPrice: total - this.total,
         })
     }
 
