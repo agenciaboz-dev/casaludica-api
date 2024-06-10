@@ -78,20 +78,20 @@ export class User {
         try {
             const user_prisma = await prisma.user.create({
                 data: {
-                    address: data.address,
-                    city: data.city,
+                    address: data.address.trim(),
+                    city: data.city.trim(),
                     cpf: unmask(data.cpf),
-                    district: data.district,
-                    email: data.email.toLowerCase(),
-                    lastname: data.lastname,
-                    name: data.name,
-                    number: data.number,
+                    district: data.district.trim(),
+                    email: data.email.toLowerCase().trim(),
+                    lastname: data.lastname.trim(),
+                    name: data.name.trim(),
+                    number: data.number.trim(),
                     phone: unmask(data.phone),
                     postcode: unmask(data.postcode),
                     state: data.state,
-                    company: data.company,
-                    complement: data.complement,
-                    password: data.password,
+                    company: data.company?.trim(),
+                    complement: data.complement?.trim(),
+                    password: data.password?.trim(),
                 },
                 include,
             })
@@ -163,11 +163,26 @@ export class User {
         const user_prisma = await prisma.user.update({
             where: { id: this.id },
             data: {
-                ...data,
+                ...this.sanitizeData(data),
                 orders: {},
             },
             include,
         })
         this.load(user_prisma)
+    }
+
+    async sanitizeData(data: Partial<User>) {
+        let new_data: Partial<User> = {}
+        Object.entries(data).map(([key, value]) => {
+            if (typeof value == "string") {
+                // @ts-ignore
+                new_data[key] = value.trim()
+            } else {
+                // @ts-ignore
+                new_data[key] = value
+            }
+        })
+
+        return new_data
     }
 }
