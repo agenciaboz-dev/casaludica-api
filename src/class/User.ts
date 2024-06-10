@@ -171,7 +171,7 @@ export class User {
         this.load(user_prisma)
     }
 
-    async sanitizeData(data: Partial<User>) {
+    sanitizeData(data: Partial<User>) {
         let new_data: Partial<User> = {}
         Object.entries(data).map(([key, value]) => {
             if (typeof value == "string") {
